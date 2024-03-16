@@ -6,17 +6,19 @@ import axios from 'axios'
 import { Article } from '@/types/Article'
 import { useRecoilState } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import { articleTitleState } from '@/state/articleTitleState'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
-  const [title, setTitle] = useState<string>('')
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
+  const [articleTitle, setArticleTitle] =
+    useRecoilState<string>(articleTitleState)
 
   const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
+    setArticleTitle(e.target.value)
   }
 
   const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,8 +35,7 @@ export default function Home() {
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
     setIsSearching(true)
-    console.log(title)
-    fetchArticles(title).then((articles) => {
+    fetchArticles(articleTitle).then((articles) => {
       setArticles(articles)
       setIsSearching(false)
     })
@@ -61,9 +62,18 @@ export default function Home() {
 
   useEffect(() => {
     // NOTE: 初期表示時に記事を取得する必要はないかもしれない
-    // fetchArticles(title).then((articles) => {
-    //   setArticles(articles)
-    // })
+    console.log(articleTitle)
+    console.log(qiitaApiToken)
+    console.log(isValidApiToken)
+    if (articleTitle.length && qiitaApiToken.length) {
+      //NOTE: 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしないが、要検証
+      // 依存配列が空だからarticleTitleまたはqiitaApiTokenが変更された場合には実行されないはず
+      setIsSearching(true)
+      fetchArticles(articleTitle).then((articles) => {
+        setArticles(articles)
+        setIsSearching(false)
+      })
+    }
     setIsValidApiToken(true)
   }, [])
   return (
@@ -82,11 +92,14 @@ export default function Home() {
               onChange={handleInputTitle}
               type="text"
               placeholder="記事タイトル"
+              value={articleTitle}
             />
             <button
               onClick={handleTitleClick}
               disabled={
-                !title.length || !qiitaApiToken.length || !isValidApiToken
+                !articleTitle.length ||
+                !qiitaApiToken.length ||
+                !isValidApiToken
               }
             >
               検索

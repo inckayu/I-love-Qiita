@@ -4,46 +4,77 @@ import { articles } from '../constants/articles'
 import Link from 'next/link'
 import axios from 'axios'
 import { Article } from '@/types/Article'
-
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_QIITA_TOKEN}`,
-  },
-}
-
-const fetchArticles = async (title: string): Promise<Article[]> => {
-  // TODO: configの型定義を追加する
-  // TODO: 検索条件は最終的にはオブジェクトとかにまとめて引数として渡すようにする
-  const query = `title:${title}`
-  const res = await axios.get<Article[]>(
-    `https://qiita.com/api/v2/items?per_page=5&query=${query}`,
-    config
-  )
-  return res.data
-}
+import { useRecoilState } from 'recoil'
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import { articleTitleState } from '@/state/articleTitleState'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
-  const [title, setTitle] = useState<string>('')
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
+  const [qiitaApiToken, setQiitaApiToken] =
+    useRecoilState<string>(qiitaApiTokenState)
+  const [articleTitle, setArticleTitle] =
+    useRecoilState<string>(articleTitleState)
 
   const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value)
+    setArticleTitle(e.target.value)
   }
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputToken = e.target.value
+    setQiitaApiToken(inputToken)
+    if (!inputToken.match(/^\w+$/)) {
+      console.log('input')
+      setIsValidApiToken(false)
+    } else {
+      setIsValidApiToken(true)
+    }
+  }
+
+  const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
-    console.log(title)
-    fetchArticles(title).then((articles) => {
+    setIsSearching(true)
+    fetchArticles(articleTitle).then((articles) => {
       setArticles(articles)
+      setIsSearching(false)
     })
+  }
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${qiitaApiToken}`,
+    },
+  }
+
+  const fetchArticles = async (title: string): Promise<Article[]> => {
+    // TODO: configの型定義を追加する
+    // TODO: 検索条件は最終的にはオブジェクトとかにまとめて引数として渡すようにする
+    // TODO: エラーハンドリングを追加する(APIキーがない場合など)
+    const query = `title:${title}`
+    const res = await axios.get<Article[]>(
+      `https://qiita.com/api/v2/items?per_page=5&query=${query}`,
+      config
+    )
+    return res.data
   }
 
   useEffect(() => {
     // NOTE: 初期表示時に記事を取得する必要はないかもしれない
-    fetchArticles(title).then((articles) => {
-      setArticles(articles)
-    })
+    console.log(articleTitle)
+    console.log(qiitaApiToken)
+    console.log(isValidApiToken)
+    if (articleTitle.length && qiitaApiToken.length) {
+      //NOTE: 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしないが、要検証
+      // 依存配列が空だからarticleTitleまたはqiitaApiTokenが変更された場合には実行されないはず
+      setIsSearching(true)
+      fetchArticles(articleTitle).then((articles) => {
+        setArticles(articles)
+        setIsSearching(false)
+      })
+    }
+    setIsValidApiToken(true)
   }, [])
   return (
     <>
@@ -61,23 +92,47 @@ export default function Home() {
               onChange={handleInputTitle}
               type="text"
               placeholder="記事タイトル"
+              value={articleTitle}
             />
-            <button onClick={handleClick}>検索</button>
+            <button
+              onClick={handleTitleClick}
+              disabled={
+                !articleTitle.length ||
+                !qiitaApiToken.length ||
+                !isValidApiToken
+              }
+            >
+              検索
+            </button>
           </form>
         </div>
         <div>
           <form action="">
-            {/* TODO: APIキーの入力部分は最終的にはモーダルで実装したい */}
-            <input type="text" placeholder="APIキー" />
-            <button>APIキーを入力</button>
+            {/*
+            TODO: APIキーの入力部分は最終的にはモーダルで実装したい
+            TODO:　正規表現を用いてAPIキーの形式をチェックする
+            */}
+            <input
+              onChange={handleInputApi}
+              type="text"
+              placeholder="APIキー"
+            />
+            {isValidApiToken ? null : (
+              <div style={{ color: 'red' }}>APIキーの形式が無効です</div>
+            )}
+            <div>{qiitaApiToken}</div>
           </form>
         </div>
         <div>
-          {articles.map((article) => (
-            <div key={article.id}>
-              <Link href={article.id}>{article.title}</Link>
-            </div>
-          ))}
+          {isSearching ? (
+            <div>Searching ...</div>
+          ) : (
+            articles.map((article) => (
+              <div key={article.id}>
+                <Link href={article.id}>{article.title}</Link>
+              </div>
+            ))
+          )}
         </div>
       </main>
     </>

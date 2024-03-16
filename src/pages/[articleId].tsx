@@ -2,22 +2,25 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { Article } from '@/types/Article'
-
-const config = {
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.NEXT_PUBLIC_QIITA_TOKEN}`,
-  },
-}
-
-const fetchArticleDetail = async (id: string): Promise<Article> => {
-  const res = await axios.get(`https://qiita.com/api/v2/items/${id}`, config)
-  return res.data
-}
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import { useRecoilValue } from 'recoil'
 
 const Article = () => {
   const [article, setArticle] = useState<Article | null>(null)
   const router = useRouter()
+  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${qiitaApiToken}`,
+    },
+  }
+
+  const fetchArticleDetail = async (id: string): Promise<Article> => {
+    const res = await axios.get(`https://qiita.com/api/v2/items/${id}`, config)
+    return res.data
+  }
 
   useEffect(() => {
     const articleId = router.query.articleId

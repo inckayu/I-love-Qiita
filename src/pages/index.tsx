@@ -32,7 +32,7 @@ export default function Home() {
   }
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    e.preventDefault() // フォームが送信されてリロードされないよう
     console.log(title)
     fetchArticles(title).then((articles) => {
       setArticles(articles)

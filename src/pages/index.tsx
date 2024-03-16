@@ -63,6 +63,12 @@ export default function Home() {
               placeholder="記事タイトル"
             />
             <button onClick={handleClick}>検索</button>
+          </form>
+        </div>
+        <div>
+          <form action="">
+            {/* TODO: APIキーの入力部分は最終的にはモーダルで実装したい */}
+            <input type="text" placeholder="APIキー" />
             <button>APIキーを入力</button>
           </form>
         </div>

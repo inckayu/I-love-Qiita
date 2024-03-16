@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { articles } from '../constants/articles'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
         <div>
           {articles.map((article) => (
             <div key={article.id}>
-              <a href={article.url}>{article.title}</a>
+              <Link href={article.id}>{article.title}</Link>
             </div>
           ))}
         </div>

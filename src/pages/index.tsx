@@ -10,6 +10,7 @@ import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
   const [title, setTitle] = useState<string>('')
+  const [isSearching, setIsSearching] = useState<boolean>(false)
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
 
@@ -23,9 +24,11 @@ export default function Home() {
 
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
+    setIsSearching(true)
     console.log(title)
     fetchArticles(title).then((articles) => {
       setArticles(articles)
+      setIsSearching(false)
     })
   }
 
@@ -89,11 +92,15 @@ export default function Home() {
           </form>
         </div>
         <div>
-          {articles.map((article) => (
-            <div key={article.id}>
-              <Link href={article.id}>{article.title}</Link>
-            </div>
-          ))}
+          {isSearching ? (
+            <div>Searching ...</div>
+          ) : (
+            articles.map((article) => (
+              <div key={article.id}>
+                <Link href={article.id}>{article.title}</Link>
+              </div>
+            ))
+          )}
         </div>
       </main>
     </>

@@ -83,7 +83,14 @@ export default function Home() {
               type="text"
               placeholder="記事タイトル"
             />
-            <button onClick={handleTitleClick}>検索</button>
+            <button
+              onClick={handleTitleClick}
+              disabled={
+                !title.length || !qiitaApiToken.length || !isValidApiToken
+              }
+            >
+              検索
+            </button>
           </form>
         </div>
         <div>

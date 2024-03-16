@@ -11,6 +11,7 @@ export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
   const [title, setTitle] = useState<string>('')
   const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
 
@@ -19,7 +20,14 @@ export default function Home() {
   }
 
   const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQiitaApiToken(e.target.value)
+    const inputToken = e.target.value
+    setQiitaApiToken(inputToken)
+    if (!inputToken.match(/^\w+$/)) {
+      console.log('input')
+      setIsValidApiToken(false)
+    } else {
+      setIsValidApiToken(true)
+    }
   }
 
   const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,6 +64,7 @@ export default function Home() {
     // fetchArticles(title).then((articles) => {
     //   setArticles(articles)
     // })
+    setIsValidApiToken(true)
   }, [])
   return (
     <>
@@ -88,6 +97,9 @@ export default function Home() {
               type="text"
               placeholder="APIキー"
             />
+            {isValidApiToken ? null : (
+              <div style={{ color: 'red' }}>APIキーの形式が無効です</div>
+            )}
             <div>{qiitaApiToken}</div>
           </form>
         </div>

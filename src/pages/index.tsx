@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { articles } from '../constants/articles'
 
 export default function Home() {
   return (
@@ -11,6 +12,20 @@ export default function Home() {
       </Head>
       <main>
         <h1>I love Qiita</h1>
+        <div>
+          <form action="">
+            <input type="text" placeholder="記事タイトル" />
+            <button>検索</button>
+            <button>APIキーを入力</button>
+          </form>
+        </div>
+        <div>
+          {articles.map((article) => (
+            <div key={article.id}>
+              <a href={article.url}>{article.title}</a>
+            </div>
+          ))}
+        </div>
       </main>
     </>
   )

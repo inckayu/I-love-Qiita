@@ -12,10 +12,12 @@ const config = {
   },
 }
 
-const fetchArticles = async (): Promise<Article[]> => {
+const fetchArticles = async (title: string): Promise<Article[]> => {
   // TODO: configの型定義を追加する
+  // TODO: 検索条件は最終的にはオブジェクトとかにまとめて引数として渡すようにする
+  const query = `title:${title}`
   const res = await axios.get<Article[]>(
-    'https://qiita.com/api/v2/items?per_page=5',
+    `https://qiita.com/api/v2/items?per_page=5&query=${query}`,
     config
   )
   return res.data
@@ -23,9 +25,23 @@ const fetchArticles = async (): Promise<Article[]> => {
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
+  const [title, setTitle] = useState<string>('')
+
+  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value)
+  }
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    console.log(title)
+    fetchArticles(title).then((articles) => {
+      setArticles(articles)
+    })
+  }
+
   useEffect(() => {
-    fetchArticles().then((articles) => {
-      console.log(articles)
+    // NOTE: 初期表示時に記事を取得する必要はないかもしれない
+    fetchArticles(title).then((articles) => {
       setArticles(articles)
     })
   }, [])
@@ -40,9 +56,13 @@ export default function Home() {
       <main>
         <h1>I love Qiita</h1>
         <div>
-          <form action="">
-            <input type="text" placeholder="記事タイトル" />
-            <button>検索</button>
+          <form>
+            <input
+              onChange={handleInputTitle}
+              type="text"
+              placeholder="記事タイトル"
+            />
+            <button onClick={handleClick}>検索</button>
             <button>APIキーを入力</button>
           </form>
         </div>

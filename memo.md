@@ -107,3 +107,17 @@ git reset --soft HEAD^
 https://zenn.dev/kalubi/articles/27fa889c338cdf
 https://zenn.dev/tingtt/articles/b7482fb829ce39
 https://qiita.com/shuntaro_tamura/items/06281261d893acf049ed
+
+## Storybookのインストール
+
+コンポーネントの挙動確認のためのツール。
+<br>
+デザインとかを確認したり調整したりするためのものなので、一通りアプリの骨組み作りが終わったあとで実装する。
+
+### 背景
+
+開発効率向上
+
+### 参考
+
+https://zenn.dev/chris_d_k/articles/a9a05e963c11cd

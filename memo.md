@@ -217,3 +217,13 @@ Propsなどで動的に変わる要素以外はsassファイルに定義して�
 #### 参考
 
 <https://www.youtube.com/watch?v=D52gjW9T3YM>(プライベートブラウザで開くこと)
+
+### デザイン作成
+
+[figma](https://www.figma.com/file/PWNYfomzX4y31fwN8jpBqH/I-love-Qiita?type=design&node-id=0%3A1&mode=design&t=8dJ9ebFsT5sUQyd1-1)でデザイン作成する。
+
+レスポンシブ対応も後々する。優先度は低い。
+
+まずはデザインシステム作ったあとでモックアップを作成する。
+
+デザインシステムは[デジタル庁のデザインシステム](<https://www.figma.com/file/NCAqaM8jcWtd54ovH8TXXq/Design-System-1.4.1-(Community)>)を参考にしつつ作成したい。ここまでがっちり定義する必要はないので使う色やフォントの定義、ボタンやテキストエリアなどの基本的なUIコンポーネントのデザインが作成できれば良い。デザインのセンスはないのでAIに頼りたいところだが、webページのデザイン作成に特化したものはあるのかな...

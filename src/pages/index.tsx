@@ -1,8 +1,34 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { articles } from '../constants/articles'
 import Link from 'next/link'
+import axios from 'axios'
+import { Article } from '@/types/Article'
+
+const config = {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${process.env.NEXT_PUBLIC_QIITA_TOKEN}`,
+  },
+}
+
+const fetchArticles = async (): Promise<Article[]> => {
+  // TODO: configの型定義を追加する
+  const res = await axios.get<Article[]>(
+    'https://qiita.com/api/v2/items?per_page=5',
+    config
+  )
+  return res.data
+}
 
 export default function Home() {
+  const [articles, setArticles] = useState<Article[]>([])
+  useEffect(() => {
+    fetchArticles().then((articles) => {
+      console.log(articles)
+      setArticles(articles)
+    })
+  }, [])
   return (
     <>
       <Head>

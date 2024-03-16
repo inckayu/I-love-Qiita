@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { articles } from '../constants/articles'
 import Link from 'next/link'
 import axios from 'axios'
 import { Article } from '@/types/Article'
 import { useRecoilState } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
-import Circle from '@/stories/Circle'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -87,7 +85,6 @@ export default function Home() {
       </Head>
       <main>
         <h1>I love Qiita</h1>
-        <Circle />
         <div>
           <form>
             <input

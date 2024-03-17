@@ -3,10 +3,11 @@ import Head from 'next/head'
 import Link from 'next/link'
 import axios from 'axios'
 import { Article } from '@/types/Article'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
 import { Button } from '@/stories/Button'
+import MainTextBox from '@/stories/MainTextBox'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -14,12 +15,7 @@ export default function Home() {
   const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
-  const [articleTitle, setArticleTitle] =
-    useRecoilState<string>(articleTitleState)
-
-  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleTitle(e.target.value)
-  }
+  const articleTitle = useRecoilValue<string>(articleTitleState)
 
   const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputToken = e.target.value
@@ -84,34 +80,30 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main style={{ backgroundColor: '#F1EAFA' }}>
         <h1>I love Qiita</h1>
         <div>
           <form>
-            <input
-              onChange={handleInputTitle}
-              type="text"
-              placeholder="記事タイトル"
-              value={articleTitle}
-            />
-            <Button
-              variant="primary"
-              onClick={handleTitleClick}
-              label={'Search'}
-              disabled={
-                !articleTitle.length ||
-                !qiitaApiToken.length ||
-                !isValidApiToken
-              }
-            />
+            <MainTextBox />
+            <div></div>
+            <div>
+              <Button
+                variant="primary"
+                onClick={handleTitleClick}
+                label={'Search'}
+                disabled={
+                  !articleTitle.length ||
+                  !qiitaApiToken.length ||
+                  !isValidApiToken
+                }
+              />
+            </div>
           </form>
         </div>
-        <div>
+        {/* <div>
           <form action="">
-            {/*
             TODO: APIキーの入力部分は最終的にはモーダルで実装したい
             TODO:　正規表現を用いてAPIキーの形式をチェックする
-            */}
             <input
               onChange={handleInputApi}
               type="text"
@@ -122,7 +114,7 @@ export default function Home() {
             )}
             <div>{qiitaApiToken}</div>
           </form>
-        </div>
+        </div> */}
         <div>
           {isSearching ? (
             <div>Searching ...</div>

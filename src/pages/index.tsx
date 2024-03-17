@@ -12,6 +12,7 @@ import TuneIcon from '@mui/icons-material/Tune'
 import KeyIcon from '@mui/icons-material/Key'
 import { Article } from '@/types/Article'
 import ArticleCard from '@/stories/ArticleCard'
+import styles from '@/styles/modules/home.module.scss'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -84,12 +85,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main style={{ backgroundColor: '#F1EAFA' }}>
-        <h1>I love Qiita</h1>
-        <div>
+      <main className={styles.home}>
+        <h1 className={styles.home__title}>I love Qiita</h1>
+        <div className={styles.home__form}>
           <form>
-            <MainTextBox />
-            <div>
+            <div className={styles.home__textbox}>
+              <MainTextBox />
+            </div>
+            <div className={styles.home__options}>
               <IconButton>
                 <ForumIcon />
               </IconButton>
@@ -100,7 +103,7 @@ export default function Home() {
                 <KeyIcon />
               </IconButton>
             </div>
-            <div>
+            <div className={styles.home__search}>
               <Button
                 variant="primary"
                 onClick={handleTitleClick}

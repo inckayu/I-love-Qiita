@@ -42,3 +42,8 @@ export interface User {
   twitter_screen_name?: null
   website_url?: null
 }
+
+export type BasicUserInfo = Pick<
+  User,
+  'organization' | 'name' | 'profile_image_url'
+>

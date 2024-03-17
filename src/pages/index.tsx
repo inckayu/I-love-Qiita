@@ -95,15 +95,15 @@ export default function Home() {
               value={articleTitle}
             />
             <Button
+              variant="primary"
               onClick={handleTitleClick}
+              label={'Search'}
               disabled={
                 !articleTitle.length ||
                 !qiitaApiToken.length ||
                 !isValidApiToken
               }
-            >
-              検索
-            </Button>
+            />
           </form>
         </div>
         <div>

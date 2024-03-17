@@ -8,6 +8,10 @@ import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
 import { Button } from '@/stories/Button'
 import MainTextBox from '@/stories/MainTextBox'
+import { IconButton } from '@mui/material'
+import ForumIcon from '@mui/icons-material/Forum'
+import TuneIcon from '@mui/icons-material/Tune'
+import KeyIcon from '@mui/icons-material/Key'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -85,11 +89,22 @@ export default function Home() {
         <div>
           <form>
             <MainTextBox />
-            <div></div>
+            <div>
+              <IconButton>
+                <ForumIcon />
+              </IconButton>
+              <IconButton>
+                <TuneIcon />
+              </IconButton>
+              <IconButton>
+                <KeyIcon />
+              </IconButton>
+            </div>
             <div>
               <Button
                 variant="primary"
                 onClick={handleTitleClick}
+                size="large"
                 label={'Search'}
                 disabled={
                   !articleTitle.length ||

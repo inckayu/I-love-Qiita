@@ -1,7 +1,7 @@
 .storybook-maintextbox {
   width: 720px;
   height: 80px;
-  padding: 0px 0px 0px 40px; // 円形のテキストボックスの中心にテキストを配置するためのパディング
+  padding: 0px 0px 0px 40px; // 円形のテキストボックスの中心にテキストを配置するためのパディング. radiusと同じ値
   border: none;
   background-color: #fff;
   color: #666;

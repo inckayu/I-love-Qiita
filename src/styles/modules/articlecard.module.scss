@@ -1,0 +1,33 @@
+.articlecard {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 196px;
+  background-color: #fff;
+  margin: 24px auto;
+  padding: 24px 0px;
+  border-radius: 40px;
+
+  &__left {
+    width: 50%;
+    margin-left: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__right {
+    width: 40%;
+    margin-right: 64px;
+    margin-left: 24px;
+  }
+
+  &__title {
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  &__date {
+    font-size: 18px;
+  }
+}

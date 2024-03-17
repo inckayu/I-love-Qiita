@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import axios from 'axios'
-import { Article } from '@/types/Article'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
@@ -12,6 +10,8 @@ import { IconButton } from '@mui/material'
 import ForumIcon from '@mui/icons-material/Forum'
 import TuneIcon from '@mui/icons-material/Tune'
 import KeyIcon from '@mui/icons-material/Key'
+import { Article } from '@/types/Article'
+import ArticleCard from '@/stories/ArticleCard'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -130,14 +130,12 @@ export default function Home() {
             <div>{qiitaApiToken}</div>
           </form>
         </div> */}
-        <div>
+        <div style={{ width: '100%' }}>
           {isSearching ? (
             <div>Searching ...</div>
           ) : (
             articles.map((article) => (
-              <div key={article.id}>
-                <Link href={article.id}>{article.title}</Link>
-              </div>
+              <ArticleCard key={article.id} article={article} />
             ))
           )}
         </div>

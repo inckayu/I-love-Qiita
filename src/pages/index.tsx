@@ -13,6 +13,7 @@ import KeyIcon from '@mui/icons-material/Key'
 import { Article } from '@/types/Article'
 import ArticleCard from '@/stories/ArticleCard'
 import styles from '@/styles/modules/home.module.scss'
+import Paging from '@/stories/Paging'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -142,6 +143,7 @@ export default function Home() {
             ))
           )}
         </div>
+        <Paging />
       </main>
     </>
   )

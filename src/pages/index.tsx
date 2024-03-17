@@ -6,6 +6,7 @@ import { Article } from '@/types/Article'
 import { useRecoilState } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
+import { Button } from '@/stories/Button'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -31,7 +32,7 @@ export default function Home() {
     }
   }
 
-  const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
     setIsSearching(true)
     fetchArticles(articleTitle).then((articles) => {
@@ -93,7 +94,7 @@ export default function Home() {
               placeholder="記事タイトル"
               value={articleTitle}
             />
-            <button
+            <Button
               onClick={handleTitleClick}
               disabled={
                 !articleTitle.length ||
@@ -102,7 +103,7 @@ export default function Home() {
               }
             >
               検索
-            </button>
+            </Button>
           </form>
         </div>
         <div>

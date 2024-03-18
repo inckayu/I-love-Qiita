@@ -83,6 +83,7 @@ const Article = () => {
         {/* TODO: dangerouslySetInnerHTMLにセットしたrendered_bodyのサニタイズ */}
         <div dangerouslySetInnerHTML={{ __html: article.rendered_body }} />
       </div>
+      <div>back</div>
     </div>
   )
 }

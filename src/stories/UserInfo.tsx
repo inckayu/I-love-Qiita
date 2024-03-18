@@ -8,6 +8,7 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ user }: UserInfoProps) => {
+  console.log(user)
   return (
     <div className={styles.userinfo}>
       <div className={styles.userinfo__left}>
@@ -20,7 +21,11 @@ const UserInfo = ({ user }: UserInfoProps) => {
         />
       </div>
       <div className={styles.userinfo__right}>
-        <div className={styles.userinfo__organization}>{user.organization}</div>
+        {user.organization ? (
+          <div className={styles.userinfo__organization}>
+            {user.organization}
+          </div>
+        ) : null}
         <div className={styles.userinfo__name}>{user.name}</div>
       </div>
     </div>

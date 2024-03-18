@@ -3,6 +3,10 @@
 
   &__right {
     margin-left: 16px;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: start;
   }
   &__icon {
     border-radius: 50%;

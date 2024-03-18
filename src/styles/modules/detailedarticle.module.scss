@@ -40,7 +40,7 @@
   }
 
   &__times {
-    font-size: 18px;
+    font-size: 15px;
     margin-right: 32px;
   }
 
@@ -53,7 +53,7 @@
   &__icon {
     display: flex;
     color: #666;
-    font-size: 18px;
+    font-size: 15px;
     margin-right: 16px;
   }
 
@@ -61,6 +61,12 @@
     width: 100%;
     background-color: red;
     margin-bottom: 48px;
+  }
 
+  &__body {
+    font-size: 18px;
+    img {
+      max-width: 90%;
+    }
   }
 }

@@ -96,7 +96,10 @@ const DetailedArticle = () => {
             <Divider />
           </div>
           {/* TODO: dangerouslySetInnerHTMLにセットしたrendered_bodyのサニタイズ */}
-          <div dangerouslySetInnerHTML={{ __html: article.rendered_body }} />
+          <div
+            className={styles.detailedarticle__body}
+            dangerouslySetInnerHTML={{ __html: article.rendered_body }}
+          />
         </div>
       </div>
       <div className={styles.detailedarticle__back}>

@@ -11,7 +11,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 import Divider from '@/stories/Divider'
 import { Button } from '@/stories/Button'
 import formatDate from '@/functions/formatDate'
-import LinkTextButton from '@/stories/LinkTextButton'
+import LinkText from '@/stories/LinkText'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 import Link from 'next/link'
 
@@ -49,7 +49,7 @@ const DetailedArticle = () => {
   ) : (
     <main className={styles.detailedarticle}>
       <div className={styles.detailedarticle__back}>
-        <LinkTextButton text="back" />
+        <LinkText text="back" path="/" />
       </div>
       <div className={styles.detailedarticle__wrapper}>
         <div>
@@ -106,7 +106,7 @@ const DetailedArticle = () => {
         </div>
       </div>
       <div className={styles.detailedarticle__back}>
-        <LinkTextButton text="back" />
+        <LinkText text="back" path="/" />
       </div>
     </main>
   )

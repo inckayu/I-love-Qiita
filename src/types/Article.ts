@@ -25,25 +25,34 @@ export interface TagsEntity {
   versions?: null[] | null
 }
 export interface User {
-  description?: null
-  facebook_id?: null
+  description: string
+  facebook_id: string
   followees_count: number
   followers_count: number
-  github_login_name?: null
+  github_login_name: string
   id: string
   items_count: number
-  linkedin_id?: null
-  location?: null
+  linkedin_id: string
+  location: string
   name: string
-  organization?: null
+  organization: string
   permanent_id: number
   profile_image_url: string
   team_only: boolean
-  twitter_screen_name?: null
-  website_url?: null
+  twitter_screen_name: string
+  website_url: string
 }
 
 export type BasicUserInfo = Pick<
   User,
   'organization' | 'name' | 'profile_image_url'
+>
+
+export type UserNames = Pick<
+  User,
+  | 'name'
+  | 'twitter_screen_name'
+  | 'github_login_name'
+  | 'facebook_id'
+  | 'linkedin_id'
 >

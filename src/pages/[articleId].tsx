@@ -14,6 +14,7 @@ import formatDate from '@/functions/formatDate'
 import LinkText from '@/stories/LinkText'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 import Link from 'next/link'
+import { getUserName } from '@/functions/getUserName'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -80,7 +81,10 @@ const DetailedArticle = () => {
             <UserInfo
               user={{
                 organization: article.user.organization,
-                name: article.user.name,
+                name: getUserName({
+                  name: article.user.name,
+                  id: article.user.id,
+                }),
                 profile_image_url: article.user.profile_image_url,
               }}
             />

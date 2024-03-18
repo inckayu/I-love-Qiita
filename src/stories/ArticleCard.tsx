@@ -4,6 +4,7 @@ import React from 'react'
 import UserInfo from './UserInfo'
 import styles from '../styles/modules/articlecard.module.scss'
 import formatDate from '@/functions/formatDate'
+import { getUserName } from '@/functions/getUserName'
 
 interface ArticleCardProps {
   article: Article
@@ -22,7 +23,10 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
         <UserInfo
           user={{
             organization: article.user.organization,
-            name: article.user.name,
+            name: getUserName({
+              name: article.user.name,
+              id: article.user.id,
+            }),
             profile_image_url: article.user.profile_image_url,
           }}
         />

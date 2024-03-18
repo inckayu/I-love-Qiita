@@ -1,0 +1,28 @@
+.home {
+  background-color: #f1eafa;
+  min-height: calc(100vh - 24px);
+  padding-bottom: 24px;
+  
+  &__title {
+    font-size: 64px;
+    text-align: center;
+    padding-top: 64px;
+    margin-bottom: 48px;
+  }
+
+  &__form {
+    text-align: center;
+  }
+
+  &__textbox {
+    margin-bottom: 16px;
+  }
+
+  &__options {
+    margin-bottom: 16px;
+  }
+
+  &__search {
+    margin-bottom: 64px;
+  }
+}

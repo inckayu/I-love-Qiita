@@ -1,0 +1,40 @@
+.storybook-button {
+  font-weight: bold;
+  border: 0;
+  border-radius: 17%/50%; // 17% is the half of the height of the button
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1;
+  
+}
+.storybook-button--primary {
+  color: #fff;
+  background-color: #6F23D0;
+}
+.storybook-button--secondary {
+  color: #6F23D0;
+  border: solid 1px #8843E1;
+  background-color: #fff;
+}
+.storybook-button--disabled {
+  color: #e6e6e6;
+  background-color: #b3b3b3;
+  cursor: not-allowed;
+}
+.storybook-button--small {
+  width: 90px;
+  height: 30px;
+  font-size: 12px;
+}
+.storybook-button--medium {
+  width: 120px;
+  height: 40px;
+  font-size: 15px;
+}
+.storybook-button--large {
+  width: 180px;
+  height: 60px;
+  font-size: 18px;
+  border-width: 2px;
+
+}

@@ -1,0 +1,79 @@
+.detailedarticle {
+  background-color: #F1EAFA;
+  padding: 1px 0;
+
+  &__back {
+    // background-color: red;
+    margin: 32px auto;
+    width: 90%;
+  }
+  &__wrapper {
+    background-color: #fff;
+    width: calc(90% - 128px); // 両側のpaddingの分を引く
+    margin: 0 auto;
+    border-radius: 40px;
+    padding: 64px
+  }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    // background-color: red;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: bold;
+    width: 80%;
+  }
+
+  &__tags {
+    display: flex;
+    margin-bottom: 32px;
+  }
+  &__tagwrapper {
+    padding-right: 8px;
+  }
+  &__info {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  &__times {
+    font-size: 15px;
+    margin-right: 32px;
+  }
+
+  &__icons {
+    display: flex;
+    margin-bottom: 48px;
+    // background-color: red;
+  }
+
+  &__icon {
+    display: flex;
+    color: #666;
+    font-size: 15px;
+    margin-right: 16px;
+  }
+
+  &__divider {
+    width: 100%;
+    background-color: red;
+    margin-bottom: 48px;
+  }
+
+  &__body {
+    font-size: 18px;
+    img {
+      max-width: 90%;
+    }
+
+    div {  
+      // MEMO:コード部分
+      // background-color: red;
+      // border-radius: 18px;
+      // padding: 8px 16px;
+    }
+  }
+}

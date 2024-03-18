@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import { articles } from '../constants/articles'
-import Link from 'next/link'
 import axios from 'axios'
-import { Article } from '@/types/Article'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
+import { Button } from '@/stories/Button'
+import MainTextBox from '@/stories/MainTextBox'
+import { IconButton } from '@mui/material'
+import ForumIcon from '@mui/icons-material/Forum'
+import TuneIcon from '@mui/icons-material/Tune'
+import KeyIcon from '@mui/icons-material/Key'
+import { Article } from '@/types/Article'
+import ArticleCard from '@/stories/ArticleCard'
+import styles from '@/styles/modules/home.module.scss'
+import Paging from '@/stories/Paging'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -14,12 +21,7 @@ export default function Home() {
   const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
-  const [articleTitle, setArticleTitle] =
-    useRecoilState<string>(articleTitleState)
-
-  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleTitle(e.target.value)
-  }
+  const articleTitle = useRecoilValue<string>(articleTitleState)
 
   const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputToken = e.target.value
@@ -32,7 +34,7 @@ export default function Home() {
     }
   }
 
-  const handleTitleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
     setIsSearching(true)
     fetchArticles(articleTitle).then((articles) => {
@@ -84,34 +86,43 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>I love Qiita</h1>
-        <div>
+      <main className={styles.home}>
+        <h1 className={styles.home__title}>I love Qiita</h1>
+        <div className={styles.home__form}>
           <form>
-            <input
-              onChange={handleInputTitle}
-              type="text"
-              placeholder="記事タイトル"
-              value={articleTitle}
-            />
-            <button
-              onClick={handleTitleClick}
-              disabled={
-                !articleTitle.length ||
-                !qiitaApiToken.length ||
-                !isValidApiToken
-              }
-            >
-              検索
-            </button>
+            <div className={styles.home__textbox}>
+              <MainTextBox />
+            </div>
+            <div className={styles.home__options}>
+              <IconButton>
+                <ForumIcon />
+              </IconButton>
+              <IconButton>
+                <TuneIcon />
+              </IconButton>
+              <IconButton>
+                <KeyIcon />
+              </IconButton>
+            </div>
+            <div className={styles.home__search}>
+              <Button
+                variant="primary"
+                onClick={handleTitleClick}
+                size="large"
+                label={'Search'}
+                disabled={
+                  !articleTitle.length ||
+                  !qiitaApiToken.length ||
+                  !isValidApiToken
+                }
+              />
+            </div>
           </form>
         </div>
-        <div>
+        {/* <div>
           <form action="">
-            {/*
             TODO: APIキーの入力部分は最終的にはモーダルで実装したい
             TODO:　正規表現を用いてAPIキーの形式をチェックする
-            */}
             <input
               onChange={handleInputApi}
               type="text"
@@ -122,16 +133,17 @@ export default function Home() {
             )}
             <div>{qiitaApiToken}</div>
           </form>
-        </div>
-        <div>
+        </div> */}
+        <div style={{ width: '100%' }}>
           {isSearching ? (
             <div>Searching ...</div>
           ) : (
-            articles.map((article) => (
-              <div key={article.id}>
-                <Link href={article.id}>{article.title}</Link>
-              </div>
-            ))
+            <>
+              {articles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+              {articles.length ? <Paging /> : null}
+            </>
           )}
         </div>
       </main>

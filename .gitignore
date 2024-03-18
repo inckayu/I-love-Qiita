@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+commitlint.config.js
+
+.env
+.env.development
+*storybook.log

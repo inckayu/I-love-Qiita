@@ -1,0 +1,25 @@
+.userinfo {
+  display: flex;
+
+  &__right {
+    margin-left: 16px;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: start;
+  }
+  &__icon {
+    border-radius: 50%;
+  }
+
+  &__organization {
+    font-size: 18px;
+    color: #1a1a1a;
+  }
+
+  &__name {
+    font-size: 18px;
+    // TODO: 組織名がない場合にアイコンの縦中央に配置する
+
+  }
+}

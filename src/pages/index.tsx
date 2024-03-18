@@ -138,12 +138,14 @@ export default function Home() {
           {isSearching ? (
             <div>Searching ...</div>
           ) : (
-            articles.map((article) => (
-              <ArticleCard key={article.id} article={article} />
-            ))
+            <>
+              {articles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))}
+              {articles.length ? <Paging /> : null}
+            </>
           )}
         </div>
-        <Paging />
       </main>
     </>
   )

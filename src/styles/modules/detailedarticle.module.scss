@@ -1,0 +1,17 @@
+.detailedarticle {
+  background-color: #F1EAFA;
+  padding: 1px 0;
+
+  &__back {
+    // background-color: red;
+    margin: 32px auto;
+    width: 90%;
+  }
+  &__wrapper {
+    background-color: #fff;
+    width: calc(90% - 128px); // 両側のpaddingの分を引く
+    margin: 0 auto;
+    border-radius: 40px;
+    padding: 64px
+  }
+}

@@ -13,6 +13,7 @@ import { Button } from '@/stories/Button'
 import formatDate from '@/functions/formatDate'
 import LinkTextButton from '@/stories/LinkTextButton'
 import styles from '@/styles/modules/detailedarticle.module.scss'
+import Link from 'next/link'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -54,7 +55,9 @@ const DetailedArticle = () => {
         <div>
           <div className={styles.detailedarticle__top}>
             <div className={styles.detailedarticle__title}>{article.title}</div>
-            <Button variant="primary" size="large" label="Read in Qiita" />
+            <Link href={article.url} rel="noopener noreferrer" target="_blank">
+              <Button variant="primary" size="large" label="Read in Qiita" />
+            </Link>
           </div>
 
           <div className={styles.detailedarticle__tags}>

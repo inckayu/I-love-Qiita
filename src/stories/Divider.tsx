@@ -1,8 +1,8 @@
 import React from 'react'
+import styles from '../styles/modules/divider.module.scss'
 
 const Divider = () => {
-  // 仮のCSSを当てておく
-  return <div style={{ width: '90%', height: '2px', backgroundColor: 'red' }} />
+  return <div className={styles.divider} />
 }
 
 export default Divider

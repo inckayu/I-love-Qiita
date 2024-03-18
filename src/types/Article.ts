@@ -29,7 +29,7 @@ export interface User {
   facebook_id: string
   followees_count: number
   followers_count: number
-  github_login_name: string
+  github_login_name: string | null
   id: string
   items_count: number
   linkedin_id: string
@@ -39,7 +39,7 @@ export interface User {
   permanent_id: number
   profile_image_url: string
   team_only: boolean
-  twitter_screen_name: string
+  twitter_screen_name: string | null
   website_url: string
 }
 
@@ -48,11 +48,4 @@ export type BasicUserInfo = Pick<
   'organization' | 'name' | 'profile_image_url'
 >
 
-export type UserNames = Pick<
-  User,
-  | 'name'
-  | 'twitter_screen_name'
-  | 'github_login_name'
-  | 'facebook_id'
-  | 'linkedin_id'
->
+export type UserNames = Pick<User, 'name' | 'id'>

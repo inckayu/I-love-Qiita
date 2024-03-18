@@ -14,4 +14,53 @@
     border-radius: 40px;
     padding: 64px
   }
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    // background-color: red;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: bold;
+    width: 80%;
+  }
+
+  &__tags {
+    display: flex;
+    margin-bottom: 32px;
+  }
+  &__tagwrapper {
+    padding-right: 8px;
+  }
+  &__info {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  &__times {
+    font-size: 18px;
+    margin-right: 32px;
+  }
+
+  &__icons {
+    display: flex;
+    margin-bottom: 48px;
+    // background-color: red;
+  }
+
+  &__icon {
+    display: flex;
+    color: #666;
+    font-size: 18px;
+    margin-right: 16px;
+  }
+
+  &__divider {
+    width: 100%;
+    background-color: red;
+    margin-bottom: 48px;
+
+  }
 }

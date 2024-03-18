@@ -52,18 +52,25 @@ const DetailedArticle = () => {
       </div>
       <div className={styles.detailedarticle__wrapper}>
         <div>
-          <div>
-            <div>{article.title}</div>
+          <div className={styles.detailedarticle__top}>
+            <div className={styles.detailedarticle__title}>{article.title}</div>
             <Button variant="primary" size="large" label="Read in Qiita" />
           </div>
 
-          <div>
-            {tags.map((tag, index) => (
-              <Tag key={index} tag={tag} />
-            ))}
+          <div className={styles.detailedarticle__tags}>
+            {article.tags
+              ? article.tags.map((tag, index) => (
+                  <div
+                    className={styles.detailedarticle__tagwrapper}
+                    key={index}
+                  >
+                    <Tag tag={tag.name} />
+                  </div>
+                ))
+              : null}
           </div>
-          <div>
-            <div>
+          <div className={styles.detailedarticle__info}>
+            <div className={styles.detailedarticle__times}>
               <div>投稿：{formatDate(article.created_at)}</div>
               <div>更新：{formatDate(article.updated_at)}</div>
             </div>
@@ -75,17 +82,19 @@ const DetailedArticle = () => {
               }}
             />
           </div>
-          <div>
-            <div>
+          <div className={styles.detailedarticle__icons}>
+            <div className={styles.detailedarticle__icon}>
               <FavoriteIcon />
               <div>{article.likes_count}</div>
             </div>
-            <div>
+            <div className={styles.detailedarticle__icon}>
               <BookmarkIcon />
               <div>{article.stocks_count}</div>
             </div>
           </div>
-          <Divider />
+          <div className={styles.detailedarticle__divider}>
+            <Divider />
+          </div>
           {/* TODO: dangerouslySetInnerHTMLにセットしたrendered_bodyのサニタイズ */}
           <div dangerouslySetInnerHTML={{ __html: article.rendered_body }} />
         </div>

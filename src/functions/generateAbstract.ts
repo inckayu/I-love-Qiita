@@ -1,3 +1,4 @@
+import { Answer } from '@/types/Answer'
 import OpenAI from 'openai'
 
 export const generateAbstract = (article: string): Promise<string> => {
@@ -29,7 +30,7 @@ export const generateAbstract = (article: string): Promise<string> => {
         // model: 'gpt-3.5-turbo-0125',
         model: 'mixtral-8x7b-32768',
       })
-      .then((result) => {
+      .then((result: Answer) => {
         const abstract =
           result.choices[0]?.message?.content || 'Failed to generate abstract.'
         console.log(abstract)

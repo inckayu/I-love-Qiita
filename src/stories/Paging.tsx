@@ -4,7 +4,6 @@ import LinkText from './LinkText'
 
 const Paging = () => {
   // TODO: ページングの実装
-  // TODO: リンクテキストのコンポーネント作成
   return (
     <div className={styles.paging}>
       <LinkText text="prev" path="" />

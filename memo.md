@@ -397,7 +397,7 @@ https://chat.openai.com/share/1ac7e4c0-79c5-448d-bd10-51abf1a2c80d
 
 ### 今後の方針
 
-記事の要約生成が一段落したのでリファクタを進める。とりあえず[関数のメモ化](https://github.com/inckayu/I-love-Qiita/issues/21)以外のissuesをすべて解決したところでリファクタ完了にする。その後は
+記事の要約生成が一段落したのでリファクタを進める。とりあえず[関数のメモ化](https://github.com/inckayu/I-love-Qiita/issues/21)と[環境変数の取り扱い](https://github.com/inckayu/I-love-Qiita/issues/24)以外のissuesをすべて解決したところでリファクタ完了にする。その後は
 
 - ページング
 - AIコンシェルジュ

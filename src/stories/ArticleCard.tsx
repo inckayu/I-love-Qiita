@@ -5,7 +5,6 @@ import UserInfo from './UserInfo'
 import styles from '../styles/modules/articlecard.module.scss'
 import formatDate from '@/functions/formatDate'
 import { getUserName } from '@/functions/getUserName'
-import OpenAI from 'openai'
 
 interface ArticleCardProps {
   article: Article

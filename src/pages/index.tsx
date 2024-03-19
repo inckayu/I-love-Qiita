@@ -18,71 +18,31 @@ import CommonModal from '@/stories/CommonModal'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import ApiKeyForm from '@/stories/ApiKeyForm'
 import { generateAbstract } from '@/functions/generateAbstract'
+import { fetchArticles } from '@/functions/fetchArticles'
+import { articlesState } from '@/state/articlesState'
+import { isSearchingState } from '@/state/isSearchingState'
+import { generatedAbstractsState } from '@/state/generatedAbstracts'
+import useSearchForm from '@/hooks/useSearchForm'
 
 export default function Home() {
-  const [articles, setArticles] = useState<Article[]>([])
-  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [articles, setArticles] = useRecoilState<Article[]>(articlesState)
+  const [isSearching, setIsSearching] =
+    useRecoilState<boolean>(isSearchingState)
   const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
-  const [generatedAbstracts, setGeneratedAbstracts] = useState<string[]>([])
+  const [generatedAbstracts, setGeneratedAbstracts] = useRecoilState<string[]>(
+    generatedAbstractsState
+  )
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
-  const [isOpenApiKeyModal, setIsOpenApiKeyModal] = useRecoilState<boolean>(
-    isOpenApiKeyModalState
-  )
-
-  const handleApiKeyModalClose = () => {
-    setIsOpenApiKeyModal(false)
-  }
-
-  const handleApiKeyButton = () => {
-    setIsOpenApiKeyModal(true)
-  }
-
-  const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault() // フォームが送信されてリロードされないよう
-    setIsSearching(true)
-    fetchArticles(articleTitle).then(async (articles) => {
-      setArticles(articles)
-
-      const summaries = await Promise.all(
-        articles.map((article) => generateAbstract(article.body))
-      )
-      console.log(summaries)
-      setGeneratedAbstracts(summaries) // 要約の配列を状態に保存
-      setIsSearching(false)
-    })
-  }
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${qiitaApiToken}`,
-    },
-  }
-
-  const fetchArticles = async (title: string): Promise<Article[]> => {
-    // TODO: configの型定義を追加する
-    // TODO: 検索条件は最終的にはオブジェクトとかにまとめて引数として渡すようにする
-    // TODO: エラーハンドリングを追加する(APIキーがない場合など)
-    const query = `title:${title}`
-    const res = await axios.get<Article[]>(
-      `https://qiita.com/api/v2/items?per_page=5&query=${query}`,
-      config
-    )
-    return res.data
-  }
+  const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
+  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick } =
+    useSearchForm()
 
   useEffect(() => {
     setIsValidApiToken(true)
-    // if (!isSearching) return
-    // NOTE: 初期表示時に記事を取得する必要はないかもしれない
-    console.log(articleTitle)
-    console.log(qiitaApiToken)
-    console.log(isValidApiToken)
     if (articleTitle.length && qiitaApiToken.length) {
-      //NOTE: 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしないが、要検証
-      // 依存配列が空だからarticleTitleまたはqiitaApiTokenが変更された場合には実行されないはず
-      fetchArticles(articleTitle).then(async (articles) => {
+      // 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしない
+      fetchArticles(articleTitle, qiitaApiToken).then(async (articles) => {
         setArticles(articles)
 
         const summaries = await Promise.all(

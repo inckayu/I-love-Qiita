@@ -14,6 +14,9 @@ import { Article } from '@/types/Article'
 import ArticleCard from '@/stories/ArticleCard'
 import styles from '@/styles/modules/home.module.scss'
 import Paging from '@/stories/Paging'
+import CommonModal from '@/stories/CommonModal'
+import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import ApiKeyForm from '@/stories/ApiKeyForm'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -22,16 +25,16 @@ export default function Home() {
   const [qiitaApiToken, setQiitaApiToken] =
     useRecoilState<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
+  const [isOpenApiKeyModal, setIsOpenApiKeyModal] = useRecoilState<boolean>(
+    isOpenApiKeyModalState
+  )
 
-  const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputToken = e.target.value
-    setQiitaApiToken(inputToken)
-    if (!inputToken.match(/^\w+$/)) {
-      console.log('input')
-      setIsValidApiToken(false)
-    } else {
-      setIsValidApiToken(true)
-    }
+  const handleApiKeyModalClose = () => {
+    setIsOpenApiKeyModal(false)
+  }
+
+  const handleApiKeyButton = () => {
+    setIsOpenApiKeyModal(true)
   }
 
   const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -100,7 +103,7 @@ export default function Home() {
               <IconButton>
                 <TuneIcon />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleApiKeyButton}>
                 <KeyIcon />
               </IconButton>
             </div>
@@ -146,6 +149,12 @@ export default function Home() {
             </>
           )}
         </div>
+        <CommonModal
+          isOpenModal={isOpenApiKeyModal}
+          onClose={handleApiKeyModalClose}
+        >
+          <ApiKeyForm />
+        </CommonModal>
       </main>
     </>
   )

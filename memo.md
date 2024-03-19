@@ -355,3 +355,36 @@ https://zenn.dev/honegger/articles/ff76dbdaf9d7a9
 とりあえず最低限のデザインの実装が終わったのでmainにマージする。今後はTODOなどはIssuesで管理する。
 
 まずはAPIキーの入力フォーム(モーダル)を作成し、その後生成AIを用いた記事一覧画面の記事の要約に付いて検討し、何らかの形で実装が終わり次第リファクタという流れで行う。
+
+### 生成AIを用いた記事要約
+
+先述した通り、要約の生成に時間がかかるのが課題。100~200文字の要約生成なので今回は精度よりも生成速度を重視したい。[Groq](https://groq.com/)というLLMが早いらしいのでこれを使う。[LLMの性能ランキング](https://wandb.ai/wandb-japan/llm-leaderboard/reports/Nejumi-Leaderboard-Neo--Vmlldzo2MTkyMTU0)によると、精度はGPT4には劣るがそこまで悪いわけではないっぽい。
+
+Groqだとrate limit(40,000 tokens per minute)が厳しいので断念してGPT4を利用することにする。金払うから緩和してくれないかな。
+
+### 環境変数
+
+GroqのAPIを叩こうとしたらエラーが出た。
+
+```
+Error: This is disabled by default, as it risks exposing your secret API credentials to attackers.
+If you understand the risks and have appropriate mitigations in place,
+you can set the `dangerouslyAllowBrowser` option to `true`, e.g.,
+
+new Groq({ dangerouslyAllowBrowser: true })
+```
+
+APIキーをクライアントサイドの実行で使おうとしたのが原因らしい。環境変数の扱いについてよく理解できていなかったので[公式ドキュメント](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables)を読んで理解しておく。
+
+### 要約生成の非同期処理
+
+だいぶ苦労した。非同期処理については正直あまり理解できていないので要復習。とりあえず`Promise.all`を用いて`index.tsx`内で一括で要約を取得するくらいしか上手い解決策が思いつかなかった。プログレスバーとの兼ね合いで要約取得の進捗状況をカウンタ変数で取得したかったがこの方法だと実現不可能。
+
+正直要約したテキストを一覧表示画面に表示せずとも、詳細画面で記事本文の代わりに記事の要約を表示すればいい話ではある。本文が読みたかったらQiitaを見ればいいので...
+
+進捗の把握は非同期処理の実装方法を考え直す必要があるので一旦`Promise.all`を使う方針で妥協。ローディング中のUIをどうするかが問題になる。先述したようにロードがそこそこ長くなるのでローディングサークルはできれば避けたいが、進捗状況を示すことはできない。代替案として、初めはローディングサークルを表示し、一定時間が経過したらスケルトンスクリーンを用いることで体感の待機時間を軽減する策が有効かも。場合によっては間に「読み込みに時間がかかっています」みたいなメッセージを表示してさらに段階を踏むとかもあり。
+
+#### 参考
+
+https://zenn.dev/kii/articles/progress-indicator-ui
+https://uxmilk.jp/57894

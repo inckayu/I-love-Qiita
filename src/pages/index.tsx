@@ -17,13 +17,14 @@ import Paging from '@/stories/Paging'
 import CommonModal from '@/stories/CommonModal'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import ApiKeyForm from '@/stories/ApiKeyForm'
+import { generateAbstract } from '@/functions/generateAbstract'
 
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([])
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
-  const [qiitaApiToken, setQiitaApiToken] =
-    useRecoilState<string>(qiitaApiTokenState)
+  const [generatedAbstracts, setGeneratedAbstracts] = useState<string[]>([])
+  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const [isOpenApiKeyModal, setIsOpenApiKeyModal] = useRecoilState<boolean>(
     isOpenApiKeyModalState
@@ -40,8 +41,14 @@ export default function Home() {
   const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
     setIsSearching(true)
-    fetchArticles(articleTitle).then((articles) => {
+    fetchArticles(articleTitle).then(async (articles) => {
       setArticles(articles)
+
+      const summaries = await Promise.all(
+        articles.map((article) => generateAbstract(article.body))
+      )
+      console.log(summaries)
+      setGeneratedAbstracts(summaries) // 要約の配列を状態に保存
       setIsSearching(false)
     })
   }
@@ -66,6 +73,8 @@ export default function Home() {
   }
 
   useEffect(() => {
+    setIsValidApiToken(true)
+    // if (!isSearching) return
     // NOTE: 初期表示時に記事を取得する必要はないかもしれない
     console.log(articleTitle)
     console.log(qiitaApiToken)
@@ -73,14 +82,19 @@ export default function Home() {
     if (articleTitle.length && qiitaApiToken.length) {
       //NOTE: 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしないが、要検証
       // 依存配列が空だからarticleTitleまたはqiitaApiTokenが変更された場合には実行されないはず
-      setIsSearching(true)
-      fetchArticles(articleTitle).then((articles) => {
+      fetchArticles(articleTitle).then(async (articles) => {
         setArticles(articles)
+
+        const summaries = await Promise.all(
+          articles.map((article) => generateAbstract(article.body))
+        )
+        console.log(summaries)
+        setGeneratedAbstracts(summaries) // 要約の配列を状態に保存
         setIsSearching(false)
       })
     }
-    setIsValidApiToken(true)
   }, [])
+
   return (
     <>
       <Head>
@@ -122,28 +136,17 @@ export default function Home() {
             </div>
           </form>
         </div>
-        {/* <div>
-          <form action="">
-            TODO: APIキーの入力部分は最終的にはモーダルで実装したい
-            TODO:　正規表現を用いてAPIキーの形式をチェックする
-            <input
-              onChange={handleInputApi}
-              type="text"
-              placeholder="APIキー"
-            />
-            {isValidApiToken ? null : (
-              <div style={{ color: 'red' }}>APIキーの形式が無効です</div>
-            )}
-            <div>{qiitaApiToken}</div>
-          </form>
-        </div> */}
         <div style={{ width: '100%' }}>
           {isSearching ? (
             <div>Searching ...</div>
           ) : (
             <>
-              {articles.map((article) => (
-                <ArticleCard key={article.id} article={article} />
+              {articles.map((article, index) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  abstract={generatedAbstracts[index]}
+                />
               ))}
               {articles.length ? <Paging /> : null}
             </>

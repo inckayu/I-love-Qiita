@@ -15,36 +15,24 @@ import LinkText from '@/stories/LinkText'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 import Link from 'next/link'
 import { getUserName } from '@/functions/getUserName'
+import { fetchArticle } from '@/functions/fetchArticle'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
+  const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
   const router = useRouter()
-  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${qiitaApiToken}`,
-    },
-  }
-
-  const fetchArticleDetail = async (id: string): Promise<Article> => {
-    const res = await axios.get(`https://qiita.com/api/v2/items/${id}`, config)
-    return res.data
-  }
 
   useEffect(() => {
     const articleId = router.query.articleId
     console.log(articleId)
     if (articleId && typeof articleId === 'string') {
-      fetchArticleDetail(articleId).then((article) => {
+      fetchArticle(articleId, qiitaApiToken).then((article) => {
         console.log(article)
         setArticle(article)
       })
     }
-  }, [router.query.articleId])
+  }, [router.query.articleId, qiitaApiToken])
 
-  const tags = ['typescript', 'react', 'nextjs']
   return article === null ? (
     <div>loading...</div>
   ) : (

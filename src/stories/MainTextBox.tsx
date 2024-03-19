@@ -1,15 +1,13 @@
 import React from 'react'
 import { articleTitleState } from '@/state/articleTitleState'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import styles from '../styles/modules/maintextbox.module.scss'
+import useSearchForm from '@/hooks/useSearchForm'
 
 const MainTextBox = () => {
-  const [articleTitle, setArticleTitle] =
-    useRecoilState<string>(articleTitleState)
+  const articleTitle = useRecoilValue<string>(articleTitleState)
+  const { handleInputTitle } = useSearchForm()
 
-  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleTitle(e.target.value)
-  }
   return (
     <input
       onChange={handleInputTitle}

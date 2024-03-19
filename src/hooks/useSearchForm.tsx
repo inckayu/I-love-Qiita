@@ -19,6 +19,7 @@ const useSearchForm = () => {
   const [, setGeneratedAbstracts] = useRecoilState<string[]>(
     generatedAbstractsState
   )
+  const [, setArticleTitle] = useRecoilState<string>(articleTitleState)
 
   const handleApiKeyModalClose = () => {
     setIsOpenApiKeyModal(false)
@@ -42,10 +43,16 @@ const useSearchForm = () => {
       setIsSearching(false)
     })
   }
+
+  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArticleTitle(e.target.value)
+  }
+
   return {
     handleApiKeyModalClose,
     handleApiKeyButton,
     handleTitleClick,
+    handleInputTitle,
   }
 }
 

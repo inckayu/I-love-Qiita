@@ -388,3 +388,9 @@ APIキーをクライアントサイドの実行で使おうとしたのが原�
 
 https://zenn.dev/kii/articles/progress-indicator-ui
 https://uxmilk.jp/57894
+
+### AbstractとSummaryのニュアンスの違い
+
+https://chat.openai.com/share/1ac7e4c0-79c5-448d-bd10-51abf1a2c80d
+
+今回の文脈だとどっちでも良さそう。summaryでいいかな。

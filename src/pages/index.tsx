@@ -73,7 +73,7 @@ export default function Home() {
             </div>
           </form>
         </div>
-        <div style={{ width: '100%' }}>
+        <div className={styles.home__articles}>
           {isSearching ? (
             <div>Searching ...</div>
           ) : (

@@ -30,7 +30,7 @@ const useApiKeyForm = () => {
       )
     } catch {
       setIsError(true)
-      setErrorText('Invalid API key') // FIXME: 正規表現にマッチしなかった場合との区別がつきにくい
+      setErrorText('Authentication failed. Please check the key validity')
       return false
     }
     return true
@@ -40,7 +40,7 @@ const useApiKeyForm = () => {
     if (apiKey === '') return // apiKeyが空文字列の場合はエラーテキストではなくボタンをdisabledにしてユーザに示す
     if (apiKey.match(/^\w+$/) === null) {
       setIsError(true)
-      setErrorText('Invalid format')
+      setErrorText('Invalid format. Please input again')
       return
     }
     setIsError(false)

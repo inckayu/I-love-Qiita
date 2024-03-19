@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from '../styles/modules/button.module.scss'
+import { getButtonVariant } from '@/functions/getButtonVariant'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary'
@@ -7,18 +8,6 @@ interface ButtonProps {
   label: string
   disabled?: boolean
   onClick?: (() => void) | React.MouseEventHandler<HTMLButtonElement>
-}
-
-const getMode = (variant: 'primary' | 'secondary', disabled: boolean) => {
-  if (disabled) return styles['storybook-button--disabled']
-  switch (variant) {
-    case 'primary':
-      return styles['storybook-button--primary']
-    case 'secondary':
-      return styles['storybook-button--secondary']
-    default:
-      return ''
-  }
 }
 
 export const Button = ({
@@ -34,16 +23,11 @@ export const Button = ({
       className={[
         styles['storybook-button'],
         styles[`storybook-button--${size}`],
-        getMode(variant, disabled),
+        getButtonVariant(variant, disabled),
       ].join(' ')}
       {...props}
     >
       {label}
-      {/* <style jsx>{`
-        button {
-          background-color: ${backgroundColor};
-        }
-      `}</style> */}
     </button>
   )
 }

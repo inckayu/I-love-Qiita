@@ -5,12 +5,14 @@ import UserInfo from './UserInfo'
 import styles from '../styles/modules/articlecard.module.scss'
 import formatDate from '@/functions/formatDate'
 import { getUserName } from '@/functions/getUserName'
+import OpenAI from 'openai'
 
 interface ArticleCardProps {
   article: Article
+  abstract: string
 }
 
-const ArticleCard = ({ article }: ArticleCardProps) => {
+const ArticleCard = ({ article, abstract }: ArticleCardProps) => {
   return (
     <Link key={article.id} href={article.id} className={styles.articlecard}>
       <div className={styles.articlecard__left}>
@@ -31,12 +33,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           }}
         />
       </div>
-      <div className={styles.articlecard__right}>
-        temporary text temporary text temporary text temporary text temporary
-        text temporary text temporary text temporary text temporary text
-        temporary text temporary text temporary text temporary text temporary
-        text temporary text temporary text temporary text temporary text
-      </div>
+      <div className={styles.articlecard__right}>{abstract}</div>
     </Link>
   )
 }

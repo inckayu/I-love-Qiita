@@ -16,6 +16,7 @@ import styles from '@/styles/modules/detailedarticle.module.scss'
 import Link from 'next/link'
 import { getUserName } from '@/functions/getUserName'
 import { fetchArticle } from '@/functions/fetchArticle'
+import sanitizeHtml from 'sanitize-html'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -90,10 +91,11 @@ const DetailedArticle = () => {
           <div className={styles.detailedarticle__divider}>
             <Divider />
           </div>
-          {/* TODO: dangerouslySetInnerHTMLにセットしたrendered_bodyのサニタイズ */}
           <div
             className={styles.detailedarticle__body}
-            dangerouslySetInnerHTML={{ __html: article.rendered_body }}
+            dangerouslySetInnerHTML={{
+              __html: sanitizeHtml(article.rendered_body),
+            }}
           />
         </div>
       </div>

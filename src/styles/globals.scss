@@ -1,7 +1,6 @@
 @charset "utd-8";
 
-@use "./common/colors" as *;
-@use "./common/fonts" as *;
+@use "common" as *;
 
 a {
   text-decoration: none;

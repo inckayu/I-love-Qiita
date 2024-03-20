@@ -90,7 +90,7 @@ export default function Home() {
                   isSkeleton={isSkeleton}
                 />
               ))}
-              {articles.length ? <Paging /> : null}
+              {articles.length && !isSkeleton ? <Paging /> : null}
             </>
           ) : (
             null

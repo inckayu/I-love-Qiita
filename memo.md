@@ -412,10 +412,110 @@ https://chat.openai.com/share/1ac7e4c0-79c5-448d-bd10-51abf1a2c80d
 
 ## sass座学
 
+### 採用ルール
+
+基本的には[コーディングルールの参考例](https://zenn.dev/kagan/articles/1aa466bb6ef8eb)から必要なものを抜粋。必要性が低いものや自明なものは省略。
+
+- stylelintの使用
+- クラスの命名規則はBEMに基づく(「」を参照)
+- クラス名をアンパサンドでネストしない
+- マージンはtopまたはleftでつける
+- プロパティのシュートハンドは避ける
+- フォーカス時のoutlineを消さない(デザイン作成する)
+- フォントサイズの単位はpxではなくremにする(rootを10pxにする)
+- PCのメディアクエリにはprintをつける
+- 共通パーツにはmarginやwidthを指定しない
+
+### ミックスイン
+
+定義した関数を利用する機能。
+
+```scss
+// 関数定義
+@mixin func($prop) {
+  font-size: $prop;
+}
+
+// 定義した関数を使用
+div {
+  @include func(1rem);
+}
+```
+
+### 拡張・継承
+
+セレクタを使い回す。
+
+```scss
+// %をつけるとコンパイルしたときに出力されないので原則つける
+%a {
+  width: 100px;
+  height: 100px;
+  background-color: #ff0000;
+}
+
+div {
+  @extend a;
+}
+```
+
+### パーシャル
+
+2022年10月に`@import`が廃止された。以降は基本的に`@use`と`@forward`を用いる。
+
+#### @use
+
+変数の使用には名前空間を明示(`[名前空間].$[変数名]`)する必要がある。明示することにより読み込んだファイル同士での変数名の衝突を防止できるが、今回の開発では重複するような名前はない(重複しうるほど複雑・大規模ではない)ので原則として名前空間は省略する。
+
+```scss
+@use 'directory' as 名前空間;
+
+// 名前空間を省略
+@use 'directory' as *;
+```
+
+`@use`で読み込んだファイルは、他のファイルで読み込むことができない。
+
+```sass
+-style.scss
+-sass
+├ _variables.scss ├ _utility.scss
+└ _index.scss
+```
+
+このようなディレクトリ構造の場合
+
+```scss
+/* sass/variables.scss */
+$color: #000000;
+
+/* sass/index.scss */
+@use 'variables' as var;
+
+/* style.scss */
+@use 'sass' as sass; //_indexの読み込みは省略可
+.foo {
+  color: sass.$color; //コンパイルエラー
+  color: sass.var.$color; //コンパイルエラー
+}
+```
+
+`sass/variables.scss`の中身は`sass/index.scss`でしか利用できない。
+
+#### @forward
+
+上の例において、`sass/variables.scss`の中身を`style.scss`でも利用するためには、`sass/index.scss`で`@use`ではなく`@forward`を用いる。ハブに利用するイメージ。
+
+### ファイル名のアンダーバー(`_`)
+
+コンパイルした際にそのCSSファイルを出力させない。
+
 ### 参考
 
 - [Sass Basics](https://sass-lang.com/guide/)
 - [Stylelint](https://stylelint.io/)
 - [Bootstrap](https://getbootstrap.jp/docs/5.0/layout/breakpoints/)
+- [コーディングルールの参考例](https://zenn.dev/kagan/articles/1aa466bb6ef8eb)
+- [ミックスインのテンプレ](https://zenn.dev/tak_dcxi/articles/2cc1828e9c1fe2)
 
 Sassのドキュメントを自動で作ってくれる[SassDoc](https://github.com/SassDoc/sassdoc)というライブラリがあるらしいが、最終更新が4年前なので要検証。

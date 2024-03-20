@@ -53,10 +53,7 @@ const DetailedArticle = () => {
           <div className={styles.detailedarticle__tags}>
             {article.tags
               ? article.tags.map((tag, index) => (
-                  <div
-                    className={styles.detailedarticle__tagwrapper}
-                    key={index}
-                  >
+                  <div className={styles.detailedarticle__tagwrapper} key={index}>
                     <Tag tag={tag.name} />
                   </div>
                 ))

@@ -26,11 +26,7 @@ const ApiKeyForm = () => {
         />
       </div>
       <div className={styles.apikeyform__button}>
-        <Button
-          label="Register"
-          onClick={handleClick}
-          disabled={qiitaApiToken === '' || isError}
-        />
+        <Button label="Register" onClick={handleClick} disabled={qiitaApiToken === '' || isError} />
       </div>
     </div>
   )

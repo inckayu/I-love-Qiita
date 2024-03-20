@@ -17,9 +17,7 @@ const ArticleCard = ({ article, summary }: ArticleCardProps) => {
       <div className={styles.articlecard__left}>
         <div>
           <div className={styles.articlecard__title}>{article.title}</div>
-          <div className={styles.articlecard__date}>
-            {formatDate(article.created_at)}
-          </div>
+          <div className={styles.articlecard__date}>{formatDate(article.created_at)}</div>
         </div>
         <UserInfo
           user={{

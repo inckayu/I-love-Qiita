@@ -22,9 +22,7 @@ const UserInfo = ({ user }: UserInfoProps) => {
       </div>
       <div className={styles.userinfo__right}>
         {user.organization ? (
-          <div className={styles.userinfo__organization}>
-            {user.organization}
-          </div>
+          <div className={styles.userinfo__organization}>{user.organization}</div>
         ) : null}
         <div className={styles.userinfo__name}>{user.name}</div>
       </div>

@@ -20,9 +20,7 @@ const TextBox = ({
 }: TextBoxProps) => {
   return (
     <div className={styles.textbox}>
-      {required ? (
-        <div className={styles.textbox__required}>required *</div>
-      ) : null}
+      {required ? <div className={styles.textbox__required}>required *</div> : null}
       <input
         type="text"
         value={value}
@@ -30,9 +28,7 @@ const TextBox = ({
         onChange={onChange}
         className={styles.textbox__body}
       />
-      {isError ? (
-        <div className={styles.textbox__errortext}>{errorText}</div>
-      ) : null}
+      {isError ? <div className={styles.textbox__errortext}>{errorText}</div> : null}
     </div>
   )
 }

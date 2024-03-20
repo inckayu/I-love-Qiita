@@ -1,9 +1,6 @@
 import styles from '../styles/modules/button.module.scss'
 
-export const getButtonVariant = (
-  variant: 'primary' | 'secondary',
-  disabled: boolean
-) => {
+export const getButtonVariant = (variant: 'primary' | 'secondary', disabled: boolean) => {
   if (disabled) return styles['storybook-button--disabled']
   switch (variant) {
     case 'primary':

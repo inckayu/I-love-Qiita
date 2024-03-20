@@ -29,8 +29,7 @@ export default function Home() {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
-  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick } =
-    useSearchForm()
+  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick } = useSearchForm()
 
   return (
     <>
@@ -64,11 +63,7 @@ export default function Home() {
                 onClick={handleTitleClick}
                 size="large"
                 label={'Search'}
-                disabled={
-                  !articleTitle.length ||
-                  !qiitaApiToken.length ||
-                  !isValidApiKeyToken
-                }
+                disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}
               />
             </div>
           </form>
@@ -89,10 +84,7 @@ export default function Home() {
             </>
           )}
         </div>
-        <CommonModal
-          isOpenModal={isOpenApiKeyModal}
-          onClose={handleApiKeyModalClose}
-        >
+        <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>
           <ApiKeyForm />
         </CommonModal>
       </main>

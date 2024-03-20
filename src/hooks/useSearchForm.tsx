@@ -16,9 +16,7 @@ const useSearchForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const [, setArticles] = useRecoilState<Article[]>(articlesState)
   const [, setIsSearching] = useRecoilState<boolean>(isSearchingState)
-  const [, setGeneratedSummaries] = useRecoilState<string[]>(
-    generatedSummariesState
-  )
+  const [, setGeneratedSummaries] = useRecoilState<string[]>(generatedSummariesState)
   const [, setArticleTitle] = useRecoilState<string>(articleTitleState)
 
   const handleApiKeyModalClose = () => {
@@ -35,9 +33,7 @@ const useSearchForm = () => {
     fetchArticles(articleTitle, qiitaApiToken).then(async (articles) => {
       setArticles(articles)
 
-      const summaries = await Promise.all(
-        articles.map((article) => generateSummary(article.body))
-      )
+      const summaries = await Promise.all(articles.map((article) => generateSummary(article.body)))
       console.log(summaries)
       setGeneratedSummaries(summaries)
       setIsSearching(false)

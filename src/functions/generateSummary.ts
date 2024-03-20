@@ -31,8 +31,7 @@ export const generateSummary = (article: string): Promise<string> => {
         model: 'mixtral-8x7b-32768',
       })
       .then((result: Answer) => {
-        const summary =
-          result.choices[0]?.message?.content || 'Failed to generate summary.'
+        const summary = result.choices[0]?.message?.content || 'Failed to generate summary.'
         console.log(summary)
         resolve(summary)
       })

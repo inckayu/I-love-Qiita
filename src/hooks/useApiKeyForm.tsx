@@ -24,10 +24,7 @@ const useApiKeyForm = () => {
 
     try {
       console.log(config)
-      await axios.get<Article[]>(
-        `https://qiita.com/api/v2/items?per_page=1`,
-        config
-      )
+      await axios.get<Article[]>(`https://qiita.com/api/v2/items?per_page=1`, config)
     } catch {
       setIsError(true)
       setErrorText('Authentication failed. Please check the key validity')

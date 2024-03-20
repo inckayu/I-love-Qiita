@@ -1,0 +1,42 @@
+{
+  "plugins": ["stylelint-scss"],
+  "extends": [
+    "stylelint-config-recess-order",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "selector-pseudo-element-colon-notation": "double",
+    "scss/selector-no-union-class-name": true,
+    "string-quotes": "single",
+    "color-no-invalid-hex": true,
+    "function-calc-no-invalid": true,
+    "function-calc-no-unspaced-operator": true,
+    "string-no-newline": true,
+    "unit-no-unknown": true,
+    "property-no-unknown": true,
+    "declaration-block-no-duplicate-properties": true,
+    "selector-pseudo-class-no-unknown": true,
+    "selector-pseudo-element-no-unknown": true,
+    "selector-type-no-unknown": true,
+    "at-rule-no-unknown": true,
+    "no-descending-specificity": true,
+    "property-blacklist": ["margin-bottom", "margin-right"],
+    "declaration-no-important": true,
+    "declaration-block-single-line-max-declarations": 1,
+    "declaration-property-unit-allowed-list": {
+      "font-size": ["rem"]
+    }
+  },
+  "ignoreFiles": [
+    "**/node_modules/**",
+    "**/pages/**",
+    "**/components/**",
+    "**/contexts/**",
+    "**/hooks/**",
+    "**/libs/**",
+    "**/context/**",
+    "**/functions/**",
+    "**/types/**"
+  ]
+}

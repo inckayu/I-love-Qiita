@@ -9,7 +9,9 @@
     "lint": "next lint",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint:style": "stylelint '**/*.{css,scss,sass}'",
+    "lint:style:fix": "stylelint --fix '**/*.{css,scss,sass}'"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -25,7 +27,12 @@
     "react-dom": "^18",
     "recoil": "^0.7.7",
     "sanitize-html": "^2.12.1",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^5.0.0",
+    "stylelint-config-recommended-scss": "^14.0.0",
+    "stylelint-scss": "^6.2.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.2.22",

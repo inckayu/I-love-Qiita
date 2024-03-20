@@ -53,11 +53,16 @@ const useSearchForm = () => {
     setArticleTitle(e.target.value)
   }
 
+  const handleSearchFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
+
   return {
     handleApiKeyModalClose,
     handleApiKeyButton,
     handleTitleClick,
     handleInputTitle,
+    handleSearchFormSubmit,
   }
 }
 

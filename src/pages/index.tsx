@@ -33,7 +33,8 @@ export default function Home() {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
-  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick } = useSearchForm()
+  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
+    useSearchForm()
 
   return (
     <>
@@ -46,7 +47,7 @@ export default function Home() {
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__form}>
-          <form>
+          <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>
               <MainTextBox />
             </div>

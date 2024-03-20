@@ -9,7 +9,6 @@ import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
-
 const useApiKeyForm = () => {
   const [qiitaApiToken, setQiitaApiToken] = useRecoilState(qiitaApiTokenState)
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)

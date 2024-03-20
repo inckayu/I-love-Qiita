@@ -10,6 +10,7 @@
   font-size: 18px;
   border-radius: 5.5%/50%; // 5.5% is the half of the height of the textbox
   letter-spacing: 0.05em;
+  @include fonts();
 
 }
 

@@ -8,6 +8,7 @@
   cursor: pointer;
   display: inline-block;
   line-height: 1;
+  @include fonts()
   
 }
 .storybook-button--primary {

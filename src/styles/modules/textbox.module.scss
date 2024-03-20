@@ -10,6 +10,7 @@
     padding: 0 16px;
     font-size: 18px;
     color: colors(sumi, 600);
+    @include fonts();
   }
 
   &__required {

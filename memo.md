@@ -528,3 +528,7 @@ Sassのドキュメントを自動で作ってくれる[SassDoc](https://github.
 yarn add sanitize-html
 yarn add @types/sanitize-html
 ```
+
+### stylelint
+
+導入方法をREADMEに書く

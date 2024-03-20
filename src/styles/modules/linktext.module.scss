@@ -1,13 +1,7 @@
-@use "../common" as *;
+@use '../common' as *;
 
 .linktext {
-  // background-color: transparent;
-  // border: none;
-  // cursor: pointer;
-  // outline: none;
-  // padding: 0;
-  // appearance: none;
   font-size: 18px;
-  text-decoration: underline;
   color: colors(purple);
+  text-decoration: underline;
 }

@@ -1,15 +1,15 @@
 @use "../common" as *;
 
 .home {
-  background-color: colors(purple, bg);
   min-height: calc(100vh - 24px);
   padding-bottom: 24px;
+  background-color: colors(purple, bg);
   
   &__title {
-    font-size: 64px;
-    text-align: center;
     padding-top: 64px;
     margin-bottom: 48px;
+    font-size: 64px;
+    text-align: center;
   }
 
   &__form {

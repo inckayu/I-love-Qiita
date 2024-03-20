@@ -1,21 +1,21 @@
 .apikeyform {
 
   &__title {
-    margin-bottom: 32px;
-    margin: 0 auto 32px auto;
     width: fit-content;
+    margin: 0 auto 32px auto;
+    margin-bottom: 32px;
   }
 
   &__textfield {
+    width: fit-content;
     height: 80px;
     margin: 0 auto;
     margin-bottom: 32px;
-    width: fit-content;
 
   }
 
   &__button {
-    margin: 0 auto;
     width: fit-content;
+    margin: 0 auto;
   }
 }

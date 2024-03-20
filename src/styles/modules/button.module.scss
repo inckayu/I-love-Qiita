@@ -2,12 +2,12 @@
 
 // FIXME: CSS名の命名を統一
 .storybook-button {
+  display: inline-block;
   font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
   border: 0;
   border-radius: 17%/50%; // 17% is the half of the height of the button
-  cursor: pointer;
-  display: inline-block;
-  line-height: 1;
   @include fonts()
   
 }
@@ -17,13 +17,13 @@
 }
 .storybook-button--secondary {
   color: colors(purple);
-  border: solid 1px colors(purple, secondary);
   background-color: colors(white);
+  border: solid 1px colors(purple, secondary);
 }
 .storybook-button--disabled {
   color: colors(sumi, 100);
-  background-color: colors(sumi, 300);
   cursor: not-allowed;
+  background-color: colors(sumi, 300);
 }
 .storybook-button--small {
   width: 90px;

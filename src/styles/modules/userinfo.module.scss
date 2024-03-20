@@ -1,15 +1,14 @@
-@use "../common" as *;
-
+@use '../common' as *;
 
 .userinfo {
   display: flex;
 
   &__right {
-    margin-left: 16px;
-    height: 100%;
     display: grid;
     align-items: center;
     justify-items: start;
+    height: 100%;
+    margin-left: 16px;
   }
   &__icon {
     border-radius: 50%;
@@ -22,7 +21,6 @@
 
   &__name {
     font-size: 18px;
-    // TODO: 組織名がない場合にアイコンの縦中央に配置する
-
+    // TODO: 組織名がない場合にアイコンの縦中央に配置するTODOTODOTODOTODOTODOTODOTODOTODOTODO
   }
 }

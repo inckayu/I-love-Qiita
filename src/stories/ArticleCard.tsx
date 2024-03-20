@@ -8,10 +8,10 @@ import { getUserName } from '@/functions/getUserName'
 
 interface ArticleCardProps {
   article: Article
-  abstract: string
+  summary: string
 }
 
-const ArticleCard = ({ article, abstract }: ArticleCardProps) => {
+const ArticleCard = ({ article, summary }: ArticleCardProps) => {
   return (
     <Link key={article.id} href={article.id} className={styles.articlecard}>
       <div className={styles.articlecard__left}>
@@ -32,7 +32,7 @@ const ArticleCard = ({ article, abstract }: ArticleCardProps) => {
           }}
         />
       </div>
-      <div className={styles.articlecard__right}>{abstract}</div>
+      <div className={styles.articlecard__right}>{summary}</div>
     </Link>
   )
 }

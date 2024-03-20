@@ -4,10 +4,10 @@ import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { fetchArticles } from '@/functions/fetchArticles'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { articleTitleState } from '@/state/articleTitleState'
-import { generateAbstract } from '@/functions/generateAbstract'
+import { generateSummary } from '@/functions/generateSummary'
 import { articlesState } from '@/state/articlesState'
 import { isSearchingState } from '@/state/isSearchingState'
-import { generatedAbstractsState } from '@/state/generatedAbstracts'
+import { generatedSummariesState } from '@/state/generatedSummaries'
 import { Article } from '@/types/Article'
 
 const useSearchForm = () => {
@@ -16,8 +16,8 @@ const useSearchForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const [, setArticles] = useRecoilState<Article[]>(articlesState)
   const [, setIsSearching] = useRecoilState<boolean>(isSearchingState)
-  const [, setGeneratedAbstracts] = useRecoilState<string[]>(
-    generatedAbstractsState
+  const [, setGeneratedSummaries] = useRecoilState<string[]>(
+    generatedSummariesState
   )
   const [, setArticleTitle] = useRecoilState<string>(articleTitleState)
 
@@ -36,10 +36,10 @@ const useSearchForm = () => {
       setArticles(articles)
 
       const summaries = await Promise.all(
-        articles.map((article) => generateAbstract(article.body))
+        articles.map((article) => generateSummary(article.body))
       )
       console.log(summaries)
-      setGeneratedAbstracts(summaries)
+      setGeneratedSummaries(summaries)
       setIsSearching(false)
     })
   }

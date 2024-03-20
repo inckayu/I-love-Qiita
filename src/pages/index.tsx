@@ -17,7 +17,7 @@ import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import ApiKeyForm from '@/stories/ApiKeyForm'
 import { articlesState } from '@/state/articlesState'
 import { isSearchingState } from '@/state/isSearchingState'
-import { generatedAbstractsState } from '@/state/generatedAbstracts'
+import { generatedSummariesState } from '@/state/generatedSummaries'
 import useSearchForm from '@/hooks/useSearchForm'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 
@@ -25,7 +25,7 @@ export default function Home() {
   const articles = useRecoilValue<Article[]>(articlesState)
   const isSearching = useRecoilValue<boolean>(isSearchingState)
   const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
-  const generatedAbstracts = useRecoilValue<string[]>(generatedAbstractsState)
+  const generatedSummaries = useRecoilValue<string[]>(generatedSummariesState)
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
@@ -82,7 +82,7 @@ export default function Home() {
                 <ArticleCard
                   key={article.id}
                   article={article}
-                  abstract={generatedAbstracts[index]}
+                  summary={generatedSummaries[index]}
                 />
               ))}
               {articles.length ? <Paging /> : null}

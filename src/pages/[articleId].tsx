@@ -1,5 +1,6 @@
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import CircularProgress from '@mui/material/CircularProgress';
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
@@ -21,7 +22,6 @@ import { Article } from '@/types/Article'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
-import CircularProgress from '@mui/material/CircularProgress';
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)

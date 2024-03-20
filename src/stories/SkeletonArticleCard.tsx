@@ -1,5 +1,5 @@
-import styles from '../styles/modules/articlecard.module.scss'
 import SkeletonUserInfo from './SkeletonUserInfo'
+import styles from '../styles/modules/articlecard.module.scss'
 
 const SkeletonArticleCard = () => {
   return (

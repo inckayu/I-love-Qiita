@@ -1,9 +1,9 @@
+import { CircularProgress } from '@mui/material'
 import React from 'react'
 
 import { getButtonVariant } from '@/functions/getButtonVariant'
 
 import styles from '../styles/modules/button.module.scss'
-import { CircularProgress } from '@mui/material'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary'

@@ -11,8 +11,8 @@ import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { isSearchingState } from '@/state/isSearchingState'
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { isSkeletonState } from '@/state/isSkeletonState'
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 const useSearchForm = () => {
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)

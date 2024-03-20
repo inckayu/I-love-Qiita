@@ -21,10 +21,10 @@ import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { isSearchingState } from '@/state/isSearchingState'
+import { isSkeletonState } from '@/state/isSkeletonState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
-import { isSkeletonState } from '@/state/isSkeletonState'
 
 export default function Home() {
   const articles = useRecoilValue<Article[]>(articlesState)

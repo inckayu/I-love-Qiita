@@ -7,8 +7,8 @@ import { errorTextState } from '@/state/errorTextState'
 import { isErrorState } from '@/state/isErrorState'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { isVerifingState } from '@/state/isVerifingState'
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 const useApiKeyForm = () => {
   const [qiitaApiToken, setQiitaApiToken] = useRecoilState(qiitaApiTokenState)

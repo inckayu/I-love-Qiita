@@ -6,9 +6,9 @@ import { getUserName } from '@/functions/getUserName'
 
 import { Article } from '@/types/Article'
 
+import SkeletonArticleCard from './SkeletonArticleCard'
 import UserInfo from './UserInfo'
 import styles from '../styles/modules/articlecard.module.scss'
-import SkeletonArticleCard from './SkeletonArticleCard'
 
 interface ArticleCardProps {
   article: Article

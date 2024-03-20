@@ -1,4 +1,4 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 
 .userinfo {
@@ -17,7 +17,7 @@
 
   &__organization {
     font-size: 18px;
-    color: colors.colors(sumi);
+    color: colors(sumi);
   }
 
   &__name {

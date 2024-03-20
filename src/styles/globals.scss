@@ -1,11 +1,11 @@
 @charset "utd-8";
 
-@use "./common/colors";
-@use "./common/fonts";
+@use "./common/colors" as *;
+@use "./common/fonts" as *;
 
 a {
   text-decoration: none;
-  color: colors.colors(sumi);
+  color: colors(sumi);
 }
 
 body {

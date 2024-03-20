@@ -1,4 +1,4 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 // FIXME: CSS名の命名を統一
 .storybook-button {
@@ -11,17 +11,17 @@
   
 }
 .storybook-button--primary {
-  color: colors.colors(white);
-  background-color: colors.colors(purple);
+  color: colors(white);
+  background-color: colors(purple);
 }
 .storybook-button--secondary {
-  color: colors.colors(purple);
-  border: solid 1px colors.colors(purple, secondary);
-  background-color: colors.colors(white);
+  color: colors(purple);
+  border: solid 1px colors(purple, secondary);
+  background-color: colors(white);
 }
 .storybook-button--disabled {
-  color: colors.colors(sumi, 100);
-  background-color: colors.colors(sumi, 300);
+  color: colors(sumi, 100);
+  background-color: colors(sumi, 300);
   cursor: not-allowed;
 }
 .storybook-button--small {

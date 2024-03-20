@@ -1,6 +1,6 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 .divider {
   height: 1px;
-  background-color: colors.colors(sumi, 300);
+  background-color: colors(sumi, 300);
 }

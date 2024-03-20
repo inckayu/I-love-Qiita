@@ -1,7 +1,7 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 .detailedarticle {
-  background-color: colors.colors(purple, bg);
+  background-color: colors(purple, bg);
   padding: 1px 0;
 
   &__back {
@@ -9,7 +9,7 @@
     width: 90%;
   }
   &__wrapper {
-    background-color: colors.colors(white);
+    background-color: colors(white);
     width: calc(90% - 128px); // 両側のpaddingの分を引く
     margin: 0 auto;
     border-radius: 40px;
@@ -52,7 +52,7 @@
 
   &__icon {
     display: flex;
-    color: colors.colors(sumi, 600);
+    color: colors(sumi, 600);
     font-size: 15px;
     margin-right: 16px;
   }

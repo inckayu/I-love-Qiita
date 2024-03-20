@@ -1,4 +1,4 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 .linktext {
   // background-color: transparent;
@@ -9,5 +9,5 @@
   // appearance: none;
   font-size: 18px;
   text-decoration: underline;
-  color: colors.colors(purple);
+  color: colors(purple);
 }

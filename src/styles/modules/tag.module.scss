@@ -1,9 +1,9 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 
 .tag {
-  background-color: colors.colors(purple, bg);
-  color: colors.colors(purple);
+  background-color: colors(purple, bg);
+  color: colors(purple);
   padding: 4px 20px;
   border-radius: 19px; // 30px/2 + 4px
   height: 24px;

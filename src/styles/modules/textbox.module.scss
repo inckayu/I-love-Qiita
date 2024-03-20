@@ -1,4 +1,4 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 .textbox {
 
@@ -6,14 +6,14 @@
     width: 240px;
     height: 40px;
     border-radius: 20px;
-    border: solid 1.5px colors.colors(white, 420);
+    border: solid 1.5px colors(white, 420);
     padding: 0 16px;
     font-size: 18px;
-    color: colors.colors(sumi, 600);
+    color: colors(sumi, 600);
   }
 
   &__required {
-    color: colors.colors(error);
+    color: colors(error);
     margin-left: 16px;
     font-size: 12px;
   }
@@ -22,7 +22,7 @@
 
   &__errortext {
     margin-left: 16px;
-    color: colors.colors(error);
+    color: colors(error);
     font-size: 12px;
   }
 }

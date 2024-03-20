@@ -1,7 +1,7 @@
-@use "../common/colors";
+@use "../common/colors" as *;
 
 .home {
-  background-color: colors.colors(purple, bg);
+  background-color: colors(purple, bg);
   min-height: calc(100vh - 24px);
   padding-bottom: 24px;
   

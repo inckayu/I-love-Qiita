@@ -24,6 +24,7 @@ import { isSearchingState } from '@/state/isSearchingState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
+import { isSkeletonState } from '@/state/isSkeletonState'
 
 export default function Home() {
   const articles = useRecoilValue<Article[]>(articlesState)
@@ -33,6 +34,7 @@ export default function Home() {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
+  const isSkeleton = useRecoilValue<boolean>(isSkeletonState)
   const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
     useSearchForm()
 
@@ -75,19 +77,23 @@ export default function Home() {
           </form>
         </div>
         <div className={styles.home__articles}>
-          {isSearching ? (
-            null
-          ) : (
+          {isSkeleton === isSearching ? (
+            // 記事検索と要約に4秒以上かかることを前提条件にしている
+            // ArticleCardはスケルトン状態と記事が表示された状態との2つを持つので
+            // レンダリングされるのは記事検索と要約生成が終了(false === false)または4秒以上かかる(true === true)ときのみ
             <>
               {articles.map((article, index) => (
                 <ArticleCard
                   key={article.id}
                   article={article}
                   summary={generatedSummaries[index]}
+                  isSkeleton={isSkeleton}
                 />
               ))}
               {articles.length ? <Paging /> : null}
             </>
+          ) : (
+            null
           )}
         </div>
         <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>

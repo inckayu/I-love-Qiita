@@ -8,14 +8,16 @@ import { Article } from '@/types/Article'
 
 import UserInfo from './UserInfo'
 import styles from '../styles/modules/articlecard.module.scss'
+import SkeletonArticleCard from './SkeletonArticleCard'
 
 interface ArticleCardProps {
   article: Article
   summary: string
+  isSkeleton: boolean
 }
 
-const ArticleCard = ({ article, summary }: ArticleCardProps) => {
-  return (
+const ArticleCard = ({ article, summary, isSkeleton }: ArticleCardProps) => {
+  return isSkeleton ? <SkeletonArticleCard /> : (
     <Link key={article.id} href={article.id} className={styles.articlecard}>
       <div className={styles.articlecard__left}>
         <div>

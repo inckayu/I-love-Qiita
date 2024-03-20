@@ -532,3 +532,28 @@ yarn add @types/sanitize-html
 ### stylelint
 
 導入方法をREADMEに書く
+
+### lint-staged
+commitしたときにeslintを発動させる。
+
+インストール
+```zsh
+// 開発環境でのみ必要なので-Dコマンドをつける
+yarn add lint-staged -D
+```
+`.husky/_/commit-msg`に`yarn lint-staged`を追加
+```commit-msg
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/husky.sh"
+
+++ yarn lint-staged
+yarn commitmsg
+```
+package.jsonを編集
+```package.json
+"lint-staged": "eslint --ext .ts,.tsx src --cache --fix"
+```
+
+### GitHub Flavored Markdown (GFM)
+https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-

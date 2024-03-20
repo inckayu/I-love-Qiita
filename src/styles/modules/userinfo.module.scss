@@ -21,6 +21,34 @@
 
   &__name {
     font-size: 18px;
-    // TODO: 組織名がない場合にアイコンの縦中央に配置するTODOTODOTODOTODOTODOTODOTODOTODOTODO
+  }
+}
+
+.skeleton {
+  display: flex;
+
+  &__right {
+    display: grid;
+    align-items: center;
+    justify-items: start;
+    margin-left: 16px;
+  }
+  &__icon {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    @include loading;
+    
+  }
+
+  &__organization {
+    color: colors(sumi);
+  }
+
+  &__name {
+    width: 150px;
+    height: 24px;
+    border-radius: 12px;
+    @include loading;
   }
 }

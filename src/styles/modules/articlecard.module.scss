@@ -33,3 +33,53 @@
     font-size: 18px;
   }
 }
+
+.skeleton {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 196px;
+  padding: 24px 0px;
+  margin: 24px auto 0px auto;
+  background-color: colors(white);
+  border-radius: 40px;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 64px;
+  }
+
+  &__wrapper {
+    // background-color: red;
+    width: 100%;
+  }
+
+  &__right {
+    width: 80%;
+    height: 24px;
+    border-radius: 12px;
+    margin-top: 16px;
+    margin-left: 48px;
+
+    @include loading;
+  }
+
+  &__title {
+    width: 360px;
+    height: 48px;
+    border-radius: 24px;
+
+    @include loading;
+  }
+
+  &__date {
+    width: 120px;
+    height: 24px;
+    border-radius: 12px;
+    margin-top: 16px;
+    @include loading;
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react'
-import styles from '../styles/modules/button.module.scss'
+
 import { getButtonVariant } from '@/functions/getButtonVariant'
+
+import styles from '../styles/modules/button.module.scss'
 
 interface ButtonProps {
   variant?: 'primary' | 'secondary'

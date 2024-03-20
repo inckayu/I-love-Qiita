@@ -1,5 +1,6 @@
-import { Answer } from '@/types/Answer'
 import OpenAI from 'openai'
+
+import { Answer } from '@/types/Answer'
 
 export const generateSummary = (article: string): Promise<string> => {
   console.log(article)

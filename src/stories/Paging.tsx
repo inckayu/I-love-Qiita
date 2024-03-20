@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from '../styles/modules/paging.module.scss'
+
 import LinkText from './LinkText'
+import styles from '../styles/modules/paging.module.scss'
 
 const Paging = () => {
   // TODO: ページングの実装

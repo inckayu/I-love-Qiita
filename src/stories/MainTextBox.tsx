@@ -1,8 +1,12 @@
 import React from 'react'
-import { articleTitleState } from '@/state/articleTitleState'
 import { useRecoilValue } from 'recoil'
-import styles from '../styles/modules/maintextbox.module.scss'
+
 import useSearchForm from '@/hooks/useSearchForm'
+
+import { articleTitleState } from '@/state/articleTitleState'
+
+import styles from '../styles/modules/maintextbox.module.scss'
+
 
 const MainTextBox = () => {
   const articleTitle = useRecoilValue<string>(articleTitleState)

@@ -1,5 +1,6 @@
-import { Article } from '../types/Article'
 import axios from 'axios'
+
+import { Article } from '../types/Article'
 
 export const fetchArticles = async (title: string, token: string): Promise<Article[]> => {
   // TODO: 詳細検索機能の実装後、検索条件はオブジェクトとかにまとめて引数として渡すようにする

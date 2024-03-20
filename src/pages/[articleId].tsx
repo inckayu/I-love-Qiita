@@ -1,22 +1,31 @@
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 import axios from 'axios'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+
+import sanitizeHtml from 'sanitize-html'
+import { fetchArticle } from '@/functions/fetchArticle'
+import formatDate from '@/functions/formatDate'
+import { Button } from '@/stories/Button'
+import Divider from '@/stories/Divider'
+import Tag from '@/stories/Tag'
 import { Article } from '@/types/Article'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { useRecoilValue } from 'recoil'
-import Tag from '@/stories/Tag'
 import UserInfo from '@/stories/UserInfo'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
-import Divider from '@/stories/Divider'
-import { Button } from '@/stories/Button'
-import formatDate from '@/functions/formatDate'
+
+
+
+
 import LinkText from '@/stories/LinkText'
+
 import styles from '@/styles/modules/detailedarticle.module.scss'
-import Link from 'next/link'
+
+
 import { getUserName } from '@/functions/getUserName'
-import { fetchArticle } from '@/functions/fetchArticle'
-import sanitizeHtml from 'sanitize-html'
+
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)

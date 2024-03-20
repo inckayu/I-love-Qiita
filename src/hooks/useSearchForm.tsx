@@ -1,14 +1,17 @@
 import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+
 import { fetchArticles } from '@/functions/fetchArticles'
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { articleTitleState } from '@/state/articleTitleState'
 import { generateSummary } from '@/functions/generateSummary'
-import { articlesState } from '@/state/articlesState'
-import { isSearchingState } from '@/state/isSearchingState'
-import { generatedSummariesState } from '@/state/generatedSummaries'
+
 import { Article } from '@/types/Article'
+
+import { articleTitleState } from '@/state/articleTitleState'
+import { articlesState } from '@/state/articlesState'
+import { generatedSummariesState } from '@/state/generatedSummaries'
+import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isSearchingState } from '@/state/isSearchingState'
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 const useSearchForm = () => {
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)

@@ -1,0 +1,50 @@
+$colors: (
+  purple: (
+    bg: #F1EAFA,
+    100: #ECDDFF,
+    200: #DDC2FF,
+    300: #CDA6FF,
+    400: #BB87FF,
+    500: #A565F8,
+    secondary: #8843E1,
+    primary: #6F23D0,
+    800: #5C10BE,
+    900: #5109AD,
+    tertiary: #41048E,
+    1100: #30016C,
+    1200: #21004B,
+  ),
+  sumi: (
+    50: #F2F2F2,
+    100: #E6E6E6,
+    200: #CCCCCC,
+    300: #B3B3B3,
+    400: #999999,
+    420: #949494,
+    500: #7F7F7F,
+    536: #767676,
+    600: #666666,
+    700: #4D4D4D,
+    800: #333333,
+    primary: #1A1A1A,
+  ),
+  success: (
+    primary: #259D63,
+  ),
+  error: (
+    primary: #EC0000,
+  ),
+  warining: (
+    primary: #B78F00,
+  ),
+  white: (
+    primary: #FFFFFF,
+  ),
+  black: (
+    primary: #000000,
+  ),
+);
+
+@function colors($color, $tone: primary) {
+  @return map-get(map-get($colors, $color), $tone);
+}

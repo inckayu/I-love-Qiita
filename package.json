@@ -6,14 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint --ext .ts,.tsx src",
-    "lint:fix": "eslint --ext .ts,.tsx src --fix",
+    "lint": "eslint --ext .ts,.tsx src --cache",
+    "lint:fix": "eslint --ext .ts,.tsx src --cache --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "sl": "stylelint '**/*.{css,scss,sass}'",
-    "sl:fix": "stylelint --fix '**/*.{css,scss,sass}'"
+    "sl:fix": "stylelint --fix '**/*.{css,scss,sass}'",
+    "lint-staged": "eslint --ext .ts,.tsx src --cache --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

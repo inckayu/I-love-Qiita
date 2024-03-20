@@ -3,6 +3,14 @@
 .detailedarticle {
   padding: 1px 0;
   background-color: colors(purple, bg);
+  min-height: 100vh;
+
+  &__circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   &__back {
     width: 90%;

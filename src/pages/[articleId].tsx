@@ -21,6 +21,8 @@ import { Article } from '@/types/Article'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
   const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
@@ -41,10 +43,17 @@ const DetailedArticle = () => {
     }
   }, [router.query.articleId, qiitaApiToken])
 
-  return article === null ? (
-    <div>loading...</div>
-  ) : (
+  return (
     <main className={styles.detailedarticle}>
+      {article === null ? (
+        <div className={styles.detailedarticle__circle}>
+          <CircularProgress
+          sx={{
+            color: '#6f23d0',
+          }}
+          size={100} />
+        </div>
+      ):(<>
       <div className={styles.detailedarticle__back}>
         <LinkText text="back" path="/" />
       </div>
@@ -106,6 +115,8 @@ const DetailedArticle = () => {
       <div className={styles.detailedarticle__back}>
         <LinkText text="back" path="/" />
       </div>
+      </>
+      )}
     </main>
   )
 }

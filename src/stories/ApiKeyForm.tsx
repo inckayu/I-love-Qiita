@@ -10,9 +10,6 @@ import { Button } from './Button'
 import TextBox from './TextBox'
 import styles from '../styles/modules/apikeyform.module.scss'
 
-
-
-
 const ApiKeyForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const isError = useRecoilValue<boolean>(isErrorState)
@@ -32,7 +29,11 @@ const ApiKeyForm = () => {
         />
       </div>
       <div className={styles.apikeyform__button}>
-        <Button label="Register" onClick={handleClick} disabled={qiitaApiToken === '' || isError} />
+        <Button
+          label="Register"
+          onClick={() => void handleClick()}
+          disabled={qiitaApiToken === '' || isError}
+        />
       </div>
     </div>
   )

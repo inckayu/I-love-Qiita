@@ -1,31 +1,25 @@
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
-
 import sanitizeHtml from 'sanitize-html'
+
 import { fetchArticle } from '@/functions/fetchArticle'
 import formatDate from '@/functions/formatDate'
-import { Button } from '@/stories/Button'
-import Divider from '@/stories/Divider'
-import Tag from '@/stories/Tag'
-import { Article } from '@/types/Article'
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import UserInfo from '@/stories/UserInfo'
-
-
-
-
-import LinkText from '@/stories/LinkText'
-
-import styles from '@/styles/modules/detailedarticle.module.scss'
-
-
 import { getUserName } from '@/functions/getUserName'
 
+import { Button } from '@/stories/Button'
+import Divider from '@/stories/Divider'
+import LinkText from '@/stories/LinkText'
+import Tag from '@/stories/Tag'
+import UserInfo from '@/stories/UserInfo'
+
+import { Article } from '@/types/Article'
+
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import styles from '@/styles/modules/detailedarticle.module.scss'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -36,10 +30,14 @@ const DetailedArticle = () => {
     const articleId = router.query.articleId
     console.log(articleId)
     if (articleId && typeof articleId === 'string') {
-      fetchArticle(articleId, qiitaApiToken).then((article) => {
-        console.log(article)
-        setArticle(article)
-      })
+      fetchArticle(articleId, qiitaApiToken)
+        .then((article) => {
+          console.log(article)
+          setArticle(article)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
     }
   }, [router.query.articleId, qiitaApiToken])
 

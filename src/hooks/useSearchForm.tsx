@@ -33,14 +33,20 @@ const useSearchForm = () => {
   const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
     setIsSearching(true)
-    fetchArticles(articleTitle, qiitaApiToken).then(async (articles) => {
-      setArticles(articles)
+    fetchArticles(articleTitle, qiitaApiToken)
+      .then(async (articles) => {
+        setArticles(articles)
 
-      const summaries = await Promise.all(articles.map((article) => generateSummary(article.body)))
-      console.log(summaries)
-      setGeneratedSummaries(summaries)
-      setIsSearching(false)
-    })
+        const summaries = await Promise.all(
+          articles.map((article) => generateSummary(article.body))
+        )
+        console.log(summaries)
+        setGeneratedSummaries(summaries)
+        setIsSearching(false)
+      })
+      .catch((e) => {
+        console.error(e)
+      })
   }
 
   const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {

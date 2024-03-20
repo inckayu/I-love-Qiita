@@ -9,6 +9,6 @@ export const fetchArticle = async (id: string, token: string): Promise<Article> 
       Authorization: `Bearer ${token}`,
     },
   }
-  const res = await axios.get(`https://qiita.com/api/v2/items/${id}`, config)
+  const res = await axios.get<Article>(`https://qiita.com/api/v2/items/${id}`, config)
   return res.data
 }

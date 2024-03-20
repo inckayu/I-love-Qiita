@@ -1,18 +1,16 @@
-import OpenAI from 'openai'
-
-import { Answer } from '@/types/Answer'
+// import OpenAI from 'openai'
+import Groq from 'groq-sdk'
 
 export const generateSummary = (article: string): Promise<string> => {
   console.log(article)
-  const Groq = require('groq-sdk')
   const groq = new Groq({
     apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
     dangerouslyAllowBrowser: true, // FIXME: 本番環境ではfalseにする
   })
-  const openai = new OpenAI({
-    apiKey: process.env.NEXT_PUBLIC_GPT4_API_KEY,
-    dangerouslyAllowBrowser: true, // FIXME: 本番環境ではfalseにする
-  })
+  // const openai = new OpenAI({
+  //   apiKey: process.env.NEXT_PUBLIC_GPT4_API_KEY,
+  //   dangerouslyAllowBrowser: true, // FIXME: 本番環境ではfalseにする
+  // })
 
   return new Promise((resolve, reject) => {
     groq.chat.completions
@@ -31,7 +29,7 @@ export const generateSummary = (article: string): Promise<string> => {
         // model: 'gpt-3.5-turbo-0125',
         model: 'mixtral-8x7b-32768',
       })
-      .then((result: Answer) => {
+      .then((result) => {
         const summary = result.choices[0]?.message?.content || 'Failed to generate summary.'
         console.log(summary)
         resolve(summary)

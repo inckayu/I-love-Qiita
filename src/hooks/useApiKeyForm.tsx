@@ -8,6 +8,7 @@ import { isErrorState } from '@/state/isErrorState'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import { isVerifingState } from '@/state/isVerifingState'
 
 const useApiKeyForm = () => {
   const [qiitaApiToken, setQiitaApiToken] = useRecoilState(qiitaApiTokenState)
@@ -15,6 +16,7 @@ const useApiKeyForm = () => {
   const [, setIsValidApiKeyToken] = useRecoilState(isValidApiKeyTokenState)
   const [, setIsError] = useRecoilState(isErrorState)
   const [, setErrorText] = useRecoilState(errorTextState)
+  const [, setIsVerifing] = useRecoilState(isVerifingState)
 
   const checkValidApiKey = async (apiKey: string): Promise<boolean> => {
     const config = {
@@ -30,6 +32,7 @@ const useApiKeyForm = () => {
     } catch {
       setIsError(true)
       setErrorText('Authentication failed. Please check the key validity')
+      setIsVerifing(false)
       return false
     }
     return true
@@ -40,6 +43,7 @@ const useApiKeyForm = () => {
     if (apiKey.match(/^\w+$/) === null) {
       setIsError(true)
       setErrorText('Invalid format. Please input again')
+      setIsVerifing(false)
       return
     }
     setIsError(false)
@@ -52,10 +56,12 @@ const useApiKeyForm = () => {
   }
 
   const handleClick = async () => {
+    setIsVerifing(true)
     if (await checkValidApiKey(qiitaApiToken)) {
       setQiitaApiToken(qiitaApiToken)
       setIsOpenApiKeyModal(false)
       setIsValidApiKeyToken(true)
+      setIsVerifing(false)
     }
   }
   return {

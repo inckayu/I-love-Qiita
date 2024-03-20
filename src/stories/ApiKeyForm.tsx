@@ -9,11 +9,13 @@ import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import { Button } from './Button'
 import TextBox from './TextBox'
 import styles from '../styles/modules/apikeyform.module.scss'
+import { isVerifingState } from '@/state/isVerifingState'
 
 const ApiKeyForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const isError = useRecoilValue<boolean>(isErrorState)
   const errorText = useRecoilValue<string>(errorTextState)
+  const isVerifing = useRecoilValue<boolean>(isVerifingState)
   const { handleInputAPIKey, handleClick } = useApiKeyForm()
 
   return (
@@ -33,6 +35,7 @@ const ApiKeyForm = () => {
           label="Register"
           onClick={() => void handleClick()}
           disabled={qiitaApiToken === '' || isError}
+          isLoading={isVerifing}
         />
       </div>
     </div>

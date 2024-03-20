@@ -69,13 +69,14 @@ export default function Home() {
                 size="large"
                 label={'Search'}
                 disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}
+                isLoading={isSearching}
               />
             </div>
           </form>
         </div>
         <div className={styles.home__articles}>
           {isSearching ? (
-            <div>Searching ...</div>
+            null
           ) : (
             <>
               {articles.map((article, index) => (

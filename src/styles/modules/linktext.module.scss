@@ -1,3 +1,5 @@
+@use "../common/colors";
+
 .linktext {
   // background-color: transparent;
   // border: none;
@@ -7,5 +9,5 @@
   // appearance: none;
   font-size: 18px;
   text-decoration: underline;
-  color: #6F23D0;
+  color: colors.colors(purple);
 }

@@ -1,9 +1,11 @@
+@use "../common/colors";
+
 .articlecard {
   display: flex;
   justify-content: space-between;
   width: 90%;
   height: 196px;
-  background-color: #fff;
+  background-color: colors.colors(white);
   margin: 24px auto 0px auto;
   padding: 24px 0px;
   border-radius: 40px;

@@ -1,14 +1,15 @@
+@use "../common/colors";
+
 .detailedarticle {
-  background-color: #F1EAFA;
+  background-color: colors.colors(purple, bg);
   padding: 1px 0;
 
   &__back {
-    // background-color: red;
     margin: 32px auto;
     width: 90%;
   }
   &__wrapper {
-    background-color: #fff;
+    background-color: colors.colors(white);
     width: calc(90% - 128px); // 両側のpaddingの分を引く
     margin: 0 auto;
     border-radius: 40px;
@@ -17,7 +18,6 @@
   &__top {
     display: flex;
     justify-content: space-between;
-    // background-color: red;
     margin-bottom: 16px;
   }
 
@@ -52,14 +52,13 @@
 
   &__icon {
     display: flex;
-    color: #666;
+    color: colors.colors(sumi, 600);
     font-size: 15px;
     margin-right: 16px;
   }
 
   &__divider {
     width: 100%;
-    background-color: red;
     margin-bottom: 48px;
   }
 

@@ -1,9 +1,11 @@
+@use "../common/colors";
+
 .commonmodal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: colors.colors(white);
   border-radius: 40px;
   padding: 48px;
   width: 30%;

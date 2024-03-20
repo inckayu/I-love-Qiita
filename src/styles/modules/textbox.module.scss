@@ -1,19 +1,20 @@
+@use "../common/colors";
+
 .textbox {
 
   &__body {
     width: 240px;
     height: 40px;
     border-radius: 20px;
-    border: solid 1.5px #949494;
+    border: solid 1.5px colors.colors(white, 420);
     padding: 0 16px;
     font-size: 18px;
-    color: #666;
+    color: colors.colors(sumi, 600);
   }
 
   &__required {
-    color: #ec0000;
+    color: colors.colors(error);
     margin-left: 16px;
-    // background-color: pink;
     font-size: 12px;
   }
   &__error {
@@ -21,7 +22,7 @@
 
   &__errortext {
     margin-left: 16px;
-    color: #ec0000;
+    color: colors.colors(error);
     font-size: 12px;
   }
 }

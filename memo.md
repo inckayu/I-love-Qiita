@@ -519,3 +519,12 @@ $color: #000000;
 - [ミックスインのテンプレ](https://zenn.dev/tak_dcxi/articles/2cc1828e9c1fe2)
 
 Sassのドキュメントを自動で作ってくれる[SassDoc](https://github.com/SassDoc/sassdoc)というライブラリがあるらしいが、最終更新が4年前なので要検証。
+
+### sanitize-html
+
+インストールは型も含めてする必要あり
+
+```zsh
+yarn add sanitize-html
+yarn add @types/sanitize-html
+```

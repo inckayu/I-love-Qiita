@@ -16,5 +16,6 @@ export const fetchArticles = async (title: string, token: string, page: number):
     `https://qiita.com/api/v2/items?page=${page}&per_page=10&query=${query}`,
     config
   )
+  console.log(res)
   return res.data
 }

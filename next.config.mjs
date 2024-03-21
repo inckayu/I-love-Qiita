@@ -18,6 +18,12 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'avatars2.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
         port: '',
         pathname: '/**',
@@ -48,13 +54,37 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'lh6.googleusercontent.com',
+        hostname: 'lh1.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh2.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh4.googleusercontent.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'lh5.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lh6.googleusercontent.com',
         port: '',
         pathname: '/**',
       },

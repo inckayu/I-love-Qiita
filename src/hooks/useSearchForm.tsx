@@ -16,13 +16,12 @@ import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 const useSearchForm = () => {
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)
-  const articleTitle = useRecoilValue<string>(articleTitleState)
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const [, setArticles] = useRecoilState<Article[]>(articlesState)
-  const [, setIsSearching] = useRecoilState<boolean>(isSearchingState)
+  const [isSearching, setIsSearching] = useRecoilState<boolean>(isSearchingState)
   const [, setGeneratedSummaries] = useRecoilState<string[]>(generatedSummariesState)
-  const [, setArticleTitle] = useRecoilState<string>(articleTitleState)
-  const [, setIsSkeleton] = useRecoilState<boolean>(isSkeletonState)
+  const [articleTitle, setArticleTitle] = useRecoilState<string>(articleTitleState)
+  const [isSkeleton, setIsSkeleton] = useRecoilState<boolean>(isSkeletonState)
 
   const handleApiKeyModalClose = () => {
     setIsOpenApiKeyModal(false)
@@ -34,8 +33,22 @@ const useSearchForm = () => {
 
   const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault() // フォームが送信されてリロードされないよう
-    setIsSearching(true)
-    fetchArticles(articleTitle, qiitaApiToken)
+    fetchArticleAndSummary(1)
+  }
+
+  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setArticleTitle(e.target.value)
+  }
+
+  const handleSearchFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
+
+  const fetchArticleAndSummary = (page: number) => {
+    setIsSearching(true);
+    console.log("isSearching", isSearching)
+    console.log("isSkeleton", isSkeleton)
+    fetchArticles(articleTitle, qiitaApiToken, page)
       .then(async (articles) => {
         setArticles(articles)
 
@@ -66,20 +79,13 @@ const useSearchForm = () => {
       })
   }
 
-  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleTitle(e.target.value)
-  }
-
-  const handleSearchFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
-
   return {
     handleApiKeyModalClose,
     handleApiKeyButton,
     handleTitleClick,
     handleInputTitle,
     handleSearchFormSubmit,
+    fetchArticleAndSummary,
   }
 }
 

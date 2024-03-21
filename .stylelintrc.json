@@ -5,7 +5,7 @@
   ],
   "rules": {
     "selector-pseudo-element-colon-notation": "double",
-    "scss/selector-no-union-class-name": true,
+    "scss/selector-no-union-class-name": false,
     "color-no-invalid-hex": true,
     "function-calc-no-unspaced-operator": true,
     "string-no-newline": true,

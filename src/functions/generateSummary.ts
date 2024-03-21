@@ -2,7 +2,6 @@ import Groq from 'groq-sdk'
 import OpenAI from 'openai'
 
 export const generateSummary = (article: string): Promise<string> => {
-  console.log(article)
   const groq = new Groq({
     apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
     dangerouslyAllowBrowser: true,
@@ -41,7 +40,6 @@ export const generateSummary = (article: string): Promise<string> => {
       })
       .then((result) => {
         const summary = result.choices[0]?.message?.content || 'Failed to generate summary.'
-        console.log(summary)
         resolve(summary)
       })
       .catch(() => {

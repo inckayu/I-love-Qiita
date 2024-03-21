@@ -41,7 +41,6 @@ const useSearchForm = () => {
 
         // A
         setTimeout(() => {
-          console.log("aaa")
           setIsSkeleton(true)
         }, 4000) // ローディングサークルでユーザを待たせるのはUX的に4秒が限度と仮定
 
@@ -55,7 +54,6 @@ const useSearchForm = () => {
           setGeneratedSummaries(summaries)
           setIsSearching(false)
           setIsSkeleton(false)
-          console.log("bbb")
         }, 1000)
 
         // FIXME: Cの処理を必ず最後に実行してisSkeletonをfalseにするために、処理時間(s)が 4 = A < B + C = B + 1となるようにしている。

@@ -405,6 +405,8 @@ https://chat.openai.com/share/1ac7e4c0-79c5-448d-bd10-51abf1a2c80d
 - 検索に一致する部分のハイライト
 - 過去の検索条件の保存
 - ホスティング
+- レスポンシブ対応
+- 音声検索(Whisper API & LLM)
 
 の順で実装。これらすべてが実装できたら完成でいいかも。終わりが見えてきた。重いタスクばかりなので頑張りたい。
 
@@ -557,3 +559,5 @@ package.jsonを編集
 
 ### GitHub Flavored Markdown (GFM)
 https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-
+
+API入力フォームでテキストボックスに適当な値を入力してボタンを押さずにモーダルを閉じたときのstateってどうなってたっけ？

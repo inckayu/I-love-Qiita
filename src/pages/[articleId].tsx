@@ -30,7 +30,6 @@ const DetailedArticle = () => {
 
   useEffect(() => {
     const articleId = router.query.articleId
-    console.log(articleId)
     if (articleId && typeof articleId === 'string') {
       fetchArticle(articleId, qiitaApiToken)
         .then((article) => {

@@ -11,7 +11,6 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ user }: UserInfoProps) => {
-  console.log(user)
   return (
     <div className={styles.userinfo}>
       <div className={styles.userinfo__left}>

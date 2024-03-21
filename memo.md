@@ -565,3 +565,17 @@ https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-wr
 廃止されたルールがunknown ruleになる。[公式ドキュメントのMigrationのページ](https://stylelint.io/migration-guide/to-16)で`Deprecated stylistic rules`に載っているものは使えない。`extends`で外部のルールセットを使う場合にDepreatedとなったルールが含まれていることがある。
 
 API入力フォームでテキストボックスに適当な値を入力してボタンを押さずにモーダルを閉じたときのstateってどうなってたっけ？
+
+### 正規表現を用いた置換
+VSCodeで正規表現を用いてフォントの単位を修正したい。
+```example
+font-size: 12px; -> font-size: rem(12);
+```
+
+置換の際に、数字をそのまま置き換えるためには、以下のように括弧で囲んで`$`で参照する。
+```
+font-size: (\d{2,})px; -> font-size: rem($1);
+```
+
+### 今後の方針
+ちょっとモチベがあまりにもないので[コンポーネントのStorybookの作成](https://github.com/inckayu/I-love-Qiita/issues/17)と[Jestの導入](https://github.com/inckayu/I-love-Qiita/issues/34)は最後にやろうかな...最後にJest導入してもあまり意味がないけど。

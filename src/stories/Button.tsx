@@ -30,6 +30,7 @@ export const Button = ({
         styles[`storybook-button--${size}`],
         getButtonVariant(variant, disabled),
       ].join(' ')}
+      disabled={disabled || isLoading}
       {...props}
     >
       {isLoading ? (

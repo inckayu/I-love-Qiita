@@ -6,6 +6,7 @@ import sanitizeHtml from 'sanitize-html'
 
 import { fetchArticle } from '@/functions/fetchArticle'
 
+import DetailedArticleHeader from '@/stories/DetailedArticleHeader';
 import Divider from '@/stories/Divider'
 import LinkText from '@/stories/LinkText'
 
@@ -13,7 +14,6 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
-import DetailedArticleHeader from '@/stories/DetailedArticleHeader';
 
 
 const DetailedArticle = () => {

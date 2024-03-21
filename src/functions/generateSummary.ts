@@ -29,7 +29,7 @@ export const generateSummary = (article: string): Promise<string> => {
           {
             role: 'system',
             content:
-              'Please generate a summary from the given markdown text. When summarizing, please consider the following conditions:\n\n- The summary should be understandable even to those without specialized knowledge.\n- The summary should be output in Japanese.\n- The summary\'s character count must be between 180 and 200 characters (strictly adhere to this).',
+              'Please generate a summary from the given markdown text. When summarizing, please consider the following conditions:\n\n- The summary should be understandable even to those without specialized knowledge.\n- The summary should be output in Japanese.\n- The summary\'s character count must be between 180 and 200 characters (strictly adhere to this).\n- The summary should not be markdown style.',
           },
           {
             role: 'user',

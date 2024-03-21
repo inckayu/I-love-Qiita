@@ -5,12 +5,14 @@ import { IconButton } from '@mui/material'
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 
+import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
 
 import ApiKeyForm from '@/stories/ApiKeyForm'
 import ArticleCard from '@/stories/ArticleCard'
 import { Button } from '@/stories/Button'
 import CommonModal from '@/stories/CommonModal'
+import DetailedSearchForm from '@/stories/DetailedSearchForm'
 import MainTextBox from '@/stories/MainTextBox'
 import Paging from '@/stories/Paging'
 
@@ -19,7 +21,8 @@ import { Article } from '@/types/Article'
 import { articleTitleState } from '@/state/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
-import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isOpenApiKeyModalState } from '@/state/isOpenApiKeyModalState'
+import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModalState'
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
@@ -35,8 +38,10 @@ export default function Home() {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
   const isSkeleton = useRecoilValue<boolean>(isSkeletonState)
+  const isOpenDetailedSearchModal = useRecoilValue<boolean>(isOpenDetailedSearchModalState)
   const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
     useSearchForm()
+  const { handleDetailedSearchModalClose, handleDetailedSearchButton } = useDetailedSearchForm()
 
   return (
     <>
@@ -58,7 +63,7 @@ export default function Home() {
                 <ForumIcon />
               </IconButton>
               <IconButton>
-                <TuneIcon />
+                <TuneIcon onClick={handleDetailedSearchButton}/>
               </IconButton>
               <IconButton onClick={handleApiKeyButton}>
                 <KeyIcon />
@@ -98,6 +103,9 @@ export default function Home() {
         </div>
         <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>
           <ApiKeyForm />
+        </CommonModal>
+        <CommonModal isOpenModal={isOpenDetailedSearchModal} onClose={handleDetailedSearchModalClose}>
+          <DetailedSearchForm />
         </CommonModal>
       </main>
     </>

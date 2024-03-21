@@ -1,83 +1,43 @@
-import { useEffect, useState } from 'react'
-import Head from 'next/head'
-import axios from 'axios'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { articleTitleState } from '@/state/articleTitleState'
-import { Button } from '@/stories/Button'
-import MainTextBox from '@/stories/MainTextBox'
-import { IconButton } from '@mui/material'
 import ForumIcon from '@mui/icons-material/Forum'
-import TuneIcon from '@mui/icons-material/Tune'
 import KeyIcon from '@mui/icons-material/Key'
-import { Article } from '@/types/Article'
+import TuneIcon from '@mui/icons-material/Tune'
+import { IconButton } from '@mui/material'
+import Head from 'next/head'
+import { useRecoilValue } from 'recoil'
+
+import useSearchForm from '@/hooks/useSearchForm'
+
+import ApiKeyForm from '@/stories/ApiKeyForm'
 import ArticleCard from '@/stories/ArticleCard'
-import styles from '@/styles/modules/home.module.scss'
+import { Button } from '@/stories/Button'
+import CommonModal from '@/stories/CommonModal'
+import MainTextBox from '@/stories/MainTextBox'
 import Paging from '@/stories/Paging'
 
+import { Article } from '@/types/Article'
+
+import { articleTitleState } from '@/state/articleTitleState'
+import { articlesState } from '@/state/articlesState'
+import { generatedSummariesState } from '@/state/generatedSummaries'
+import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isSearchingState } from '@/state/isSearchingState'
+import { isSkeletonState } from '@/state/isSkeletonState'
+import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import styles from '@/styles/modules/home.module.scss'
+
 export default function Home() {
-  const [articles, setArticles] = useState<Article[]>([])
-  const [isSearching, setIsSearching] = useState<boolean>(false)
-  const [isValidApiToken, setIsValidApiToken] = useState<boolean>(false)
-  const [qiitaApiToken, setQiitaApiToken] =
-    useRecoilState<string>(qiitaApiTokenState)
+  const articles = useRecoilValue<Article[]>(articlesState)
+  const isSearching = useRecoilValue<boolean>(isSearchingState)
+  const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
+  const generatedSummaries = useRecoilValue<string[]>(generatedSummariesState)
+  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
+  const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
+  const isSkeleton = useRecoilValue<boolean>(isSkeletonState)
+  const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
+    useSearchForm()
 
-  const handleInputApi = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputToken = e.target.value
-    setQiitaApiToken(inputToken)
-    if (!inputToken.match(/^\w+$/)) {
-      console.log('input')
-      setIsValidApiToken(false)
-    } else {
-      setIsValidApiToken(true)
-    }
-  }
-
-  const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault() // フォームが送信されてリロードされないよう
-    setIsSearching(true)
-    fetchArticles(articleTitle).then((articles) => {
-      setArticles(articles)
-      setIsSearching(false)
-    })
-  }
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${qiitaApiToken}`,
-    },
-  }
-
-  const fetchArticles = async (title: string): Promise<Article[]> => {
-    // TODO: configの型定義を追加する
-    // TODO: 検索条件は最終的にはオブジェクトとかにまとめて引数として渡すようにする
-    // TODO: エラーハンドリングを追加する(APIキーがない場合など)
-    const query = `title:${title}`
-    const res = await axios.get<Article[]>(
-      `https://qiita.com/api/v2/items?per_page=5&query=${query}`,
-      config
-    )
-    return res.data
-  }
-
-  useEffect(() => {
-    // NOTE: 初期表示時に記事を取得する必要はないかもしれない
-    console.log(articleTitle)
-    console.log(qiitaApiToken)
-    console.log(isValidApiToken)
-    if (articleTitle.length && qiitaApiToken.length) {
-      //NOTE: 記事詳細画面から戻ってきた場合のみ実行されることを想定しているのでisValidApiTokenはチェックしないが、要検証
-      // 依存配列が空だからarticleTitleまたはqiitaApiTokenが変更された場合には実行されないはず
-      setIsSearching(true)
-      fetchArticles(articleTitle).then((articles) => {
-        setArticles(articles)
-        setIsSearching(false)
-      })
-    }
-    setIsValidApiToken(true)
-  }, [])
   return (
     <>
       <Head>
@@ -89,7 +49,7 @@ export default function Home() {
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__form}>
-          <form>
+          <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>
               <MainTextBox />
             </div>
@@ -100,7 +60,7 @@ export default function Home() {
               <IconButton>
                 <TuneIcon />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleApiKeyButton}>
                 <KeyIcon />
               </IconButton>
             </div>
@@ -110,42 +70,35 @@ export default function Home() {
                 onClick={handleTitleClick}
                 size="large"
                 label={'Search'}
-                disabled={
-                  !articleTitle.length ||
-                  !qiitaApiToken.length ||
-                  !isValidApiToken
-                }
+                disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}
+                isLoading={isSearching}
               />
             </div>
           </form>
         </div>
-        {/* <div>
-          <form action="">
-            TODO: APIキーの入力部分は最終的にはモーダルで実装したい
-            TODO:　正規表現を用いてAPIキーの形式をチェックする
-            <input
-              onChange={handleInputApi}
-              type="text"
-              placeholder="APIキー"
-            />
-            {isValidApiToken ? null : (
-              <div style={{ color: 'red' }}>APIキーの形式が無効です</div>
-            )}
-            <div>{qiitaApiToken}</div>
-          </form>
-        </div> */}
-        <div style={{ width: '100%' }}>
-          {isSearching ? (
-            <div>Searching ...</div>
-          ) : (
+        <div className={styles.home__articles}>
+          {isSkeleton === isSearching ? (
+            // 記事検索と要約に4秒以上かかることを前提条件にしている
+            // ArticleCardはスケルトン状態と記事が表示された状態との2つを持つので
+            // レンダリングされるのは記事検索と要約生成が終了(false === false)または4秒以上かかる(true === true)ときのみ
             <>
-              {articles.map((article) => (
-                <ArticleCard key={article.id} article={article} />
+              {articles.map((article, index) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  summary={generatedSummaries[index]}
+                  isSkeleton={isSkeleton}
+                />
               ))}
-              {articles.length ? <Paging /> : null}
+              {articles.length && !isSkeleton ? <Paging /> : null}
             </>
+          ) : (
+            null
           )}
         </div>
+        <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>
+          <ApiKeyForm />
+        </CommonModal>
       </main>
     </>
   )

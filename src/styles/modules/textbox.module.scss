@@ -1,0 +1,29 @@
+@use "../common" as *;
+
+.textbox {
+
+  &__body {
+    width: 240px;
+    height: 40px;
+    padding: 0 16px;
+    font-size: rem(18);
+    color: colors(sumi, 600);
+    border: solid 1.5px colors(white, 420);
+    border-radius: 20px;
+    @include fonts();
+  }
+
+  &__required {
+    margin-left: 16px;
+    font-size: rem(12);
+    color: colors(error);
+  }
+  &__error {
+  }
+
+  &__errortext {
+    margin-left: 16px;
+    font-size: rem(12);
+    color: colors(error);
+  }
+}

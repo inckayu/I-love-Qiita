@@ -1,4 +1,8 @@
+import { CircularProgress } from '@mui/material'
 import React from 'react'
+
+import { getButtonVariant } from '@/functions/getButtonVariant'
+
 import styles from '../styles/modules/button.module.scss'
 
 interface ButtonProps {
@@ -6,19 +10,8 @@ interface ButtonProps {
   size?: 'small' | 'medium' | 'large'
   label: string
   disabled?: boolean
+  isLoading?: boolean
   onClick?: (() => void) | React.MouseEventHandler<HTMLButtonElement>
-}
-
-const getMode = (variant: 'primary' | 'secondary', disabled: boolean) => {
-  if (disabled) return styles['storybook-button--disabled']
-  switch (variant) {
-    case 'primary':
-      return styles['storybook-button--primary']
-    case 'secondary':
-      return styles['storybook-button--secondary']
-    default:
-      return ''
-  }
 }
 
 export const Button = ({
@@ -26,6 +19,7 @@ export const Button = ({
   size = 'medium',
   label,
   disabled = false,
+  isLoading = false,
   ...props
 }: ButtonProps) => {
   return (
@@ -34,16 +28,16 @@ export const Button = ({
       className={[
         styles['storybook-button'],
         styles[`storybook-button--${size}`],
-        getMode(variant, disabled),
+        getButtonVariant(variant, disabled),
       ].join(' ')}
+      disabled={disabled || isLoading}
       {...props}
     >
-      {label}
-      {/* <style jsx>{`
-        button {
-          background-color: ${backgroundColor};
-        }
-      `}</style> */}
+      {isLoading ? (
+        // FIXME: サークルの大きさはsizeによって変えたい
+        <CircularProgress size={24} sx={{color: "white"}} />
+      ) : (<div>{label}</div>)}
+
     </button>
   )
 }

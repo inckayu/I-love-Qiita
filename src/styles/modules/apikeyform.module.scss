@@ -1,0 +1,22 @@
+.apikeyform {
+
+  &__title {
+    width: fit-content;
+    margin: 0 auto 32px auto;
+    margin-bottom: 32px;
+    color: colors(sumi);
+  }
+
+  &__textfield {
+    width: fit-content;
+    height: 80px;
+    margin: 0 auto;
+    margin-bottom: 32px;
+
+  }
+
+  &__button {
+    width: fit-content;
+    margin: 0 auto;
+  }
+}

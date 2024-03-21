@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from '../styles/modules/paging.module.scss'
+
 import LinkText from './LinkText'
+import styles from '../styles/modules/paging.module.scss'
 
 const Paging = () => {
   // TODO: ページングの実装
-  // TODO: リンクテキストのコンポーネント作成
   return (
     <div className={styles.paging}>
       <LinkText text="prev" path="" />

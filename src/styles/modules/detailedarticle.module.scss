@@ -1,30 +1,39 @@
+@use '../common' as *;
+
 .detailedarticle {
-  background-color: #F1EAFA;
   padding: 1px 0;
+  background-color: colors(purple, bg);
+  min-height: 100vh;
+
+  &__circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   &__back {
-    // background-color: red;
-    margin: 32px auto;
     width: 90%;
+    margin: 32px auto;
   }
   &__wrapper {
-    background-color: #fff;
-    width: calc(90% - 128px); // 両側のpaddingの分を引く
+    width: calc(90% - 128px);
+    padding: 64px;
     margin: 0 auto;
+    background-color: colors(white);
     border-radius: 40px;
-    padding: 64px
   }
   &__top {
     display: flex;
     justify-content: space-between;
-    // background-color: red;
     margin-bottom: 16px;
   }
 
   &__title {
-    font-size: 36px;
-    font-weight: bold;
     width: 80%;
+    font-size: rem(36);
+    font-weight: bold;
+    color: colors(sumi);
   }
 
   &__tags {
@@ -40,40 +49,36 @@
   }
 
   &__times {
-    font-size: 15px;
     margin-right: 32px;
+    font-size: rem(15);
+    color: colors(sumi);
   }
 
   &__icons {
     display: flex;
     margin-bottom: 48px;
-    // background-color: red;
   }
 
   &__icon {
     display: flex;
-    color: #666;
-    font-size: 15px;
     margin-right: 16px;
+    font-size: rem(15);
+    color: colors(sumi, 600);
   }
 
   &__divider {
     width: 100%;
-    background-color: red;
     margin-bottom: 48px;
   }
 
   &__body {
-    font-size: 18px;
+    font-size: rem(18);
+    color: colors(sumi);
     img {
       max-width: 90%;
     }
 
-    div {  
-      // MEMO:コード部分
-      // background-color: red;
-      // border-radius: 18px;
-      // padding: 8px 16px;
+    div {
     }
   }
 }

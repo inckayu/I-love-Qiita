@@ -1,0 +1,44 @@
+{
+  "extends": ["stylelint-config-recess-order", "stylelint-scss", "stylelint-order"],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "selector-pseudo-element-colon-notation": "double",
+    "scss/selector-no-union-class-name": false,
+    "color-no-invalid-hex": true,
+    "function-calc-no-unspaced-operator": true,
+    "string-no-newline": true,
+    "unit-no-unknown": true,
+    "property-no-unknown": true,
+    "declaration-block-no-duplicate-properties": true,
+    "selector-pseudo-class-no-unknown": true,
+    "selector-pseudo-element-no-unknown": true,
+    "selector-type-no-unknown": true,
+    "no-descending-specificity": true,
+    "declaration-no-important": true,
+    "declaration-block-single-line-max-declarations": 1,
+    "declaration-property-unit-allowed-list": {
+      "font-size": ["rem"]
+    },
+    "order/order": [
+			"custom-properties",
+			"declarations"
+		],
+		"order/properties-order": [
+			"width",
+			"height"
+		]
+  },
+  "ignoreFiles": [
+    "**/node_modules/**",
+    "**/pages/**",
+    "**/components/**",
+    "**/contexts/**",
+    "**/hooks/**",
+    "**/libs/**",
+    "**/context/**",
+    "**/functions/**",
+    "**/types/**"
+  ]
+}

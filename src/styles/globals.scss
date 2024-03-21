@@ -1,8 +1,14 @@
 @charset "utd-8";
 
+@use "common" as *;
+
+html {
+  font-family: 'Noto Sans', 'Noto Sans JP';
+}
+
 a {
+  color: colors(sumi);
   text-decoration: none;
-  color: #1a1a1a;
 }
 
 body {
@@ -10,5 +16,9 @@ body {
 }
 
 h1 {
+  margin: 0;
+}
+
+h2 {
   margin: 0;
 }

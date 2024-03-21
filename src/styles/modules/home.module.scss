@@ -1,13 +1,17 @@
+@use "../common" as *;
+
 .home {
-  background-color: #f1eafa;
   min-height: calc(100vh - 24px);
   padding-bottom: 24px;
+  background-color: colors(purple, bg);
   
   &__title {
-    font-size: 64px;
-    text-align: center;
     padding-top: 64px;
     margin-bottom: 48px;
+    font-size: rem(64);
+    text-align: center;
+    color: colors(sumi);
+    
   }
 
   &__form {
@@ -24,5 +28,8 @@
 
   &__search {
     margin-bottom: 64px;
+  }
+  &__articles {
+    width: 100%;
   }
 }

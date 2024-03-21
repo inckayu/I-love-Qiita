@@ -1,6 +1,7 @@
-import React from 'react'
-import styles from '../styles/modules/linktext.module.scss'
 import Link from 'next/link'
+import React from 'react'
+
+import styles from '../styles/modules/linktext.module.scss'
 
 interface LinkTextProps {
   text: string

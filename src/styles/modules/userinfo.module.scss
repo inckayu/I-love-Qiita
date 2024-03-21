@@ -1,25 +1,54 @@
+@use '../common' as *;
+
 .userinfo {
   display: flex;
 
   &__right {
-    margin-left: 16px;
-    height: 100%;
     display: grid;
     align-items: center;
     justify-items: start;
+    height: 100%;
+    margin-left: 16px;
   }
   &__icon {
     border-radius: 50%;
   }
 
   &__organization {
-    font-size: 18px;
-    color: #1a1a1a;
+    font-size: rem(18);
+    color: colors(sumi);
   }
 
   &__name {
-    font-size: 18px;
-    // TODO: 組織名がない場合にアイコンの縦中央に配置する
+    font-size: rem(18);
+  }
+}
 
+.skeleton {
+  display: flex;
+
+  &__right {
+    display: grid;
+    align-items: center;
+    justify-items: start;
+    margin-left: 16px;
+  }
+  &__icon {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    @include loading;
+    
+  }
+
+  &__organization {
+    color: colors(sumi);
+  }
+
+  &__name {
+    width: 150px;
+    height: 24px;
+    border-radius: 12px;
+    @include loading;
   }
 }

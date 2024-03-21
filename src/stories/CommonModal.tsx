@@ -1,5 +1,6 @@
-import React from 'react'
 import { Modal } from '@mui/material'
+import React from 'react'
+
 import styles from '../styles/modules/commonmodal.module.scss'
 
 interface CommonModalProps {

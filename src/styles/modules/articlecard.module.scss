@@ -1,33 +1,86 @@
+@use "../common" as *;
+
 .articlecard {
   display: flex;
   justify-content: space-between;
   width: 90%;
   height: 196px;
-  background-color: #fff;
-  margin: 24px auto 0px auto;
   padding: 24px 0px;
+  margin: 24px auto 0px auto;
+  background-color: colors(white);
   border-radius: 40px;
 
   &__left {
-    width: 50%;
-    margin-left: 64px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 50%;
+    margin-left: 64px;
   }
 
   &__right {
     width: 40%;
+    margin-top: 5px;
     margin-right: 64px;
     margin-left: 24px;
+
   }
 
   &__title {
-    font-size: 32px;
+    font-size: rem(32);
     font-weight: bold;
   }
 
   &__date {
-    font-size: 18px;
+    font-size: rem(18);
+  }
+}
+
+.skeleton {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 196px;
+  padding: 24px 0px;
+  margin: 24px auto 0px auto;
+  background-color: colors(white);
+  border-radius: 40px;
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    margin-left: 64px;
+  }
+
+  &__wrapper {
+    width: 100%;
+  }
+
+  &__right {
+    width: 80%;
+    height: 24px;
+    border-radius: 12px;
+    margin-top: 16px;
+    margin-left: 48px;
+
+    @include loading;
+  }
+
+  &__title {
+    width: 360px;
+    height: 48px;
+    border-radius: 24px;
+
+    @include loading;
+  }
+
+  &__date {
+    width: 120px;
+    height: 24px;
+    border-radius: 12px;
+    margin-top: 16px;
+    @include loading;
   }
 }

@@ -1,66 +1,22 @@
-import React, { useState } from 'react'
-import { Button } from './Button'
-import { TextField } from '@mui/material'
-import styles from '../styles/modules/apikeyform.module.scss'
+import { useRecoilValue } from 'recoil'
+
+import useApiKeyForm from '@/hooks/useApiKeyForm'
+
+import { errorTextState } from '@/state/errorTextState'
+import { isErrorState } from '@/state/isErrorState'
+import { isVerifingState } from '@/state/isVerifingState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { useRecoilState } from 'recoil'
+
+import { Button } from './Button'
 import TextBox from './TextBox'
-import { Article } from '@/types/Article'
-import axios from 'axios'
-import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import styles from '../styles/modules/apikeyform.module.scss'
 
 const ApiKeyForm = () => {
-  const [qiitaApiToken, setQiitaApiToken] = useRecoilState(qiitaApiTokenState)
-  const [isOpenApiKeyModal, setIsOpenApiKeyModal] = useRecoilState(
-    isOpenApiKeyModalState
-  )
-  const [isError, setIsError] = useState(false)
-  const [errorText, setErrorText] = useState('')
-
-  const checkValidApiKey = async (apiKey: string): Promise<boolean> => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-    }
-
-    try {
-      console.log(config)
-      await axios.get<Article[]>(
-        `https://qiita.com/api/v2/items?per_page=1`,
-        config
-      )
-    } catch {
-      setIsError(true)
-      setErrorText('Invalid API key') // FIXME: 正規表現にマッチしなかった場合との区別がつきにくい
-      return false
-    }
-    return true
-  }
-
-  const checkApiKey = (apiKey: string) => {
-    if (apiKey === '') return // apiKeyが空文字列の場合はエラーテキストではなくボタンをdisabledにしてユーザに示す
-    if (apiKey.match(/^\w+$/) === null) {
-      setIsError(true)
-      setErrorText('Invalid format')
-      return
-    }
-    setIsError(false)
-    setErrorText('')
-  }
-
-  const handleInputAPIKey = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQiitaApiToken(e.target.value)
-    checkApiKey(e.target.value)
-  }
-
-  const handleClick = async () => {
-    if (await checkValidApiKey(qiitaApiToken)) {
-      setQiitaApiToken(qiitaApiToken)
-      setIsOpenApiKeyModal(false)
-    }
-  }
+  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
+  const isError = useRecoilValue<boolean>(isErrorState)
+  const errorText = useRecoilValue<string>(errorTextState)
+  const isVerifing = useRecoilValue<boolean>(isVerifingState)
+  const { handleInputAPIKey, handleClick } = useApiKeyForm()
 
   return (
     <div className={styles.apikeyform}>
@@ -77,8 +33,9 @@ const ApiKeyForm = () => {
       <div className={styles.apikeyform__button}>
         <Button
           label="Register"
-          onClick={handleClick}
+          onClick={() => void handleClick()}
           disabled={qiitaApiToken === '' || isError}
+          isLoading={isVerifing}
         />
       </div>
     </div>

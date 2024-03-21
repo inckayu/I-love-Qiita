@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import sanitizeHtml from 'sanitize-html'
 
+import { decorateLink } from '@/functions/decorateLink';
 import { fetchArticle } from '@/functions/fetchArticle'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader';
@@ -14,7 +15,6 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
-import { decorateLink } from '@/functions/decorateLink';
 
 
 const DetailedArticle = () => {

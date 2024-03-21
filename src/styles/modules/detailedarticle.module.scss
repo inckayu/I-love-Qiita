@@ -33,6 +33,7 @@
     width: 80%;
     font-size: 36px;
     font-weight: bold;
+    color: colors(sumi);
   }
 
   &__tags {
@@ -50,6 +51,7 @@
   &__times {
     margin-right: 32px;
     font-size: 15px;
+    color: colors(sumi);
   }
 
   &__icons {
@@ -71,6 +73,7 @@
 
   &__body {
     font-size: 18px;
+    color: colors(sumi);
     img {
       max-width: 90%;
     }

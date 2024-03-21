@@ -19,7 +19,7 @@ const DetailedArticleHeader = ({article}: DetailedArticleHeaderProps) => {
   return (
     <div>
       <div className={styles.detailedarticle__top}>
-            <div className={styles.detailedarticle__title}>{article.title}</div>
+            <h1 className={styles.detailedarticle__title}>{article.title}</h1>
             <Link href={article.url} rel="noopener noreferrer" target="_blank">
               <Button variant="primary" size="large" label="Read in Qiita" />
             </Link>

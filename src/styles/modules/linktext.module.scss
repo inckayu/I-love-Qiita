@@ -1,7 +1,7 @@
 @use '../common' as *;
 
 .linktext {
-  font-size: 18px;
+  font-size: rem(18);
   color: colors(purple);
   text-decoration: underline;
 }

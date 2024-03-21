@@ -11,7 +11,7 @@
   border-radius: 32px;
 
   &__page {
-    font-size: 18px;
+    font-size: rem(18);
     color: colors(purple);
   }
 }

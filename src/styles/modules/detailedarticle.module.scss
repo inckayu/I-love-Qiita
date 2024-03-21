@@ -31,7 +31,7 @@
 
   &__title {
     width: 80%;
-    font-size: 36px;
+    font-size: rem(36);
     font-weight: bold;
     color: colors(sumi);
   }
@@ -50,7 +50,7 @@
 
   &__times {
     margin-right: 32px;
-    font-size: 15px;
+    font-size: rem(15);
     color: colors(sumi);
   }
 
@@ -62,7 +62,7 @@
   &__icon {
     display: flex;
     margin-right: 16px;
-    font-size: 15px;
+    font-size: rem(15);
     color: colors(sumi, 600);
   }
 
@@ -72,7 +72,7 @@
   }
 
   &__body {
-    font-size: 18px;
+    font-size: rem(18);
     color: colors(sumi);
     img {
       max-width: 90%;

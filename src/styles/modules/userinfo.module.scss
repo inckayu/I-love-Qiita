@@ -15,12 +15,12 @@
   }
 
   &__organization {
-    font-size: 18px;
+    font-size: rem(18);
     color: colors(sumi);
   }
 
   &__name {
-    font-size: 18px;
+    font-size: rem(18);
   }
 }
 

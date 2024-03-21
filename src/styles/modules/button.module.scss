@@ -28,17 +28,17 @@
 .storybook-button--small {
   width: 90px;
   height: 30px;
-  font-size: 12px;
+  font-size: rem(12);
 }
 .storybook-button--medium {
   width: 120px;
   height: 40px;
-  font-size: 15px;
+  font-size: rem(15);
 }
 .storybook-button--large {
   width: 180px;
   height: 60px;
-  font-size: 18px;
+  font-size: rem(18);
   border-width: 2px;
 
 }

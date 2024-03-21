@@ -10,10 +10,10 @@ import { articleTitleState } from '@/state/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
 import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isPagingDisabledState } from '@/state/isPagingDisabled'
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { isPagingDisabledState } from '@/state/isPagingDisabled'
 
 const useSearchForm = () => {
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)

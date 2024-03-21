@@ -4,8 +4,6 @@ import { useRecoilState } from 'recoil'
 import useSearchForm from '@/hooks/useSearchForm'
 
 import { IsPagingDisabled, isPagingDisabledState } from '@/state/isPagingDisabled'
-
-
 import { pageNumberState } from '@/state/pageNumberState'
 
 import LinkText from './LinkText'

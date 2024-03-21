@@ -14,6 +14,7 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
+import { decorateLink } from '@/functions/decorateLink';
 
 
 const DetailedArticle = () => {
@@ -58,7 +59,7 @@ const DetailedArticle = () => {
           <div
             className={styles.detailedarticle__body}
             dangerouslySetInnerHTML={{
-              __html: sanitizeHtml(article.rendered_body),
+              __html: decorateLink(sanitizeHtml(article.rendered_body)),
             }}
           />
         </div>

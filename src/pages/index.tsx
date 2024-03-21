@@ -67,7 +67,7 @@ export default function Home() {
             <div className={styles.home__search}>
               <Button
                 variant="primary"
-                onClick={handleTitleClick}
+                onClick={(e) => handleTitleClick(e)}
                 size="large"
                 label={'Search'}
                 disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}

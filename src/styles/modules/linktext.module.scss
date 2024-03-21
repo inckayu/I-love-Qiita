@@ -4,4 +4,11 @@
   font-size: rem(18);
   color: colors(purple);
   text-decoration: underline;
+
+  &__disabled {
+    font-size: rem(18);
+    color: colors(sumi, 600);
+    cursor: not-allowed;
+    text-decoration: underline;
+  }
 }

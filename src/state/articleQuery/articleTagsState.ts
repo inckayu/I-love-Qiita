@@ -2,7 +2,7 @@ import { atom } from 'recoil'
 
 import { Tag } from '@/types/Tag'
 
-export const inputTagsState = atom<Tag[]>({
-  key: 'inputTagsState',
+export const articleTagsState = atom<Tag[]>({
+  key: 'articleTagsState',
   default: [],
 })

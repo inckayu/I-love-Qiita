@@ -10,11 +10,13 @@ interface LinkTextProps {
   onClick?: () => void
 }
 
-const LinkText = ({ text, path, disabled = false ,onClick }: LinkTextProps) => {
-  return (
-    disabled ? (<div className={styles.linktext__disabled}>{text}</div>): (<Link href={path} rel="noopener noreferrer" onClick={onClick}>
+const LinkText = ({ text, path, disabled = false, onClick }: LinkTextProps) => {
+  return disabled ? (
+    <div className={styles.linktext__disabled}>{text}</div>
+  ) : (
+    <Link href={path} rel="noopener noreferrer" onClick={onClick}>
       <div className={styles.linktext}>{text}</div>
-    </Link>)
+    </Link>
   )
 }
 

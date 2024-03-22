@@ -8,7 +8,11 @@
   cursor: pointer;
   border: 0;
   border-radius: 17%/50%;
-  @include fonts()
+  @include fonts();
+  &:focus {
+    outline: none;
+    border: solid 2px colors(warning);
+  };
   
 }
 .storybook-button--primary {

@@ -43,9 +43,6 @@ export interface User {
   website_url: string
 }
 
-export type BasicUserInfo = Pick<
-  User,
-  'organization' | 'name' | 'profile_image_url'
->
+export type BasicUserInfo = Pick<User, 'organization' | 'name' | 'profile_image_url'>
 
 export type UserNames = Pick<User, 'name' | 'id'>

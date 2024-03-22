@@ -1,13 +1,13 @@
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import sanitizeHtml from 'sanitize-html'
 
-import { decorateLink } from '@/functions/decorateLink';
+import { decorateLink } from '@/functions/decorateLink'
 import { fetchArticle } from '@/functions/fetchArticle'
 
-import DetailedArticleHeader from '@/stories/DetailedArticleHeader';
+import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
 import Divider from '@/stories/Divider'
 import LinkText from '@/stories/LinkText'
 
@@ -15,7 +15,6 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
-
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -41,33 +40,35 @@ const DetailedArticle = () => {
       {article === null ? (
         <div className={styles.detailedarticle__circle}>
           <CircularProgress
-          sx={{
-            color: '#6f23d0',
-          }}
-          size={100} />
-        </div>
-      ):(<>
-      <div className={styles.detailedarticle__back}>
-        <LinkText text="back" path="/" />
-      </div>
-      <div className={styles.detailedarticle__wrapper}>
-        <div>
-          <DetailedArticleHeader article={article} />
-          <div className={styles.detailedarticle__divider}>
-            <Divider />
-          </div>
-          <div
-            className={styles.detailedarticle__body}
-            dangerouslySetInnerHTML={{
-              __html: decorateLink(sanitizeHtml(article.rendered_body)),
+            sx={{
+              color: '#6f23d0',
             }}
+            size={100}
           />
         </div>
-      </div>
-      <div className={styles.detailedarticle__back}>
-        <LinkText text="back" path="/" />
-      </div>
-      </>
+      ) : (
+        <>
+          <div className={styles.detailedarticle__back}>
+            <LinkText text="back" path="/" />
+          </div>
+          <div className={styles.detailedarticle__wrapper}>
+            <div>
+              <DetailedArticleHeader article={article} />
+              <div className={styles.detailedarticle__divider}>
+                <Divider />
+              </div>
+              <div
+                className={styles.detailedarticle__body}
+                dangerouslySetInnerHTML={{
+                  __html: decorateLink(sanitizeHtml(article.rendered_body)),
+                }}
+              />
+            </div>
+          </div>
+          <div className={styles.detailedarticle__back}>
+            <LinkText text="back" path="/" />
+          </div>
+        </>
       )}
     </main>
   )

@@ -35,9 +35,10 @@ export const Button = ({
     >
       {isLoading ? (
         // FIXME: サークルの大きさはsizeによって変えたい
-        <CircularProgress size={24} sx={{color: "white"}} />
-      ) : (<div>{label}</div>)}
-
+        <CircularProgress size={24} sx={{ color: 'white' }} />
+      ) : (
+        <div>{label}</div>
+      )}
     </button>
   )
 }

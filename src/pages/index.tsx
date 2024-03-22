@@ -18,6 +18,7 @@ import Paging from '@/stories/Paging'
 
 import { Article } from '@/types/Article'
 
+
 import { articleTitleState } from '@/state/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
@@ -62,8 +63,8 @@ export default function Home() {
               <IconButton>
                 <ForumIcon />
               </IconButton>
-              <IconButton>
-                <TuneIcon onClick={handleDetailedSearchButton}/>
+              <IconButton onClick={handleDetailedSearchButton}>
+                <TuneIcon />
               </IconButton>
               <IconButton onClick={handleApiKeyButton}>
                 <KeyIcon />
@@ -97,14 +98,15 @@ export default function Home() {
               ))}
               {articles.length && !isSkeleton ? <Paging /> : null}
             </>
-          ) : (
-            null
-          )}
+          ) : null}
         </div>
         <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>
           <ApiKeyForm />
         </CommonModal>
-        <CommonModal isOpenModal={isOpenDetailedSearchModal} onClose={handleDetailedSearchModalClose}>
+        <CommonModal
+          isOpenModal={isOpenDetailedSearchModal}
+          onClose={handleDetailedSearchModalClose}
+        >
           <DetailedSearchForm />
         </CommonModal>
       </main>

@@ -7,7 +7,6 @@ import { articleTitleState } from '@/state/articleTitleState'
 
 import styles from '../styles/modules/maintextbox.module.scss'
 
-
 const MainTextBox = () => {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const { handleInputTitle } = useSearchForm()

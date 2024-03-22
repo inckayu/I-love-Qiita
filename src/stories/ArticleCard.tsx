@@ -17,7 +17,9 @@ interface ArticleCardProps {
 }
 
 const ArticleCard = ({ article, summary, isSkeleton }: ArticleCardProps) => {
-  return isSkeleton ? <SkeletonArticleCard /> : (
+  return isSkeleton ? (
+    <SkeletonArticleCard />
+  ) : (
     <Link key={article.id} href={article.id} className={styles.articlecard}>
       <div className={styles.articlecard__left}>
         <div>

@@ -7,5 +7,5 @@ export interface IsPagingDisabled {
 
 export const isPagingDisabledState = atom<IsPagingDisabled>({
   key: 'isPagingDisabledState',
-  default: {prev: true, next: false},
+  default: { prev: true, next: false },
 })

@@ -1,7 +1,6 @@
-import { useRecoilState } from "recoil"
+import { useRecoilState } from 'recoil'
 
-import { isOpenDetailedSearchModalState } from "@/state/isOpenDetailedSearchModalState"
-
+import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModalState'
 
 const useDetailedSearchForm = () => {
   const [, setIsOpenDetailedSearchModal] = useRecoilState(isOpenDetailedSearchModalState)

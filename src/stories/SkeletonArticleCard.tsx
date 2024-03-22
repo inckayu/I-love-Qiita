@@ -12,13 +12,12 @@ const SkeletonArticleCard = () => {
         <SkeletonUserInfo />
       </div>
       <div className={styles.skeleton__wrapper}>
-      <div className={styles.skeleton__right} />
-      <div className={styles.skeleton__right} />
-      <div className={styles.skeleton__right} />
-      <div className={styles.skeleton__right} />
+        <div className={styles.skeleton__right} />
+        <div className={styles.skeleton__right} />
+        <div className={styles.skeleton__right} />
+        <div className={styles.skeleton__right} />
       </div>
-      
-    </ div>
+    </div>
   )
 }
 

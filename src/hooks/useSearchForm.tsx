@@ -15,6 +15,7 @@ import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
+
 const useSearchForm = () => {
   const [, setIsOpenApiKeyModal] = useRecoilState(isOpenApiKeyModalState)
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
@@ -50,7 +51,6 @@ const useSearchForm = () => {
     setIsSearching(true)
     fetchArticles(articleTitle, qiitaApiToken, page)
       .then(async (articles) => {
-        
         if (articles.length > 0 && articles.length < 10) {
           setPagingDisabled((cur) => ({ ...cur, next: true }))
         } else {
@@ -61,7 +61,7 @@ const useSearchForm = () => {
           setIsSkeleton(false)
           return
         }
-        
+
         setArticles(articles)
 
         // A
@@ -73,7 +73,7 @@ const useSearchForm = () => {
         const summaries = await Promise.all(
           articles.map((article) => generateSummary(article.body))
         )
-        
+
         // C
         setTimeout(() => {
           setGeneratedSummaries(summaries)
@@ -84,7 +84,6 @@ const useSearchForm = () => {
         // FIXME: Cの処理を必ず最後に実行してisSkeletonをfalseにするために、処理時間(s)が 4 = A < B + C = B + 2となるようにしている。
         // 検索と要約生成の時間に必ず+2秒されてしまうのが欠点
         // スマートな書き方ではないので要修正
-        
       })
       .catch((e) => {
         console.error(e)

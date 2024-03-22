@@ -1,8 +1,6 @@
 {
   "extends": ["stylelint-config-recess-order", "stylelint-scss", "stylelint-order"],
-  "plugins": [
-    "stylelint-scss"
-  ],
+  "plugins": ["stylelint-scss"],
   "rules": {
     "selector-pseudo-element-colon-notation": "double",
     "scss/selector-no-union-class-name": false,
@@ -21,14 +19,8 @@
     "declaration-property-unit-allowed-list": {
       "font-size": ["rem"]
     },
-    "order/order": [
-			"custom-properties",
-			"declarations"
-		],
-		"order/properties-order": [
-			"width",
-			"height"
-		]
+    "order/order": ["custom-properties", "declarations"],
+    "order/properties-order": ["width", "height"]
   },
   "ignoreFiles": [
     "**/node_modules/**",

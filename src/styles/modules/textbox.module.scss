@@ -8,13 +8,20 @@
     padding: 0 16px;
     font-size: rem(18);
     color: colors(sumi, 600);
-    border: solid 1.5px colors(white, 420);
+    border: solid 1.5px colors(sumi, 600);
     border-radius: 20px;
     @include fonts();
+    ::placeholder {
+      color: colors(sumi, 420);
+    }
+  }
+
+  &__label {
+    font-size: rem(12);
+    color: colors(sumi, 600);
   }
 
   &__required {
-    margin-left: 16px;
     font-size: rem(12);
     color: colors(error);
   }
@@ -22,7 +29,6 @@
   }
 
   &__errortext {
-    margin-left: 16px;
     font-size: rem(12);
     color: colors(error);
   }

@@ -6,11 +6,13 @@ import { styled } from '@mui/material/styles';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { tags } from "@/constants/tags"
+
 import { Tag } from '@/types/Tag';
 
 
-import { inputExcludedTagsState } from '@/state/inputExcludedTagsState';
-import { inputTagsState } from '@/state/inputTagsState';
+import { articleExcludedTagsState } from '@/state/articleQuery/articleExcludedTagsState';
+import { articleTagsState } from '@/state/articleQuery/articleTagsState';
 
 
 const Root = styled('div')(
@@ -161,14 +163,14 @@ interface TagsAutoCompleteProps {
 }
 
 export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
-  const [inputTags, setInputTags] = useRecoilState<Tag[]>(inputTagsState)
-  const [inputExcludedTags, setInputExcludedTags] = useRecoilState<Tag[]>(inputExcludedTagsState)
+  const [articleTags, setArticleTags] = useRecoilState<Tag[]>(articleTagsState)
+  const [articleExcludedTags, setArticleExcludedTags] = useRecoilState<Tag[]>(articleExcludedTagsState)
   const currentLabel = (label: string) => {
     switch (label) {
       case 'Tags':
-        return inputTags
+        return articleTags
       case 'Tags to Exclude':
-        return inputExcludedTags
+        return articleExcludedTags
       default:
         return
     
@@ -196,10 +198,10 @@ export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
   useEffect(() => {
     switch (label) {
       case 'Tags':
-        setInputTags(value)
+        setArticleTags(value)
         break
       case 'Tags to Exclude':
-        setInputExcludedTags(value)
+        setArticleExcludedTags(value)
         break
       default:
         break
@@ -231,66 +233,3 @@ export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
     </Root>
   );
 }
-
-const tags = [
-  {
-    followers_count: 1,
-    icon_url: "",
-    id: "tag1",
-    items_count: 1,
-  },
-  {
-    followers_count: 2,
-    icon_url: "",
-    id: "tag2",
-    items_count: 2,
-  },
-  {
-    followers_count: 3,
-    icon_url: "",
-    id: "tag3",
-    items_count: 3,
-  },
-  {
-    followers_count: 4,
-    icon_url: "",
-    id: "tag4",
-    items_count: 4,
-  },
-  {
-    followers_count: 5,
-    icon_url: "",
-    id: "tag5",
-    items_count: 5,
-  },
-  {
-    followers_count: 6,
-    icon_url: "",
-    id: "tag6",
-    items_count: 6,
-  },
-  {
-    followers_count: 7,
-    icon_url: "",
-    id: "tag7",
-    items_count: 7,
-  },
-  {
-    followers_count: 8,
-    icon_url: "",
-    id: "tag8",
-    items_count: 8,
-  },
-  {
-    followers_count: 9,
-    icon_url: "",
-    id: "tag9",
-    items_count: 9,
-  },
-  {
-    followers_count: 10,
-    icon_url: "",
-    id: "tag10",
-    items_count: 10,
-  }
-]

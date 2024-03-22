@@ -17,9 +17,9 @@ import MainTextBox from '@/stories/MainTextBox'
 import Paging from '@/stories/Paging'
 
 import { Article } from '@/types/Article'
+import { PublicationTimeline } from '@/types/PublicationTimeline'
 
-
-import { articleTitleState } from '@/state/articleTitleState'
+import { articleTitleState } from '@/state/articleQuery/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
 import { isOpenApiKeyModalState } from '@/state/isOpenApiKeyModalState'
@@ -27,6 +27,7 @@ import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModa
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
+import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
 
@@ -43,6 +44,13 @@ export default function Home() {
   const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
     useSearchForm()
   const { handleDetailedSearchModalClose, handleDetailedSearchButton } = useDetailedSearchForm()
+  const isValidDateFormats = useRecoilValue<PublicationTimeline>(isValidDateFormatsState)
+
+  const isCorrectDateFormat =
+    isValidDateFormats.lastUpdate.start &&
+    isValidDateFormats.lastUpdate.end &&
+    isValidDateFormats.publication.start &&
+    isValidDateFormats.publication.end
 
   return (
     <>
@@ -76,7 +84,12 @@ export default function Home() {
                 onClick={(e) => handleTitleClick(e)}
                 size="large"
                 label={'Search'}
-                disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}
+                disabled={
+                  !articleTitle.length ||
+                  !qiitaApiToken.length ||
+                  !isValidApiKeyToken ||
+                  !isCorrectDateFormat
+                }
                 isLoading={isSearching}
               />
             </div>

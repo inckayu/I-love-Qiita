@@ -607,4 +607,45 @@ https://qiita.com/d-dai/items/0b580b26bb1d1622eb46
 
 詳細検索を使わずにメインボックスから検索した場合との整合性を取るためにメインテキストボックスと同様の機能のテキストボックスを詳細検索モーダルにも設置する。これら２つは連動させる。フォームの内容を基にクエリを生成する。メインテキストボックスが空欄であっても問題はないはず。
 
-ハンドラ関数とは?
+# 3/22
+## MUI AutoComplete
+デザインシステムに合わせる必要があったので`useAutoComplete`を利用。`free solo`を使って任意のタグを設定できるようにしたかったが難しかったので断念。
+
+Qiitaのタグは総数が20万個以上あるのですべてを取得するのは現実的ではない。
+
+![タグの総数](/public/memo/0322_タグの総数.png)
+
+選択できるタグが限定されたり最新のタグを取得できないというデメリットはあるが、妥協策として全てのタグのうち記事数が高いtop1000くらいを定数ファイルに入れて利用する。
+
+以下の手順で取得。
+
+APIを叩くプログラムを作成。
+```fetchTags.mjs
+import axios from 'axios'
+
+export const fetchTags = async (token, page) => {
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const res = await axios.get(`https://qiita.com/api/v2/tags?sort=count&page=${page}&per_page=100`, config)
+  res.data.forEach((tag) => {
+    console.log(tag)
+    console.log(",")
+  })
+  // return res.data
+}
+console.log("export const tags = [")
+for (let i = 1; i <= 10; i++) {
+  await fetchTags(QIITA_API_KEY, i)
+}
+console.log("]")
+```
+プログラムを実行して結果を保存。
+```zsh
+touch tags.ts
+node fetchTags.mjs >> src/constants/tags.ts
+```

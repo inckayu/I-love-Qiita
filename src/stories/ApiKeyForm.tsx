@@ -23,8 +23,8 @@ const ApiKeyForm = () => {
       <h2 className={styles.apikeyform__title}>Register your API key</h2>
       <div className={styles.apikeyform__textfield}>
         <TextBox
+          label="API key"
           value={qiitaApiToken}
-          placeholder="your API key"
           errorText={errorText}
           onChange={handleInputAPIKey}
           isError={isError} // テキストボックスが一つしか無いのでrequiredは不要

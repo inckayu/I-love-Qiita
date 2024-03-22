@@ -18,6 +18,18 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'avatars0.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars1.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'avatars2.githubusercontent.com',
         port: '',
         pathname: '/**',
@@ -37,6 +49,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'qiita-image-store.s3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'abs.twimg.com',
         port: '',
         pathname: '/**',
       },

@@ -1,17 +1,22 @@
-@use "../common" as *;
+@use '../common' as *;
 
 .home {
   min-height: calc(100vh - 24px);
   padding-bottom: 24px;
   background-color: colors(purple, bg);
-  
+
   &__title {
     padding-top: 64px;
-    margin-bottom: 48px;
     font-size: rem(64);
     text-align: center;
     color: colors(sumi);
-    
+  }
+
+  &__subtext {
+    color: colors(sumi, 420);
+    font-size: 24px;
+    margin: 16px auto 0 auto;
+    width: fit-content;
   }
 
   &__form {
@@ -19,6 +24,7 @@
   }
 
   &__textbox {
+    margin-top: 13vh;
     margin-bottom: 16px;
   }
 

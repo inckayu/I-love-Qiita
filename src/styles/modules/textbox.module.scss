@@ -1,6 +1,7 @@
 @use "../common" as *;
 
 .textbox {
+  height: 78px;
 
   &__body {
     width: 240px;

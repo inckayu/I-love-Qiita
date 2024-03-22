@@ -11,6 +11,9 @@ export const fetchTags = async (token: string): Promise<Tag[]> => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const res = await axios.get<Tag[]>(`https://qiita.com/api/v2/tags?sort=count&per_page=100`, config)
+  const res = await axios.get<Tag[]>(
+    `https://qiita.com/api/v2/tags?sort=count&per_page=100`,
+    config
+  )
   return res.data
 }

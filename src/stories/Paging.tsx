@@ -1,8 +1,9 @@
 import React from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import useSearchForm from '@/hooks/useSearchForm'
 
+import { queryState } from '@/state/articleQuery'
 import { IsPagingDisabled, isPagingDisabledState } from '@/state/isPagingDisabled'
 import { pageNumberState } from '@/state/pageNumberState'
 
@@ -14,12 +15,13 @@ const Paging = () => {
   const { fetchArticleAndSummary } = useSearchForm()
   const [isPagingDisabled, setIsPagingDisabled] =
     useRecoilState<IsPagingDisabled>(isPagingDisabledState)
+  const query = useRecoilValue<string>(queryState)
 
   const handlePrevButtonClick = () => {
-    console.log('prev')
+    console.log(query)
     console.log(pageNumber)
     setPageNumber((prev) => prev - 1)
-    fetchArticleAndSummary(pageNumber - 1)
+    fetchArticleAndSummary(query, pageNumber - 1)
     setIsPagingDisabled((cur) => ({ ...cur, next: false }))
     if (pageNumber === 2) {
       setIsPagingDisabled((cur) => ({ ...cur, prev: true }))
@@ -29,10 +31,10 @@ const Paging = () => {
   }
 
   const handleNextButtonClick = () => {
-    console.log('next')
+    console.log(query)
     console.log(pageNumber)
     setPageNumber((prev) => prev + 1)
-    fetchArticleAndSummary(pageNumber + 1)
+    fetchArticleAndSummary(query, pageNumber + 1)
     if (pageNumber === 1) {
       setIsPagingDisabled((cur) => ({ ...cur, prev: false }))
     }

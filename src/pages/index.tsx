@@ -68,7 +68,14 @@ export default function Home() {
         <div className={styles.home__form}>
           <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>
-              <MainTextBox />
+              <MainTextBox
+                placeholder={
+                  !isValidApiKeyToken || !qiitaApiToken.length
+                    ? 'Input your Qiita API token first from the blinking key icon below.'
+                    : 'Type some words related to titles of articles you are interested in'
+                }
+                disabled={!isValidApiKeyToken || !qiitaApiToken.length}
+              />
             </div>
             <div className={styles.home__options}>
               <IconButton>

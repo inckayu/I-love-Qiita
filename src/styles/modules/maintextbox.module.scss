@@ -25,5 +25,8 @@
   //
 }
 .storybook-maintextbox--disabled {
-  //
+  background-color: colors(sumi, 300);
+  &::placeholder {
+    color: colors(sumi, 100);
+  }
 }

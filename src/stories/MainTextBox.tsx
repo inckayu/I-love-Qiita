@@ -7,7 +7,12 @@ import { articleTitleState } from '@/state/articleQuery/articleTitleState'
 
 import styles from '../styles/modules/maintextbox.module.scss'
 
-const MainTextBox = () => {
+interface MainTextBoxProps {
+  placeholder?: string
+  disabled?: boolean
+}
+
+const MainTextBox = ({ placeholder, disabled = false }: MainTextBoxProps) => {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const { handleInputTitle } = useSearchForm()
 
@@ -15,9 +20,13 @@ const MainTextBox = () => {
     <input
       onChange={handleInputTitle}
       type="text"
-      placeholder="Type some words related to titles of articles you are interested in"
+      placeholder={placeholder}
       value={articleTitle}
-      className={[styles['storybook-maintextbox']].join(' ')}
+      className={[
+        styles['storybook-maintextbox'],
+        disabled ? styles['storybook-maintextbox--disabled'] : null,
+      ].join(' ')}
+      disabled={disabled}
     />
   )
 }

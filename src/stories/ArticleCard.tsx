@@ -1,14 +1,12 @@
-import Link from 'next/link'
 import React from 'react'
-
+import Link from 'next/link'
 import formatDate from '@/functions/formatDate'
 import { getUserName } from '@/functions/getUserName'
-
 import { Article } from '@/types/Article'
 
+import styles from '../styles/modules/articlecard.module.scss'
 import SkeletonArticleCard from './SkeletonArticleCard'
 import UserInfo from './UserInfo'
-import styles from '../styles/modules/articlecard.module.scss'
 
 interface ArticleCardProps {
   article: Article

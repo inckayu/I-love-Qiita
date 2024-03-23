@@ -1,9 +1,7 @@
 import React from 'react'
-import { useRecoilValue } from 'recoil'
-
 import useSearchForm from '@/hooks/useSearchForm'
-
 import { articleTitleState } from '@/state/articleQuery/articleTitleState'
+import { useRecoilValue } from 'recoil'
 
 import styles from '../styles/modules/maintextbox.module.scss'
 

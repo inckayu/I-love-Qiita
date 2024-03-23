@@ -1,11 +1,6 @@
-import { useRecoilState, useRecoilValue } from 'recoil'
-
 import { convertToHalfWidth } from '@/functions/convertToHalfWidth'
 import { isValidFormatDate } from '@/functions/isValidFormatDate'
 import { slashConverter } from '@/functions/slashConverter'
-
-import { PublicationTimeline } from '@/types/PublicationTimeline'
-
 import {
   articleAuthorState,
   articleBodyState,
@@ -18,6 +13,8 @@ import {
 } from '@/state/articleQuery'
 import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModalState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
+import { PublicationTimeline } from '@/types/PublicationTimeline'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import useSearchForm from './useSearchForm'
 

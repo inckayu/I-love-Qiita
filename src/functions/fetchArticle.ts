@@ -1,6 +1,5 @@
-import axios from 'axios'
-
 import { Article } from '@/types/Article'
+import axios from 'axios'
 
 export const fetchArticle = async (id: string, token: string): Promise<Article> => {
   const config = {

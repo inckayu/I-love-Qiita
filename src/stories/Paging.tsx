@@ -1,14 +1,12 @@
 import React from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-
 import useSearchForm from '@/hooks/useSearchForm'
-
 import { queryState } from '@/state/articleQuery'
 import { IsPagingDisabled, isPagingDisabledState } from '@/state/isPagingDisabled'
 import { pageNumberState } from '@/state/pageNumberState'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
-import LinkText from './LinkText'
 import styles from '../styles/modules/paging.module.scss'
+import LinkText from './LinkText'
 
 const Paging = () => {
   const [pageNumber, setPageNumber] = useRecoilState<number>(pageNumberState)

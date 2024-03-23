@@ -1,6 +1,5 @@
-import axios from 'axios'
-
 import { Tag } from '@/types/Tag'
+import axios from 'axios'
 
 export const fetchTags = async (token: string): Promise<Tag[]> => {
   // TODO: 詳細検索機能の実装後、検索条件はオブジェクトとかにまとめて引数として渡すようにする

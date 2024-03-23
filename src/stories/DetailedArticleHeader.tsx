@@ -1,16 +1,14 @@
-import BookmarkIcon from '@mui/icons-material/Bookmark'
-import FavoriteIcon from '@mui/icons-material/Favorite'
 import Link from 'next/link'
-
 import formatDate from '@/functions/formatDate'
 import { getUserName } from '@/functions/getUserName'
-
 import { Article } from '@/types/Article'
+import BookmarkIcon from '@mui/icons-material/Bookmark'
+import FavoriteIcon from '@mui/icons-material/Favorite'
 
+import styles from '../styles/modules/detailedarticle.module.scss'
 import { Button } from './Button'
 import Tag from './Tag'
 import UserInfo from './UserInfo'
-import styles from '../styles/modules/detailedarticle.module.scss'
 
 interface DetailedArticleHeaderProps {
   article: Article

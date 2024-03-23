@@ -1,6 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
-
+import Image from 'next/image'
 import { BasicUserInfo } from '@/types/Article'
 
 import styles from '../styles/modules/userinfo.module.scss'

@@ -1,19 +1,16 @@
-import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import sanitizeHtml from 'sanitize-html'
-
+import { useRouter } from 'next/router'
 import { decorateLink } from '@/functions/decorateLink'
 import { fetchArticle } from '@/functions/fetchArticle'
-
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
 import Divider from '@/stories/Divider'
 import LinkText from '@/stories/LinkText'
-
 import { Article } from '@/types/Article'
+import CircularProgress from '@mui/material/CircularProgress'
+import { useRecoilValue } from 'recoil'
+import sanitizeHtml from 'sanitize-html'
 
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
 const DetailedArticle = () => {

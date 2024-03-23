@@ -1,4 +1,3 @@
-import ForumIcon from '@mui/icons-material/Forum'
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'

@@ -1,6 +1,8 @@
 import { ThemeProvider } from '@mui/material'
 import { RecoilRoot } from 'recoil'
+
 import { theme } from '@/constants/mui'
+
 import type { AppProps } from 'next/app'
 import '@/styles/globals.scss'
 

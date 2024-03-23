@@ -9,15 +9,18 @@ export const fetchTags = async (token, page) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const res = await axios.get(`https://qiita.com/api/v2/tags?sort=count&page=${page}&per_page=100`, config)
+  const res = await axios.get(
+    `https://qiita.com/api/v2/tags?sort=count&page=${page}&per_page=100`,
+    config
+  )
   res.data.forEach((tag) => {
     console.log(tag)
-    console.log(",")
+    console.log(',')
   })
   // return res.data
 }
-console.log("export const tags = [")
+console.log('export const tags = [')
 for (let i = 1; i <= 10; i++) {
-  await fetchTags('356c60512993416df8909e7fea6afe5e73f803fc', i)
+  await fetchTags('xxx', i)
 }
-console.log("]")
+console.log(']')

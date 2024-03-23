@@ -1,19 +1,16 @@
 @use "../common" as *;
 
 .detailedsearchform {
-  // background-color: red;
 
   &__title {
     color: colors(sumi);
     width: fit-content;
     margin: 0 auto;
-    // background-color: aqua;
   }
 
   &__textboxes {
     display: flex;
     justify-content: space-between;
-    // background-color: red;
     width: 900px;
     margin: 48px auto 0 auto;
   }
@@ -39,7 +36,6 @@
 
   &__tag {
     display: flex;
-    // background-color: skyblue;
     width: 800px;
     justify-content: space-between;
     margin: 32px auto 0 auto;
@@ -48,7 +44,6 @@
   &__buttons {
     display: flex;
     justify-content: space-between;
-    // background-color: blue;
     width: 280px;
     margin: 128px auto 0 auto;
   }

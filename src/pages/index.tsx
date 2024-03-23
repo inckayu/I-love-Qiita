@@ -74,10 +74,14 @@ export default function Home() {
               <IconButton>
                 <ForumIcon />
               </IconButton>
-              <IconButton onClick={handleDetailedSearchButton}>
+              <IconButton onClick={handleDetailedSearchButton} className={styles.home__iconbutton}>
                 <TuneIcon />
               </IconButton>
-              <IconButton onClick={handleApiKeyButton}>
+
+              <IconButton
+                onClick={handleApiKeyButton}
+                className={`${styles.home__iconbutton} ${isValidApiKeyToken && qiitaApiToken.length ? null : `${styles.home__blink}`}`}
+              >
                 <KeyIcon />
               </IconButton>
             </div>

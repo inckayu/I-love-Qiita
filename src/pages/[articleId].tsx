@@ -15,6 +15,7 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
+import { downgradeHeadings } from '@/functions/downgradeHeadings'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -60,7 +61,7 @@ const DetailedArticle = () => {
               <div
                 className={styles.detailedarticle__body}
                 dangerouslySetInnerHTML={{
-                  __html: decorateLink(sanitizeHtml(article.rendered_body)),
+                  __html: decorateLink(sanitizeHtml(downgradeHeadings(article.rendered_body))),
                 }}
               />
             </div>

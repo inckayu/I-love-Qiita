@@ -17,11 +17,17 @@
 .storybook-button--primary {
   color: colors(white);
   background-color: colors(purple);
+  &:hover {
+    background-color: colors(purple, tertiary);
+  }
 }
 .storybook-button--secondary {
   color: colors(purple);
   background-color: colors(white);
   border: solid 1px colors(purple, secondary);
+  &:hover {
+    background-color: colors(purple, 100);
+  }
 }
 .storybook-button--disabled {
   color: colors(sumi, 100);

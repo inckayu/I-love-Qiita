@@ -536,14 +536,18 @@ yarn add @types/sanitize-html
 導入方法をREADMEに書く
 
 ## lint-staged
+
 commitしたときにeslintを発動させる。
 
 インストール
+
 ```zsh
 // 開発環境でのみ必要なので-Dコマンドをつける
 yarn add lint-staged -D
 ```
+
 `.husky/_/commit-msg`に`yarn lint-staged`を追加
+
 ```commit-msg
 
 #!/usr/bin/env sh
@@ -552,40 +556,51 @@ yarn add lint-staged -D
 ++ yarn lint-staged
 yarn commitmsg
 ```
+
 package.jsonを編集
+
 ```package.json
 "lint-staged": "eslint --ext .ts,.tsx src --cache --fix"
 ```
 
 ## GitHub Flavored Markdown (GFM)
+
 https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-
 
 # 3/21
+
 ## stylelint
+
 廃止されたルールがunknown ruleになる。[公式ドキュメントのMigrationのページ](https://stylelint.io/migration-guide/to-16)で`Deprecated stylistic rules`に載っているものは使えない。`extends`で外部のルールセットを使う場合にDepreatedとなったルールが含まれていることがある。
 
 API入力フォームでテキストボックスに適当な値を入力してボタンを押さずにモーダルを閉じたときのstateってどうなってたっけ？
 
 ## 正規表現を用いた置換
+
 VSCodeで正規表現を用いてフォントの単位を修正したい。
+
 ```example
 font-size: 12px; -> font-size: rem(12);
 ```
 
 置換の際に、数字をそのまま置き換えるためには、以下のように括弧で囲んで`$`で参照する。
+
 ```
 font-size: (\d{2,})px; -> font-size: rem($1);
 ```
 
 ## 今後の方針
+
 ちょっとモチベがあまりにもないので[コンポーネントのStorybookの作成](https://github.com/inckayu/I-love-Qiita/issues/17)と[Jestの導入](https://github.com/inckayu/I-love-Qiita/issues/34)は最後にやろうかな...最後にJest導入してもあまり意味がないけど。
 
 ## ブラウザのディベロッパーツール
+
 consoleやhtml/cssを確認するくらいにしか使ってなかったけど、他の機能はよく知らなかったので座学。
 
 https://qiita.com/d-dai/items/0b580b26bb1d1622eb46
 
 ## Qiita APIのレスポンス
+
 ![0321_QiitaAPIのレスポンス](public/memo/0321_QiitaAPIのレスポンス.png)
 `Total-Count`の値が1367になっている。リクエストのパラメータ`page=100 * per_page=10 = 1000`を上回っているから多分記事の総数を返すという認識で大丈夫そう。
 
@@ -596,6 +611,7 @@ https://qiita.com/d-dai/items/0b580b26bb1d1622eb46
 ページングはAPIの設計のおかげで思ったより簡単に実装できそうだが、`Link`ヘッダと`Total-Count`ヘッダの取得方法がわからない。`fetchArticles`のレスポンスをコンソールに表示してもこれら2つがない。おそらくCORSポリシーのせいでjavascriptからアクセスできない。とりあえず`page`パラメータを用いてページングを行い、存在しない`page`にアクセスしてエラーが起きたらエラーハンドリングで対処。余裕があったらSSRを試してみる。(上の画像をよく見たら`Referrer-Policy`にそれっぽいこと書いてある)
 
 ## 詳細検索の内容・仕様
+
 - タイトル部分一致(実装済み)
 - 本文部分一致
 - 空白区切りでOR検索
@@ -608,7 +624,9 @@ https://qiita.com/d-dai/items/0b580b26bb1d1622eb46
 詳細検索を使わずにメインボックスから検索した場合との整合性を取るためにメインテキストボックスと同様の機能のテキストボックスを詳細検索モーダルにも設置する。これら２つは連動させる。フォームの内容を基にクエリを生成する。メインテキストボックスが空欄であっても問題はないはず。
 
 # 3/22
+
 ## MUI AutoComplete
+
 デザインシステムに合わせる必要があったので`useAutoComplete`を利用。`free solo`を使って任意のタグを設定できるようにしたかったが難しかったので断念。
 
 Qiitaのタグは総数が20万個以上あるのですべてを取得するのは現実的ではない。
@@ -620,6 +638,7 @@ Qiitaのタグは総数が20万個以上あるのですべてを取得するの�
 以下の手順で取得。
 
 APIを叩くプログラムを作成。
+
 ```fetchTags.mjs
 import axios from 'axios'
 
@@ -644,8 +663,18 @@ for (let i = 1; i <= 10; i++) {
 }
 console.log("]")
 ```
+
 プログラムを実行して結果を保存。
+
 ```zsh
 touch tags.ts
 node fetchTags.mjs >> src/constants/tags.ts
 ```
+
+# 3/23
+
+## タグの画像
+
+`GET /api/v2/items(/:item_id)`で取得した記事の情報にはタグの画像URLが含まれていないので記事詳細画面で`GET /api/v2/tags/:tag_id`を用いて画像を取得する必要がある。
+
+そもそもタグの画像が必要な理由って記事作成時/記事検索時にタグを見つけやすくするためとも考えられるので、記事詳細画面で表示する必要性は低い(だから記事を取得するAPIにも画像の情報がない)のかもしれない。まあ時間に余裕はあるしそんなに難しい処理ではないので実装しておく。

@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 import sanitizeHtml from 'sanitize-html'
 
 import { decorateLink } from '@/functions/decorateLink'
+import { downgradeHeadings } from '@/functions/downgradeHeadings'
 import { fetchArticle } from '@/functions/fetchArticle'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
@@ -15,7 +16,7 @@ import { Article } from '@/types/Article'
 
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
-import { downgradeHeadings } from '@/functions/downgradeHeadings'
+import { allowedTags } from '@/constants/allowedTags'
 
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
@@ -61,7 +62,22 @@ const DetailedArticle = () => {
               <div
                 className={styles.detailedarticle__body}
                 dangerouslySetInnerHTML={{
-                  __html: decorateLink(sanitizeHtml(downgradeHeadings(article.rendered_body))),
+                  __html: decorateLink(
+                    sanitizeHtml(downgradeHeadings(article?.rendered_body as string), {
+                      allowedTags: [...allowedTags, 'iframe'],
+                      allowedAttributes: {
+                        iframe: [
+                          'src',
+                          'data-content',
+                          'frameborder',
+                          'scrolling',
+                          'loading',
+                          'style',
+                        ],
+                      },
+                      allowedIframeDomains: ['qiita.com'],
+                    })
+                  ),
                 }}
               />
             </div>

@@ -9,6 +9,7 @@ import { allowedTags } from '@/constants/allowedTags'
 import { decorateLink } from '@/functions/decorateLink'
 import { downgradeHeadings } from '@/functions/downgradeHeadings'
 import { fetchArticle } from '@/functions/fetchArticle'
+import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
 import Divider from '@/stories/Divider'
@@ -53,12 +54,24 @@ const DetailedArticle = () => {
     if (articleId && typeof articleId === 'string') {
       fetchArticle(articleId, qiitaApiToken)
         .then((article) => {
-          console.log(article)
+          // console.log(article.rendered_body)
           setArticle(article)
           // syntaxHighlighter(article.body).then((result) => {
           //   console.log(result)
           //   setCode(result)
           // })
+
+          console.log(
+            sanitizeHtml(downgradeHeadings(pseudoCodingBlock(article?.rendered_body)), {
+              allowedTags: [...allowedTags, 'iframe'],
+              allowedAttributes: {
+                iframe: ['src', 'data-content', 'frameborder', 'scrolling', 'loading', 'style'],
+                div: ['class', 'style'],
+                span: ['class'],
+              },
+              allowedIframeDomains: ['qiita.com'],
+            })
+          )
         })
         .catch((e) => {
           console.error(e)
@@ -92,7 +105,7 @@ const DetailedArticle = () => {
                 className={styles.detailedarticle__body}
                 dangerouslySetInnerHTML={{
                   __html: decorateLink(
-                    sanitizeHtml(downgradeHeadings(article?.rendered_body), {
+                    sanitizeHtml(downgradeHeadings(pseudoCodingBlock(article?.rendered_body)), {
                       allowedTags: [...allowedTags, 'iframe'],
                       allowedAttributes: {
                         iframe: [
@@ -103,6 +116,8 @@ const DetailedArticle = () => {
                           'loading',
                           'style',
                         ],
+                        div: ['class', 'style'],
+                        span: ['class'],
                       },
                       allowedIframeDomains: ['qiita.com'],
                     })

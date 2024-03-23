@@ -20,58 +20,17 @@ import { Article } from '@/types/Article'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
-// import { remark } from 'remark'
-// import html from 'remark-html'
-// import prism from 'remark-prism'
-// import highlight from 'remark-highlight.js'
-// import { unified } from 'unified'
-// import remarkParse from 'remark-parse'
-// import remarkRehype from 'remark-rehype'
-// import rehypeHighlight from 'rehype-highlight'
-// import rehypeStringify from 'rehype-stringify'
-// import 'highlight.js/styles/hybrid.css'
-
 const DetailedArticle = () => {
   const [article, setArticle] = useState<Article | null>(null)
   const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
   const router = useRouter()
-
-  // const [code, setCode] = useState<string>('')
-  // const syntaxHighlighter = async (codeBlock: string) => {
-  //   const result = await unified()
-  //     .use(remarkParse)
-  //     .use(remarkRehype)
-  //     .use(rehypeHighlight)
-  //     .use(rehypeStringify)
-  //     .process(codeBlock)
-  //   return result.toString()
-  // }
-  // const reg = article?.body.match(/```([^`]+)```/g)
-  // const test = article?.body.match(/use/g)
 
   useEffect(() => {
     const articleId = router.query.articleId
     if (articleId && typeof articleId === 'string') {
       fetchArticle(articleId, qiitaApiToken)
         .then((article) => {
-          // console.log(article.rendered_body)
           setArticle(article)
-          // syntaxHighlighter(article.body).then((result) => {
-          //   console.log(result)
-          //   setCode(result)
-          // })
-
-          console.log(
-            sanitizeHtml(downgradeHeadings(pseudoCodingBlock(article?.rendered_body)), {
-              allowedTags: [...allowedTags, 'iframe'],
-              allowedAttributes: {
-                iframe: ['src', 'data-content', 'frameborder', 'scrolling', 'loading', 'style'],
-                div: ['class', 'style'],
-                span: ['class'],
-              },
-              allowedIframeDomains: ['qiita.com'],
-            })
-          )
         })
         .catch((e) => {
           console.error(e)

@@ -3,7 +3,7 @@
   "plugins": ["stylelint-scss"],
   "rules": {
     "selector-pseudo-element-colon-notation": "double",
-    "scss/selector-no-union-class-name": false,
+    "scss/selector-no-union-class-name": null,
     "color-no-invalid-hex": true,
     "function-calc-no-unspaced-operator": true,
     "string-no-newline": true,

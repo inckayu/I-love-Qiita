@@ -678,3 +678,18 @@ node fetchTags.mjs >> src/constants/tags.ts
 `GET /api/v2/items(/:item_id)`で取得した記事の情報にはタグの画像URLが含まれていないので記事詳細画面で`GET /api/v2/tags/:tag_id`を用いて画像を取得する必要がある。
 
 そもそもタグの画像が必要な理由って記事作成時/記事検索時にタグを見つけやすくするためとも考えられるので、記事詳細画面で表示する必要性は低い(だから記事を取得するAPIにも画像の情報がない)のかもしれない。まあ時間に余裕はあるしそんなに難しい処理ではないので実装しておく。
+
+## .vscodeフォルダ
+
+VSCodeのSettingsにはUser SettingsとWorkspace Settingsの2つがあり、VSCode全体の設定は前者、プロジェクト個別の場合は後者。知らなかった...
+
+とりあえずprettierの設定をWorkspace settingsに追記した。
+
+## prettierが効かない
+
+eslintとprettierでimport sortのルールが競合していたのが原因。確か競合しないようにするプラグインやエクステンションがあったような気もするが、とりあえずprettierの方のルールを削除したら解決した。
+
+### 参考
+
+https://qiita.com/teixan/items/dd612f13ed002528a6dd
+https://qiita.com/kokogento/items/9791cdc3aef309fbbed4

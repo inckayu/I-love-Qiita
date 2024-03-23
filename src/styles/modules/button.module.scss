@@ -1,4 +1,4 @@
-@use "../common" as *;
+@use '../common' as *;
 
 // FIXME: CSS名の命名を統一
 .storybook-button {
@@ -12,8 +12,7 @@
   &:focus {
     outline: none;
     border: solid 2px colors(warning);
-  };
-  
+  }
 }
 .storybook-button--primary {
   color: colors(white);
@@ -44,5 +43,4 @@
   height: 60px;
   font-size: rem(18);
   border-width: 2px;
-
 }

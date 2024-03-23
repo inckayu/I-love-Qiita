@@ -726,3 +726,20 @@ const clean = sanitizeHtml(dirty, {
 ## シンタックスハイライト
 
 外部ライブラリの使用は断念。Qiitaのページからディベロッパーツールでコーディングブロックのcssファイル探して引用した(`highlight.css`)。
+
+## 今後の方針
+
+時間がなくなってきたので、以下の順に対応する。
+
+- [過去の検索条件の保存](https://github.com/inckayu/I-love-Qiita/issues/41)
+- [過去に閲覧した記事へのタグ付け](https://github.com/inckayu/I-love-Qiita/issues/64)
+- [一部の画像が表示されない](https://github.com/inckayu/I-love-Qiita/issues/61)
+- [デザインシステムと現状の実装の確認](https://github.com/inckayu/I-love-Qiita/issues/55)
+- [CSSクラス名をBEM準拠にしてネストをなくす](https://github.com/inckayu/I-love-Qiita/issues/35)
+- [コンポーネントのStorybookの作成](https://github.com/inckayu/I-love-Qiita/issues/17)
+- [Jestの導入](https://github.com/inckayu/I-love-Qiita/issues/34)
+- [環境変数の取り扱い](https://github.com/inckayu/I-love-Qiita/issues/24)
+- [ホスティング](https://github.com/inckayu/I-love-Qiita/issues/42)
+- [関数のメモ化](https://github.com/inckayu/I-love-Qiita/issues/21)
+- [OGPの作成](https://github.com/inckayu/I-love-Qiita/issues/47)
+- [READMEの作成](https://github.com/inckayu/I-love-Qiita/issues/63)

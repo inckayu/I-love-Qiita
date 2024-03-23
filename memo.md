@@ -697,3 +697,32 @@ https://qiita.com/kokogento/items/9791cdc3aef309fbbed4
 ## MUIの色のカスタマイズ
 
 https://mui.com/material-ui/customization/palette/#custom-colors
+
+## replace関数
+
+第二引数に関数を取ることができる。
+
+```javascript
+body = body.replace(
+  /<h([1-5])>(.+?)<\/h\1>/g,
+  (match, p1, p2) => `<h${Number(p1) + 1}>${p2}</h${Number(p1) + 1}>`
+)
+```
+
+## sanitize-htmlで除外するタグの設定
+
+- [ドキュメント](https://github.com/apostrophecms/sanitize-html)
+
+```javascript
+const clean = sanitizeHtml(dirty, {
+  allowedTags: ['b', 'i', 'em', 'strong', 'a'],
+  allowedAttributes: {
+    a: ['href'],
+  },
+  allowedIframeHostnames: ['www.youtube.com'],
+})
+```
+
+## シンタックスハイライト
+
+外部ライブラリの使用は断念。Qiitaのページからディベロッパーツールでコーディングブロックのcssファイル探して引用した(`highlight.css`)。

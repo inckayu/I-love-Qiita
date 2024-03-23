@@ -28,6 +28,14 @@
     margin-bottom: 16px;
   }
 
+  &__iconbutton {
+    color: colors(sumi, 900);
+  }
+
+  &__blink {
+    animation: blink 1s infinite;
+  }
+
   &__options {
     margin-bottom: 16px;
   }
@@ -37,5 +45,18 @@
   }
   &__articles {
     width: 100%;
+  }
+}
+
+@keyframes blink {
+  0% {
+    color: colors(sumi, 420);
+  }
+  50% {
+    color: colors(error);
+  }
+  100% {
+    color: colors(sumi, 420);
+
   }
 }

@@ -1,14 +1,17 @@
-// import "@/styles/globals.css";
+import { ThemeProvider } from '@mui/material'
 import { RecoilRoot } from 'recoil'
 
-import type { AppProps } from 'next/app'
+import { theme } from '@/constants/mui'
 
+import type { AppProps } from 'next/app'
 import '@/styles/globals.scss'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </RecoilRoot>
   )
 }

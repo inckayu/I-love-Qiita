@@ -1,4 +1,3 @@
-import ForumIcon from '@mui/icons-material/Forum'
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
@@ -68,16 +67,23 @@ export default function Home() {
         <div className={styles.home__form}>
           <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>
-              <MainTextBox />
+              <MainTextBox
+                placeholder={
+                  !isValidApiKeyToken || !qiitaApiToken.length
+                    ? 'Input your Qiita API token first from the blinking key icon below.'
+                    : 'Type some words related to titles of articles you are interested in'
+                }
+                disabled={!isValidApiKeyToken || !qiitaApiToken.length}
+              />
             </div>
             <div className={styles.home__options}>
-              <IconButton>
-                <ForumIcon />
-              </IconButton>
-              <IconButton onClick={handleDetailedSearchButton}>
+              <IconButton onClick={handleDetailedSearchButton} className={styles.home__iconbutton}>
                 <TuneIcon />
               </IconButton>
-              <IconButton onClick={handleApiKeyButton}>
+              <IconButton
+                onClick={handleApiKeyButton}
+                className={`${styles.home__iconbutton} ${isValidApiKeyToken && qiitaApiToken.length ? null : `${styles.home__blink}`}`}
+              >
                 <KeyIcon />
               </IconButton>
             </div>

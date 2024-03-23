@@ -79,6 +79,12 @@
     }
 
     div {
+      div {
+        @include fonts(400, source);
+        code {
+          @include fonts(400, source);
+        }
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
-import React from 'react'
-import { getButtonVariant } from '@/functions/getButtonVariant'
 import { CircularProgress } from '@mui/material'
+import React from 'react'
+
+import { getButtonVariant } from '@/functions/getButtonVariant'
 
 import styles from '../styles/modules/button.module.scss'
 

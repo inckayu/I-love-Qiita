@@ -1,13 +1,15 @@
+import { useRecoilValue } from 'recoil'
+
 import useApiKeyForm from '@/hooks/useApiKeyForm'
+
 import { errorTextState } from '@/state/errorTextState'
 import { isErrorState } from '@/state/isErrorState'
 import { isVerifingState } from '@/state/isVerifingState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { useRecoilValue } from 'recoil'
 
-import styles from '../styles/modules/apikeyform.module.scss'
 import { Button } from './Button'
 import TextBox from './TextBox'
+import styles from '../styles/modules/apikeyform.module.scss'
 
 const ApiKeyForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)

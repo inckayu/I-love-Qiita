@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+
 import { fetchTag } from '@/functions/fetchTag'
 
 import styles from '../styles/modules/tag.module.scss'

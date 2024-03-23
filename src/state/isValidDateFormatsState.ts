@@ -1,5 +1,6 @@
-import { PublicationTimeline } from '@/types/PublicationTimeline'
 import { atom } from 'recoil'
+
+import { PublicationTimeline } from '@/types/PublicationTimeline'
 
 // 日付の初期値は空文字列なのでtrueにしておく
 export const isValidDateFormatsState = atom<PublicationTimeline>({

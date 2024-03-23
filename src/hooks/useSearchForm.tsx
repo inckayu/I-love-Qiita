@@ -1,7 +1,12 @@
 import React from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+
 import { fetchArticles } from '@/functions/fetchArticles'
 import { generateSummary } from '@/functions/generateSummary'
 import { slashConverter } from '@/functions/slashConverter'
+
+import { Article } from '@/types/Article'
+
 import {
   articleAuthorState,
   articleBodyState,
@@ -19,8 +24,6 @@ import { isPagingDisabledState } from '@/state/isPagingDisabled'
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-import { Article } from '@/types/Article'
-import { useRecoilState, useRecoilValue } from 'recoil'
 
 const useSearchForm = () => {
   const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)

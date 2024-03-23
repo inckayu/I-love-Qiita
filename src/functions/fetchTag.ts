@@ -1,5 +1,6 @@
-import { Tag } from '@/types/Tag'
 import axios from 'axios'
+
+import { Tag } from '@/types/Tag'
 
 export const fetchTag = async (id: string): Promise<Tag> => {
   const config = {

@@ -1,5 +1,6 @@
-import { ArticleRange } from '@/types/ArticleRange'
 import { atom } from 'recoil'
+
+import { ArticleRange } from '@/types/ArticleRange'
 
 export const articlePublicationState = atom<ArticleRange>({
   key: 'articlePublicationState',

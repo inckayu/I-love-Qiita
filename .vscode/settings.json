@@ -1,0 +1,13 @@
+{
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "[scss]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true
+    }
+  },
+  "stylelint.configFile": ".stylelintrc.json",
+  "stylelint.validate": ["css", "scss"]
+}

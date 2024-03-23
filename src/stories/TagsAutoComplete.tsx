@@ -3,16 +3,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
 import { styled } from '@mui/material/styles';
-import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import Image from "next/image"
 
 import { tags } from "@/constants/tags"
 
 import { Tag } from '@/types/Tag';
-
-
-import { articleExcludedTagsState } from '@/state/articleQuery/articleExcludedTagsState';
-import { articleTagsState } from '@/state/articleQuery/articleTagsState';
 
 
 const Root = styled('div')(
@@ -163,19 +158,6 @@ interface TagsAutoCompleteProps {
 }
 
 export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
-  const [articleTags, setArticleTags] = useRecoilState<Tag[]>(articleTagsState)
-  const [articleExcludedTags, setArticleExcludedTags] = useRecoilState<Tag[]>(articleExcludedTagsState)
-  const currentLabel = (label: string) => {
-    switch (label) {
-      case 'Tags':
-        return articleTags
-      case 'Tags to Exclude':
-        return articleExcludedTags
-      default:
-        return
-    
-    }
-  }
   const {
     getRootProps,
     getInputLabelProps,
@@ -189,45 +171,38 @@ export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
     setAnchorEl,
   } = useAutocomplete({
     id: 'customized-hook-demo',
-    defaultValue: currentLabel(label),
     multiple: true,
     options: tags,
     getOptionLabel: (option) => option.id,
   })
-
-  useEffect(() => {
-    switch (label) {
-      case 'Tags':
-        setArticleTags(value)
-        break
-      case 'Tags to Exclude':
-        setArticleExcludedTags(value)
-        break
-      default:
-        break
-    }
-  }, [value])
-
 
   return (
     <Root>
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}>{label}</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          {value.map((option: Tag, index: number) => (
-            <StyledTag key={option.id} label={option.id} {...getTagProps({ index })} />
-          ))}
+          {value.map((option: Tag, index: number) => {
+            const tagImage = tags[index].icon_url
+            return (
+            <div key={option.id}>
+            {tagImage ? (<div style={{position: "absolute",  marginTop: "6px" , marginLeft: "14px"}}><Image src={tagImage} width={16} height={16} alt={option.id} /></div>) : null}
+              <StyledTag sx={tagImage ? {paddingLeft: "34px"} : {}} key={option.id} label={option.id} {...getTagProps({ index })} />
+            </div>
+          )})}
           <input {...getInputProps()} />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
-          {(groupedOptions as typeof tags).map((option, index) => (
+          {(groupedOptions as typeof tags).map((option, index) => {
+            const tagImage = tags[index].icon_url
+            return (
             <li key={option.id} {...getOptionProps({ option, index })}>
-              <span>{option.id}</span>
+              {tagImage ? (<div style={{position: "absolute",  marginTop: "2px"}}><Image src={tagImage} width={16} height={16} alt={option.id} /></div>) : null}
+              <span style={tagImage ? {marginLeft: "24px"} : {}}>{option.id}</span>
               <CheckIcon fontSize="small" />
             </li>
-          ))}
+          )})}
         </Listbox>
       ) : null}
     </Root>

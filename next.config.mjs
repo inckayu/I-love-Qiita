@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -103,6 +104,18 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'lh6.googleusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'avatars3.githubusercontent.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gravatar.com',
         port: '',
         pathname: '/**',
       },

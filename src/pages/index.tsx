@@ -1,24 +1,6 @@
-import ForumIcon from '@mui/icons-material/Forum'
-import KeyIcon from '@mui/icons-material/Key'
-import TuneIcon from '@mui/icons-material/Tune'
-import { IconButton } from '@mui/material'
 import Head from 'next/head'
-import { useRecoilValue } from 'recoil'
-
 import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
-
-import ApiKeyForm from '@/stories/ApiKeyForm'
-import ArticleCard from '@/stories/ArticleCard'
-import { Button } from '@/stories/Button'
-import CommonModal from '@/stories/CommonModal'
-import DetailedSearchForm from '@/stories/DetailedSearchForm'
-import MainTextBox from '@/stories/MainTextBox'
-import Paging from '@/stories/Paging'
-
-import { Article } from '@/types/Article'
-import { PublicationTimeline } from '@/types/PublicationTimeline'
-
 import { articleTitleState } from '@/state/articleQuery/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
@@ -29,6 +11,21 @@ import { isSkeletonState } from '@/state/isSkeletonState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import ApiKeyForm from '@/stories/ApiKeyForm'
+import ArticleCard from '@/stories/ArticleCard'
+import { Button } from '@/stories/Button'
+import CommonModal from '@/stories/CommonModal'
+import DetailedSearchForm from '@/stories/DetailedSearchForm'
+import MainTextBox from '@/stories/MainTextBox'
+import Paging from '@/stories/Paging'
+import { Article } from '@/types/Article'
+import { PublicationTimeline } from '@/types/PublicationTimeline'
+import ForumIcon from '@mui/icons-material/Forum'
+import KeyIcon from '@mui/icons-material/Key'
+import TuneIcon from '@mui/icons-material/Tune'
+import { IconButton } from '@mui/material'
+import { useRecoilValue } from 'recoil'
+
 import styles from '@/styles/modules/home.module.scss'
 
 export default function Home() {
@@ -62,6 +59,9 @@ export default function Home() {
       </Head>
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
+        <div className={styles.home__subtext}>
+          I love Qiita, where seekers of knowledge meet up.
+        </div>
         <div className={styles.home__form}>
           <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>

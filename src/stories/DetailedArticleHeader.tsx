@@ -7,7 +7,7 @@ import { getUserName } from '@/functions/getUserName'
 
 import { Article } from '@/types/Article'
 
-import { Button } from './Button'
+import { Button } from './Button/Button'
 import Tag from './Tag'
 import UserInfo from './UserInfo'
 import styles from '../styles/modules/detailedarticle.module.scss'

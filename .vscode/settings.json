@@ -9,5 +9,6 @@
     }
   },
   "stylelint.configFile": ".stylelintrc.json",
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": ["css", "scss"],
+  "liveServer.settings.AdvanceCustomBrowserCmdLine": ""
 }

@@ -7,6 +7,6 @@ $fonts: (
 );
 
 @mixin fonts($weight: 400, $font: noto) {
-  font-family: map-get($fonts, $font);
   font-weight: $weight;
+  font-family: map-get($fonts, $font);
 }

@@ -7,12 +7,12 @@
 .textbox__body {
   width: 240px;
   height: 40px;
+  margin-top: 4px;
   padding: 0 16px;
-  font-size: rem(18);
-  color: colors(sumi, 600);
   border: solid 1.5px colors(sumi, 600);
   border-radius: 20px;
-  margin-top: 4px;
+  color: colors(sumi, 600);
+  font-size: rem(18);
   @include fonts(400);
 }
 
@@ -21,24 +21,24 @@
 }
 
 .textbox__body:focus {
-  outline: none;
   border: solid 1.5px colors(purple, secondary);
+  outline: none;
 }
 
 .textbox__label {
-  font-size: rem(12);
   color: colors(sumi, 600);
+  font-size: rem(12);
 }
 
 .textbox__required {
-  font-size: rem(12);
   color: colors(error);
+  font-size: rem(12);
 }
 
 .textbox__error {
 }
 
 .textbox__errortext {
-  font-size: rem(12);
   color: colors(error);
+  font-size: rem(12);
 }

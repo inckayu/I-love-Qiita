@@ -8,16 +8,16 @@
 
 .home__title {
   padding-top: 64px;
+  color: colors(sumi);
   font-size: rem(64);
   text-align: center;
-  color: colors(sumi);
 }
 
 .home__subtext {
+  width: fit-content;
+  margin: 16px auto 0 auto;
   color: colors(sumi, 420);
   font-size: rem(24);
-  margin: 16px auto 0 auto;
-  width: fit-content;
 }
 
 .home__form {

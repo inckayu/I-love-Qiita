@@ -2,10 +2,10 @@
 
 
 @mixin loading {
-  background-color: colors(sumi, 100);
   background-image: linear-gradient(90deg, colors(sumi, 100) 0%, colors(sumi, 100) 5%, colors(white) 50%, colors(sumi, 100) 5%, colors(sumi, 100) 100%);
-  background-repeat: no-repeat;
   background-size: 150% 100%;
+  background-repeat: no-repeat;
+  background-color: colors(sumi, 100);
   animation: loading 1.5s infinite;
 }
 

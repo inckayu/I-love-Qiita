@@ -4,9 +4,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
   width: fit-content;
   padding: 48px;
-  background-color: colors(white);
   border-radius: 40px;
-  transform: translate(-50%, -50%);
+  background-color: colors(white);
 }

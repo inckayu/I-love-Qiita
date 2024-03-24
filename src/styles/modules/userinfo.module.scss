@@ -17,8 +17,8 @@
 }
 
 .userinfo__organization {
-  font-size: rem(18);
   color: colors(sumi);
+  font-size: rem(18);
 }
 
 .userinfo__name {
@@ -37,9 +37,9 @@
 }
 
 .skeleton__icon {
-  border-radius: 50%;
   width: 48px;
   height: 48px;
+  border-radius: 50%;
   @include loading;
 }
 

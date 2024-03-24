@@ -1,9 +1,9 @@
 @use '../common' as *;
 
 .detailedarticle {
+  min-height: 100vh;
   padding: 1px 0;
   background-color: colors(purple, bg);
-  min-height: 100vh;
 }
 
 .detailedarticle__circle {
@@ -20,10 +20,10 @@
 
 .detailedarticle__wrapper {
   width: calc(90% - 128px);
-  padding: 64px;
   margin: 0 auto;
-  background-color: colors(white);
+  padding: 64px;
   border-radius: 40px;
+  background-color: colors(white);
 }
 
 .detailedarticle__top {
@@ -34,9 +34,9 @@
 
 .detailedarticle__title {
   width: 80%;
-  font-size: rem(36);
-  font-weight: bold;
   color: colors(sumi);
+  font-weight: bold;
+  font-size: rem(36);
 }
 
 .detailedarticle__tags {
@@ -55,8 +55,8 @@
 
 .detailedarticle__times {
   margin-right: 32px;
-  font-size: rem(15);
   color: colors(sumi);
+  font-size: rem(15);
 }
 
 .detailedarticle__icons {
@@ -67,8 +67,8 @@
 .detailedarticle__icon {
   display: flex;
   margin-right: 16px;
-  font-size: rem(15);
   color: colors(sumi, 600);
+  font-size: rem(15);
 }
 
 .detailedarticle__divider {
@@ -77,8 +77,8 @@
 }
 
 .detailedarticle__body {
-  font-size: rem(18);
   color: colors(sumi);
+  font-size: rem(18);
 }
 
 .detailedarticle__body img {

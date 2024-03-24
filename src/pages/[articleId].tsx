@@ -9,6 +9,7 @@ import { sanitizeHtml as sanitizeHtmlOptions } from '@/constants/sanitize'
 import { decorateLink } from '@/functions/decorateLink'
 import { downgradeHeadings } from '@/functions/downgradeHeadings'
 import { fetchArticle } from '@/functions/fetchArticle'
+import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
@@ -31,13 +32,6 @@ const DetailedArticle = () => {
       fetchArticle(articleId, qiitaApiToken)
         .then((article) => {
           setArticle(article)
-          console.log(article?.rendered_body)
-          console.log(
-            sanitizeHtml(
-              downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
-              sanitizeHtmlOptions
-            )
-          )
         })
         .catch((e) => {
           console.error(e)
@@ -71,9 +65,11 @@ const DetailedArticle = () => {
                 className={styles.detailedarticle__body}
                 dangerouslySetInnerHTML={{
                   __html: decorateLink(
-                    sanitizeHtml(
-                      downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
-                      sanitizeHtmlOptions
+                    getDataframeInIframe(
+                      sanitizeHtml(
+                        downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
+                        sanitizeHtmlOptions
+                      )
                     )
                   ),
                 }}

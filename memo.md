@@ -761,3 +761,42 @@ rendered_body
 ![0324_iframe_rendered_body](public/memo/0324_iframe_rendered_body.png)
 
 せっかくなのでdata-contentのURLからmeta情報を取得してカードの形式で表示させたいが時間的に断念。
+
+## ターミナルのショートカットキー
+
+https://qiita.com/akito/items/d09a2d5b36d4cf7bac6d
+
+## ターミナルのエイリアス
+
+今まで設定していなかったのでこれを気に作成
+
+```.zshrc
+alias soz='source ~/.zshrc'
+
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+alias ga='git add'
+alias gaa='git add .'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master 2> /dev/null || git checkout main'
+alias gcod='git checkout dev 2> /dev/null || git checkout develop'
+alias gd='git diff'
+alias gl='git log'
+alias gps='git push'
+alias gpso='git push origin'
+alias gpl='git pull'
+alias gplo='git pull origin'
+alias gst='git status'
+alias gsw='git switch'
+alias gswm='git switch main'
+alias gswd='git switch dev 2> /dev/null || git switch develop'
+alias gswc='git switch -c'
+```

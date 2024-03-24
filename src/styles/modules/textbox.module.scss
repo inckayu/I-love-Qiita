@@ -16,6 +16,10 @@
   @include fonts(400);
 }
 
+.textbox__error {
+  border: solid 1.5px colors(error);
+}
+
 .textbox__body::placeholder {
   color: colors(sumi, 420);
 }

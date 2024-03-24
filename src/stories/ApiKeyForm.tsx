@@ -8,7 +8,7 @@ import { isVerifingState } from '@/state/isVerifingState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 import { Button } from './Button/Button'
-import TextBox from './TextBox'
+import TextBox from './TextBox/TextBox'
 import styles from '../styles/modules/apikeyform.module.scss'
 
 const ApiKeyForm = () => {

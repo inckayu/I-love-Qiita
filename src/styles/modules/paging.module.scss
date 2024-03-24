@@ -9,9 +9,9 @@
   line-height: 64px;
   background-color: colors(white);
   border-radius: 32px;
+}
 
-  &__page {
-    font-size: rem(18);
-    color: colors(purple);
-  }
+.paging__page {
+  font-size: rem(18);
+  color: colors(purple);
 }

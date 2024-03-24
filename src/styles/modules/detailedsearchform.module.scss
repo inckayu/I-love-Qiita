@@ -1,50 +1,46 @@
 @use "../common" as *;
 
-.detailedsearchform {
+.detailedsearchform__title {
+  color: colors(sumi);
+  width: fit-content;
+  margin: 0 auto;
+}
 
-  &__title {
-    color: colors(sumi);
-    width: fit-content;
-    margin: 0 auto;
-  }
+.detailedsearchform__textboxes {
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  margin: 48px auto 0 auto;
+}
 
-  &__textboxes {
-    display: flex;
-    justify-content: space-between;
-    width: 900px;
-    margin: 48px auto 0 auto;
-  }
+.detailedsearchform__ranges {
+  display: flex;
+  justify-content: space-between;
+  width: 720px;
+  margin: 32px auto 0 auto;
+}
 
-  &__ranges {
-    display: flex;
-    justify-content: space-between;
-    width: 720px;
-    margin: 32px auto 0 auto;
-  }
+.detailedsearchform__range {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+}
 
+.detailedsearchform__rangename {
+  color: colors(sumi, 600);
+  font-size: rem(15);
+}
 
-  &__range {
-    display: flex;
-    justify-content: space-between;
-    width: 320px;
-  }
+.detailedsearchform__tag {
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  margin: 32px auto 0 auto;
+}
 
-  &__rangename {
-    color: colors(sumi, 600);
-    font-size: rem(15);
-  }
-
-  &__tag {
-    display: flex;
-    width: 800px;
-    justify-content: space-between;
-    margin: 32px auto 0 auto;
-  }
-
-  &__buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 280px;
-    margin: 128px auto 0 auto;
-  }
+.detailedsearchform__buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 280px;
+  margin: 128px auto 0 auto;
 }

@@ -1,14 +1,14 @@
 @use '../common' as *;
 
 .linktext {
-  font-size: rem(18);
   color: colors(purple);
+  font-size: rem(18);
   text-decoration: underline;
+}
 
-  &__disabled {
-    font-size: rem(18);
-    color: colors(sumi, 600);
-    cursor: not-allowed;
-    text-decoration: underline;
-  }
+.linktext__disabled {
+  color: colors(sumi, 600);
+  font-size: rem(18);
+  cursor: not-allowed;
+  text-decoration: underline;
 }

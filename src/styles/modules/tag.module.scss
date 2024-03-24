@@ -8,10 +8,10 @@
   color: colors(purple);
   background-color: colors(purple, bg);
   border-radius: 19px; // 30px/2 + 4px
+}
 
-  &__image {
-    margin-top: 5px;
-    margin-right: 8px;
-    width: fit-content;
-  }
+.tag__image {
+  margin-top: 5px;
+  margin-right: 8px;
+  width: fit-content;
 }

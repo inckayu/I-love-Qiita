@@ -12,9 +12,9 @@ import { fetchArticle } from '@/functions/fetchArticle'
 import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
-import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
-import Divider from '@/stories/Divider'
-import LinkText from '@/stories/LinkText'
+import DetailedArticleHeader from '@/stories/DetailedArticleHeader/DetailedArticleHeader'
+import Divider from '@/stories/Divider/Divider'
+import LinkText from '@/stories/LinkText/LinkText'
 
 import { Article } from '@/types/Article'
 
@@ -59,7 +59,7 @@ const DetailedArticle = () => {
             <div>
               <DetailedArticleHeader article={article} />
               <div className={styles.detailedarticle__divider}>
-                <Divider />
+                <Divider widthUnit="%" width={90} thick={1} color="#B3B3B3" />
               </div>
               <div
                 className={styles.detailedarticle__body}

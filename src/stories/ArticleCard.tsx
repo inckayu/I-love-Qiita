@@ -3,19 +3,14 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 import sanitizeHtml from 'sanitize-html'
 
-import formatDate from '@/functions/formatDate'
-import { getUserName } from '@/functions/getUserName'
-import { titleHighlighter } from '@/functions/titleHighlighter'
-
-import { Article } from '@/types/Article'
-
-import { articleTitleState } from '@/state/articleQuery'
-
 import SkeletonArticleCard from './SkeletonArticleCard'
 import UserInfo from './UserInfo'
+import formatDate from '../functions/formatDate'
+import { getUserName } from '../functions/getUserName'
+import { titleHighlighter } from '../functions/titleHighlighter'
+import { articleTitleState } from '../state/articleQuery/articleTitleState'
 import styles from '../styles/modules/articlecard.module.scss'
-
-
+import { Article } from '../types/Article'
 
 interface ArticleCardProps {
   article: Article

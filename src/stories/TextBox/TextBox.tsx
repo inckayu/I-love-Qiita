@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from '../styles/modules/textbox.module.scss'
+import styles from '../../styles/modules/textbox.module.scss'
 
 interface TextBoxProps {
   value: string
@@ -37,7 +37,7 @@ const TextBox = ({
         value={value}
         placeholder={placeholder}
         onChange={onChange}
-        className={styles.textbox__body}
+        className={`${styles.textbox__body} ${isError ? styles.textbox__error : ''}`}
         style={{ width }}
       />
       {isError ? <div className={styles.textbox__errortext}>{errorText}</div> : null}

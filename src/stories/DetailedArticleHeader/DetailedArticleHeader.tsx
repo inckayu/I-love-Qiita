@@ -2,15 +2,13 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import Link from 'next/link'
 
-import formatDate from '@/functions/formatDate'
-import { getUserName } from '@/functions/getUserName'
-
-import { Article } from '@/types/Article'
-
-import { Button } from './Button'
-import Tag from './Tag'
-import UserInfo from './UserInfo'
-import styles from '../styles/modules/detailedarticle.module.scss'
+import formatDate from '../../functions/formatDate'
+import { getUserName } from '../../functions/getUserName'
+import styles from '../../styles/modules/detailedarticle.module.scss'
+import { Article } from '../../types/Article'
+import { Button } from '../Button/Button'
+import Tag from '../Tag'
+import UserInfo from '../UserInfo'
 
 interface DetailedArticleHeaderProps {
   article: Article
@@ -20,9 +18,11 @@ const DetailedArticleHeader = ({ article }: DetailedArticleHeaderProps) => {
     <div>
       <div className={styles.detailedarticle__top}>
         <h1 className={styles.detailedarticle__title}>{article.title}</h1>
-        <Link href={article.url} rel="noopener noreferrer" target="_blank">
-          <Button variant="primary" size="large" label="Read in Qiita" />
-        </Link>
+        <div className={styles.detailedarticle__button}>
+          <Link href={article.url} rel="noopener noreferrer" target="_blank">
+            <Button variant="primary" size="large" label="Read in Qiita" />
+          </Link>
+        </div>
       </div>
 
       <div className={styles.detailedarticle__tags}>

@@ -2,10 +2,8 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { fetchTag } from '@/functions/fetchTag'
-
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
-
+import { fetchTag } from '../functions/fetchTag'
+import { qiitaApiTokenState } from '../state/qiitaApiTokenState'
 import styles from '../styles/modules/tag.module.scss'
 
 interface TagProps {

@@ -9,7 +9,7 @@ import useSearchForm from '@/hooks/useSearchForm'
 
 import ApiKeyForm from '@/stories/ApiKeyForm'
 import ArticleCard from '@/stories/ArticleCard'
-import { Button } from '@/stories/Button'
+import { Button } from '@/stories/Button/Button'
 import CommonModal from '@/stories/CommonModal'
 import DetailedSearchForm from '@/stories/DetailedSearchForm'
 import MainTextBox from '@/stories/MainTextBox'

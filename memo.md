@@ -731,8 +731,6 @@ const clean = sanitizeHtml(dirty, {
 
 時間がなくなってきたので、以下の順に対応する。
 
-- [過去の検索条件の保存](https://github.com/inckayu/I-love-Qiita/issues/41)
-- [過去に閲覧した記事へのタグ付け](https://github.com/inckayu/I-love-Qiita/issues/64)
 - [一部の画像が表示されない](https://github.com/inckayu/I-love-Qiita/issues/61)
 - [デザインシステムと現状の実装の確認](https://github.com/inckayu/I-love-Qiita/issues/55)
 - [CSSクラス名をBEM準拠にしてネストをなくす](https://github.com/inckayu/I-love-Qiita/issues/35)
@@ -743,3 +741,23 @@ const clean = sanitizeHtml(dirty, {
 - [関数のメモ化](https://github.com/inckayu/I-love-Qiita/issues/21)
 - [OGPの作成](https://github.com/inckayu/I-love-Qiita/issues/47)
 - [READMEの作成](https://github.com/inckayu/I-love-Qiita/issues/63)
+
+# 3/24
+
+## UI生成ツール
+
+vervelの提供する[V0](https://v0.dev/)というサービス。最初に知っておきたかった...
+
+## sanitizeHtmlのiframeが表示されない
+
+どうやら元々`rendered_body`にaタグが含まれていない。
+
+qiita
+
+![0324_iframe_qiita](public/memo/0324_iframe_qiita.png)
+
+rendered_body
+
+![0324_iframe_rendered_body](public/memo/0324_iframe_rendered_body.png)
+
+せっかくなのでdata-contentのURLからmeta情報を取得してカードの形式で表示させたいが時間的に断念。

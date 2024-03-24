@@ -1,9 +1,23 @@
 import React from 'react'
 
-import styles from '../styles/modules/divider.module.scss'
+interface DividerProps {
+  widthUnit: '%' | 'px'
+  width: number
+  thick: number
+  color: string
+}
 
-const Divider = () => {
-  return <div className={styles.divider} />
+const Divider = ({ widthUnit, width, thick, color }: DividerProps) => {
+  return (
+    <div
+      style={{
+        width: `${width}${widthUnit}`,
+        height: `${thick}px`,
+        backgroundColor: color,
+        margin: '0 auto',
+      }}
+    />
+  )
 }
 
 export default Divider

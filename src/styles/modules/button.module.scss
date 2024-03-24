@@ -8,7 +8,7 @@
   cursor: pointer;
   border: 0;
   border-radius: 17%/50%;
-  @include fonts();
+  @include fonts(400);
   &:focus {
     outline: none;
     border: solid 2px colors(warning);

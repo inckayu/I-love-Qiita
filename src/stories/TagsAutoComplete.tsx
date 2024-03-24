@@ -1,37 +1,37 @@
-import { useAutocomplete, AutocompleteGetTagProps } from '@mui/base/useAutocomplete';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import { autocompleteClasses } from '@mui/material/Autocomplete';
-import { styled } from '@mui/material/styles';
-import Image from "next/image"
+import { useAutocomplete, AutocompleteGetTagProps } from '@mui/base/useAutocomplete'
+import CheckIcon from '@mui/icons-material/Check'
+import CloseIcon from '@mui/icons-material/Close'
+import { autocompleteClasses } from '@mui/material/Autocomplete'
+import { styled } from '@mui/material/styles'
+import Image from 'next/image'
 
-import { tags } from "@/constants/tags"
+import { tags } from '@/constants/tags'
 
-import { Tag } from '@/types/Tag';
-
+import { Tag } from '@/types/Tag'
 
 const Root = styled('div')(
   () => `
-  color: #949494;
+  color: #666666;
   font-size: 14px;
-`,
-);
+`
+)
 
 const Label = styled('label')`
   line-height: 1.5;
   color: #666666;
   font-size: 12px;
-`;
+`
 
 const InputWrapper = styled('div')(
   () => `
   width: 360px;
   min-height: 20px;
-  border: 1.5px solid #949494;
+  border: 1.5px solid #666666;
   border-radius: 28px;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 4px;
 
   &:hover {
     border-color: #8843e1;
@@ -53,15 +53,15 @@ const InputWrapper = styled('div')(
     margin: 0;
     outline: 0;
   }
-`,
-);
+`
+)
 
 interface TagProps extends ReturnType<AutocompleteGetTagProps> {
-  label: string;
+  label: string
 }
 
 function Tag(props: TagProps) {
-  const { label, onDelete, ...other } = props;
+  const { label, onDelete, ...other } = props
   return (
     <div {...other}>
       <span>{label}</span>
@@ -101,12 +101,12 @@ const StyledTag = styled(Tag)<TagProps>(
     cursor: pointer;
     padding: 4px;
   }
-`,
-);
+`
+)
 
 const Listbox = styled('ul')(
   () => `
-  width: 300px;
+  width: 380px;
   max-height: 200px;
   margin: 2px 0 0;
   padding: 0;
@@ -125,7 +125,7 @@ const Listbox = styled('ul')(
 
     & span {
       flex-grow: 1;
-      color: #1a1a1a;
+      color: #666666;
     }
 
     & svg {
@@ -150,14 +150,14 @@ const Listbox = styled('ul')(
       color: #6F23D0;
     }
   }
-`,
-);
+`
+)
 
 interface TagsAutoCompleteProps {
-  label: string;
+  label: string
 }
 
-export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
+export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
   const {
     getRootProps,
     getInputLabelProps,
@@ -184,11 +184,21 @@ export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
           {value.map((option: Tag, index: number) => {
             const tagImage = tags[index].icon_url
             return (
-            <div key={option.id}>
-            {tagImage ? (<div style={{position: "absolute",  marginTop: "6px" , marginLeft: "14px"}}><Image src={tagImage} width={16} height={16} alt={option.id} /></div>) : null}
-              <StyledTag sx={tagImage ? {paddingLeft: "34px"} : {}} key={option.id} label={option.id} {...getTagProps({ index })} />
-            </div>
-          )})}
+              <div key={option.id}>
+                {tagImage ? (
+                  <div style={{ position: 'absolute', marginTop: '6px', marginLeft: '14px' }}>
+                    <Image src={tagImage} width={16} height={16} alt={option.id} />
+                  </div>
+                ) : null}
+                <StyledTag
+                  sx={tagImage ? { paddingLeft: '34px' } : {}}
+                  key={option.id}
+                  label={option.id}
+                  {...getTagProps({ index })}
+                />
+              </div>
+            )
+          })}
           <input {...getInputProps()} />
         </InputWrapper>
       </div>
@@ -197,14 +207,19 @@ export default function TagsAutoComplete({label}: TagsAutoCompleteProps) {
           {(groupedOptions as typeof tags).map((option, index) => {
             const tagImage = tags[index].icon_url
             return (
-            <li key={option.id} {...getOptionProps({ option, index })}>
-              {tagImage ? (<div style={{position: "absolute",  marginTop: "2px"}}><Image src={tagImage} width={16} height={16} alt={option.id} /></div>) : null}
-              <span style={tagImage ? {marginLeft: "24px"} : {}}>{option.id}</span>
-              <CheckIcon fontSize="small" />
-            </li>
-          )})}
+              <li key={option.id} {...getOptionProps({ option, index })}>
+                {tagImage ? (
+                  <div style={{ position: 'absolute', marginTop: '2px' }}>
+                    <Image src={tagImage} width={16} height={16} alt={option.id} />
+                  </div>
+                ) : null}
+                <span style={tagImage ? { marginLeft: '24px' } : {}}>{option.id}</span>
+                <CheckIcon fontSize="small" />
+              </li>
+            )
+          })}
         </Listbox>
       ) : null}
     </Root>
-  );
+  )
 }

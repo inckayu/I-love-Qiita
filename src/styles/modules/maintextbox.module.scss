@@ -10,7 +10,7 @@
   background-color: colors(white);
   border: none;
   border-radius: 5.5%/50%;
-  @include fonts();
+  @include fonts(400);
   &::placeholder {
     color: colors(sumi, 420);
   }

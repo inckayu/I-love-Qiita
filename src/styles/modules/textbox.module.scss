@@ -11,7 +11,8 @@
     color: colors(sumi, 600);
     border: solid 1.5px colors(sumi, 600);
     border-radius: 20px;
-    @include fonts();
+    margin-top: 4px;
+    @include fonts(400);
     &::placeholder {
       color: colors(sumi, 420);
     }

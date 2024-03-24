@@ -1,4 +1,4 @@
-export const allowedTags = [
+const allowedTags: string[] = [
   'address',
   'article',
   'aside',
@@ -69,4 +69,23 @@ export const allowedTags = [
   'th',
   'thead',
   'tr',
+  'iframe',
+  'a',
+  'img',
 ]
+
+const allowedAttributes = {
+  iframe: ['src', 'data-content', 'frameborder', 'scrolling', 'loading', 'style', 'height'],
+  div: ['class', 'style'],
+  span: ['class'],
+  a: ['href', 'rel', 'target'],
+  img: ['src', 'alt', 'title'],
+}
+
+const allowedIframeDomains: string[] = ['qiita.com']
+
+export const sanitizeHtml = {
+  allowedTags,
+  allowedAttributes,
+  allowedIframeDomains,
+}

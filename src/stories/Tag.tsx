@@ -1,7 +1,10 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { fetchTag } from '@/functions/fetchTag'
+
+import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 import styles from '../styles/modules/tag.module.scss'
 
@@ -11,9 +14,10 @@ interface TagProps {
 
 const Tag = ({ tag }: TagProps) => {
   const [tagImage, setTagImage] = useState<string | null>(null)
+  const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
 
   useEffect(() => {
-    fetchTag(tag)
+    fetchTag(tag, qiitaApiToken)
       .then((result) => {
         setTagImage(result.icon_url)
       })

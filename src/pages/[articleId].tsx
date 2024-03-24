@@ -4,11 +4,12 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import sanitizeHtml from 'sanitize-html'
 
-import { allowedTags } from '@/constants/allowedTags'
+import { sanitizeHtml as sanitizeHtmlOptions } from '@/constants/sanitize'
 
 import { decorateLink } from '@/functions/decorateLink'
 import { downgradeHeadings } from '@/functions/downgradeHeadings'
 import { fetchArticle } from '@/functions/fetchArticle'
+import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
@@ -64,22 +65,12 @@ const DetailedArticle = () => {
                 className={styles.detailedarticle__body}
                 dangerouslySetInnerHTML={{
                   __html: decorateLink(
-                    sanitizeHtml(downgradeHeadings(pseudoCodingBlock(article?.rendered_body)), {
-                      allowedTags: [...allowedTags, 'iframe'],
-                      allowedAttributes: {
-                        iframe: [
-                          'src',
-                          'data-content',
-                          'frameborder',
-                          'scrolling',
-                          'loading',
-                          'style',
-                        ],
-                        div: ['class', 'style'],
-                        span: ['class'],
-                      },
-                      allowedIframeDomains: ['qiita.com'],
-                    })
+                    getDataframeInIframe(
+                      sanitizeHtml(
+                        downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
+                        sanitizeHtmlOptions
+                      )
+                    )
                   ),
                 }}
               />

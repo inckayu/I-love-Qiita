@@ -800,3 +800,7 @@ alias gswm='git switch main'
 alias gswd='git switch dev 2> /dev/null || git switch develop'
 alias gswc='git switch -c'
 ```
+
+## storybookのビルド時のエラー
+
+storybookが`@`インポート(eg: `'@/functions/getButtonVariant'`)に対応していないのでstorybookで管理するコンポーネント内のインポートは相対パスにする。もしかしたら@に対応させる設定があるかもしれないので要調査。

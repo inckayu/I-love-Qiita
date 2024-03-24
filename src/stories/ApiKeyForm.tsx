@@ -7,7 +7,7 @@ import { isErrorState } from '@/state/isErrorState'
 import { isVerifingState } from '@/state/isVerifingState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
-import { Button } from './Button'
+import { Button } from './Button/Button'
 import TextBox from './TextBox'
 import styles from '../styles/modules/apikeyform.module.scss'
 

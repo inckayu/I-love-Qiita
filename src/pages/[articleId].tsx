@@ -59,7 +59,7 @@ const DetailedArticle = () => {
             <div>
               <DetailedArticleHeader article={article} />
               <div className={styles.detailedarticle__divider}>
-                <Divider />
+                <Divider widthUnit="%" width={90} thick={1} color="#B3B3B3" />
               </div>
               <div
                 className={styles.detailedarticle__body}

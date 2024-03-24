@@ -1,4 +1,5 @@
 import { useAutocomplete, AutocompleteGetTagProps } from '@mui/base/useAutocomplete'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
 import { autocompleteClasses } from '@mui/material/Autocomplete'
@@ -200,6 +201,9 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
             )
           })}
           <input {...getInputProps()} />
+          <div style={{ marginTop: '4px', marginRight: '4px' }}>
+            <ArrowDropDownIcon fontSize="medium" />
+          </div>
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (

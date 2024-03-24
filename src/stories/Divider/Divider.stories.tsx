@@ -17,7 +17,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const DetailedArticle: Story = {
+export const Example: Story = {
   args: {
     widthUnit: 'px',
     width: 500,

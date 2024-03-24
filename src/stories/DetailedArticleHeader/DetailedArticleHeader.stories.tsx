@@ -51,7 +51,7 @@ const article: Article = {
   slide: false,
 }
 
-export const DetailedArticle: Story = {
+export const Example: Story = {
   args: {
     article,
   },

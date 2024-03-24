@@ -13,7 +13,7 @@ import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
-import Divider from '@/stories/Divider'
+import Divider from '@/stories/Divider/Divider'
 import LinkText from '@/stories/LinkText'
 
 import { Article } from '@/types/Article'

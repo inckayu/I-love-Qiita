@@ -12,7 +12,7 @@ import { fetchArticle } from '@/functions/fetchArticle'
 import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
-import DetailedArticleHeader from '@/stories/DetailedArticleHeader'
+import DetailedArticleHeader from '@/stories/DetailedArticleHeader/DetailedArticleHeader'
 import Divider from '@/stories/Divider/Divider'
 import LinkText from '@/stories/LinkText'
 

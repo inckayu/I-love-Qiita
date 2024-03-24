@@ -75,7 +75,7 @@ const allowedTags: string[] = [
 ]
 
 const allowedAttributes = {
-  iframe: ['src', 'data-content', 'frameborder', 'scrolling', 'loading', 'style'],
+  iframe: ['src', 'data-content', 'frameborder', 'scrolling', 'loading', 'style', 'height'],
   div: ['class', 'style'],
   span: ['class'],
   a: ['href', 'rel', 'target'],

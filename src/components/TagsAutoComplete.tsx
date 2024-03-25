@@ -193,7 +193,6 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
                 ) : null}
                 <StyledTag
                   sx={tagImage ? { paddingLeft: '34px' } : {}}
-                  key={option.id}
                   label={option.id}
                   {...getTagProps({ index })}
                 />

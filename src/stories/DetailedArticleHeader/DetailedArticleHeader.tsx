@@ -7,8 +7,8 @@ import { getUserName } from '../../functions/getUserName'
 import styles from '../../styles/modules/detailedarticle.module.scss'
 import { Article } from '../../types/Article'
 import { Button } from '../Button/Button'
-import Tag from '../Tag'
-import UserInfo from '../UserInfo'
+import Tag from '../../components/Tag'
+import UserInfo from '../../components/UserInfo'
 
 interface DetailedArticleHeaderProps {
   article: Article

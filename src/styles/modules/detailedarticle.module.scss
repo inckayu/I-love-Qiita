@@ -1,84 +1,99 @@
 @use '../common' as *;
 
 .detailedarticle {
+  min-height: 100vh;
   padding: 1px 0;
   background-color: colors(purple, bg);
-  min-height: 100vh;
+}
 
-  &__circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.detailedarticle__circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  &__back {
-    width: 90%;
-    margin: 32px auto;
-  }
-  &__wrapper {
-    width: calc(90% - 128px);
-    padding: 64px;
-    margin: 0 auto;
-    background-color: colors(white);
-    border-radius: 40px;
-  }
-  &__top {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
+.detailedarticle__back {
+  width: 90%;
+  margin: 32px auto;
+}
 
-  &__title {
-    width: 80%;
-    font-size: rem(36);
-    font-weight: bold;
-    color: colors(sumi);
-  }
+.detailedarticle__wrapper {
+  width: calc(90% - 128px);
+  margin: 0 auto;
+  padding: 64px;
+  border-radius: 40px;
+  background-color: colors(white);
+}
 
-  &__tags {
-    display: flex;
-    margin-bottom: 32px;
-  }
-  &__tagwrapper {
-    padding-right: 8px;
-  }
-  &__info {
-    display: flex;
-    margin-bottom: 16px;
-  }
+.detailedarticle__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
 
-  &__times {
-    margin-right: 32px;
-    font-size: rem(15);
-    color: colors(sumi);
-  }
+.detailedarticle__title {
+  width: 80%;
+  color: colors(sumi);
+  font-weight: bold;
+  font-size: rem(36);
+}
 
-  &__icons {
-    display: flex;
-    margin-bottom: 48px;
-  }
+.detailedarticle__button {
+  margin-top: 32px;
+}
 
-  &__icon {
-    display: flex;
-    margin-right: 16px;
-    font-size: rem(15);
-    color: colors(sumi, 600);
-  }
+.detailedarticle__tags {
+  display: flex;
+  margin-bottom: 32px;
+}
 
-  &__divider {
-    width: 100%;
-    margin-bottom: 48px;
-  }
+.detailedarticle__tagwrapper {
+  padding-right: 8px;
+}
 
-  &__body {
-    font-size: rem(18);
-    color: colors(sumi);
-    img {
-      max-width: 90%;
-    }
+.detailedarticle__info {
+  display: flex;
+  margin-bottom: 16px;
+}
 
-    div {
-    }
-  }
+.detailedarticle__times {
+  margin-right: 32px;
+  color: colors(sumi);
+  font-size: rem(15);
+}
+
+.detailedarticle__icons {
+  display: flex;
+  margin-bottom: 48px;
+}
+
+.detailedarticle__icon {
+  display: flex;
+  margin-right: 16px;
+  color: colors(sumi, 600);
+  font-size: rem(15);
+}
+
+.detailedarticle__divider {
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.detailedarticle__body {
+  color: colors(sumi);
+  font-size: rem(18);
+}
+
+.detailedarticle__body img {
+  max-width: 90%;
+  max-height: 600px
+}
+
+.detailedarticle__body div div {
+  @include fonts(400, source);
+}
+
+.detailedarticle__body div div code {
+  @include fonts(400, source);
 }

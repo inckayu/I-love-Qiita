@@ -1,29 +1,48 @@
 @use "../common" as *;
 
 .textbox {
+  height: 78px;
+}
 
-  &__body {
-    width: 240px;
-    height: 40px;
-    padding: 0 16px;
-    font-size: rem(18);
-    color: colors(sumi, 600);
-    border: solid 1.5px colors(white, 420);
-    border-radius: 20px;
-    @include fonts();
-  }
+.textbox__body {
+  width: 240px;
+  height: 40px;
+  margin-top: 4px;
+  padding: 0 16px;
+  border: solid 1.5px colors(sumi, 600);
+  border-radius: 20px;
+  color: colors(sumi, 600);
+  font-size: rem(18);
+  @include fonts(400);
+}
 
-  &__required {
-    margin-left: 16px;
-    font-size: rem(12);
-    color: colors(error);
-  }
-  &__error {
-  }
+.textbox__error {
+  border: solid 1.5px colors(error);
+}
 
-  &__errortext {
-    margin-left: 16px;
-    font-size: rem(12);
-    color: colors(error);
-  }
+.textbox__body::placeholder {
+  color: colors(sumi, 420);
+}
+
+.textbox__body:focus {
+  border: solid 1.5px colors(purple, secondary);
+  outline: none;
+}
+
+.textbox__label {
+  color: colors(sumi, 600);
+  font-size: rem(12);
+}
+
+.textbox__required {
+  color: colors(error);
+  font-size: rem(12);
+}
+
+.textbox__error {
+}
+
+.textbox__errortext {
+  color: colors(error);
+  font-size: rem(12);
 }

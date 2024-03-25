@@ -1,32 +1,38 @@
-import ForumIcon from '@mui/icons-material/Forum'
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
-import Head from 'next/head'
+// import { GetServerSideProps } from 'next'
 import { useRecoilValue } from 'recoil'
 
+import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
 
-import ApiKeyForm from '@/stories/ApiKeyForm'
-import ArticleCard from '@/stories/ArticleCard'
-import { Button } from '@/stories/Button'
-import CommonModal from '@/stories/CommonModal'
-import MainTextBox from '@/stories/MainTextBox'
-import Paging from '@/stories/Paging'
+import { Button } from '@/stories/Button/Button'
+import Footer from '@/stories/Footer/Footer'
 
 import { Article } from '@/types/Article'
+import { PublicationTimeline } from '@/types/PublicationTimeline'
 
-import { articleTitleState } from '@/state/articleTitleState'
+import ApiKeyForm from '@/components/ApiKeyForm'
+import ArticleCard from '@/components/ArticleCard'
+import CommonHead from '@/components/CommonHead'
+import CommonModal from '@/components/CommonModal'
+import DetailedSearchForm from '@/components/DetailedSearchForm'
+import MainTextBox from '@/components/MainTextBox'
+import Paging from '@/components/Paging'
+import { articleTitleState } from '@/state/articleQuery/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
-import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isOpenApiKeyModalState } from '@/state/isOpenApiKeyModalState'
+import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModalState'
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
+import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
 
-export default function Home() {
+const Home = () => {
   const articles = useRecoilValue<Article[]>(articlesState)
   const isSearching = useRecoilValue<boolean>(isSearchingState)
   const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
@@ -35,42 +41,61 @@ export default function Home() {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
   const isSkeleton = useRecoilValue<boolean>(isSkeletonState)
+  const isOpenDetailedSearchModal = useRecoilValue<boolean>(isOpenDetailedSearchModalState)
   const { handleApiKeyModalClose, handleApiKeyButton, handleTitleClick, handleSearchFormSubmit } =
     useSearchForm()
+  const { handleDetailedSearchModalClose, handleDetailedSearchButton } = useDetailedSearchForm()
+  const isValidDateFormats = useRecoilValue<PublicationTimeline>(isValidDateFormatsState)
+
+  const isCorrectDateFormat =
+    isValidDateFormats.lastUpdate.start &&
+    isValidDateFormats.lastUpdate.end &&
+    isValidDateFormats.publication.start &&
+    isValidDateFormats.publication.end
 
   return (
     <>
-      <Head>
-        <title>I love Qiita</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <CommonHead genre="website" />
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
+        <div className={styles.home__subtext}>
+          I love Qiita, where many seekers of knowledge meet up.
+        </div>
         <div className={styles.home__form}>
           <form onSubmit={handleSearchFormSubmit}>
             <div className={styles.home__textbox}>
-              <MainTextBox />
+              <MainTextBox
+                placeholder={
+                  !isValidApiKeyToken || !qiitaApiToken.length
+                    ? 'Input your Qiita API token first from the blinking key icon below.'
+                    : 'Type some words related to titles of articles you are interested in'
+                }
+                disabled={!isValidApiKeyToken || !qiitaApiToken.length}
+              />
             </div>
             <div className={styles.home__options}>
-              <IconButton>
-                <ForumIcon />
-              </IconButton>
-              <IconButton>
+              <IconButton onClick={handleDetailedSearchButton} className={styles.home__iconbutton}>
                 <TuneIcon />
               </IconButton>
-              <IconButton onClick={handleApiKeyButton}>
+              <IconButton
+                onClick={handleApiKeyButton}
+                className={`${styles.home__iconbutton} ${isValidApiKeyToken && qiitaApiToken.length ? null : `${styles.home__blink}`}`}
+              >
                 <KeyIcon />
               </IconButton>
             </div>
             <div className={styles.home__search}>
               <Button
                 variant="primary"
-                onClick={handleTitleClick}
+                onClick={(e) => handleTitleClick(e)}
                 size="large"
                 label={'Search'}
-                disabled={!articleTitle.length || !qiitaApiToken.length || !isValidApiKeyToken}
+                disabled={
+                  !articleTitle.length ||
+                  !qiitaApiToken.length ||
+                  !isValidApiKeyToken ||
+                  !isCorrectDateFormat
+                }
                 isLoading={isSearching}
               />
             </div>
@@ -92,14 +117,21 @@ export default function Home() {
               ))}
               {articles.length && !isSkeleton ? <Paging /> : null}
             </>
-          ) : (
-            null
-          )}
+          ) : null}
         </div>
         <CommonModal isOpenModal={isOpenApiKeyModal} onClose={handleApiKeyModalClose}>
           <ApiKeyForm />
         </CommonModal>
+        <CommonModal
+          isOpenModal={isOpenDetailedSearchModal}
+          onClose={handleDetailedSearchModalClose}
+        >
+          <DetailedSearchForm />
+        </CommonModal>
       </main>
+      <Footer />
     </>
   )
 }
+
+export default Home

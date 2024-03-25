@@ -332,7 +332,7 @@ bodyに謎のマージンがある問題。`globals.scss`でbodyのmarginをゼ�
 
 ## 記事詳細画面のデザイン
 
-![0308_記事詳細画面](public/memo/0308_記事詳細画面.png)
+![0318_記事詳細画面](public/memo/0318_記事詳細画面.png)
 
 3/17に箇条書きした要素をとりあえず詰め込んだデザインをfigmaに作ったけどなんか左側の情報量が多くてごちゃごちゃした印象。でもどの情報も削りにくいので上手い配置を考えたい。とりあえずこの画像のとおりにCSSを書いてみる。
 
@@ -522,7 +522,7 @@ $color: #000000;
 
 Sassのドキュメントを自動で作ってくれる[SassDoc](https://github.com/SassDoc/sassdoc)というライブラリがあるらしいが、最終更新が4年前なので要検証。
 
-### sanitize-html
+## sanitize-html
 
 インストールは型も含めてする必要あり
 
@@ -531,19 +531,23 @@ yarn add sanitize-html
 yarn add @types/sanitize-html
 ```
 
-### stylelint
+## stylelint
 
 導入方法をREADMEに書く
 
-### lint-staged
+## lint-staged
+
 commitしたときにeslintを発動させる。
 
 インストール
+
 ```zsh
 // 開発環境でのみ必要なので-Dコマンドをつける
 yarn add lint-staged -D
 ```
+
 `.husky/_/commit-msg`に`yarn lint-staged`を追加
+
 ```commit-msg
 
 #!/usr/bin/env sh
@@ -552,30 +556,268 @@ yarn add lint-staged -D
 ++ yarn lint-staged
 yarn commitmsg
 ```
+
 package.jsonを編集
+
 ```package.json
 "lint-staged": "eslint --ext .ts,.tsx src --cache --fix"
 ```
 
-### GitHub Flavored Markdown (GFM)
+## GitHub Flavored Markdown (GFM)
+
 https://docs.github.com/ja/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-
 
-## 3/21
-### stylelint
+# 3/21
+
+## stylelint
+
 廃止されたルールがunknown ruleになる。[公式ドキュメントのMigrationのページ](https://stylelint.io/migration-guide/to-16)で`Deprecated stylistic rules`に載っているものは使えない。`extends`で外部のルールセットを使う場合にDepreatedとなったルールが含まれていることがある。
 
 API入力フォームでテキストボックスに適当な値を入力してボタンを押さずにモーダルを閉じたときのstateってどうなってたっけ？
 
-### 正規表現を用いた置換
+## 正規表現を用いた置換
+
 VSCodeで正規表現を用いてフォントの単位を修正したい。
+
 ```example
 font-size: 12px; -> font-size: rem(12);
 ```
 
 置換の際に、数字をそのまま置き換えるためには、以下のように括弧で囲んで`$`で参照する。
+
 ```
 font-size: (\d{2,})px; -> font-size: rem($1);
 ```
 
-### 今後の方針
+## 今後の方針
+
 ちょっとモチベがあまりにもないので[コンポーネントのStorybookの作成](https://github.com/inckayu/I-love-Qiita/issues/17)と[Jestの導入](https://github.com/inckayu/I-love-Qiita/issues/34)は最後にやろうかな...最後にJest導入してもあまり意味がないけど。
+
+## ブラウザのディベロッパーツール
+
+consoleやhtml/cssを確認するくらいにしか使ってなかったけど、他の機能はよく知らなかったので座学。
+
+https://qiita.com/d-dai/items/0b580b26bb1d1622eb46
+
+## Qiita APIのレスポンス
+
+![0321_QiitaAPIのレスポンス](public/memo/0321_QiitaAPIのレスポンス.png)
+`Total-Count`の値が1367になっている。リクエストのパラメータ`page=100 * per_page=10 = 1000`を上回っているから多分記事の総数を返すという認識で大丈夫そう。
+
+`Link`ヘッダを見ると、`rel='last'`のリンクが`page=137`になっている。`page=137 * per_page=10 = 1370 = Total-Count / 10 + 1`なので全記事取得できる。
+
+今気づいたが、`page`パラメータの意味を理解できていなかった。`page=n`は検索条件に合致するすべての記事のうちのnページ目を取得するという意味。
+
+ページングはAPIの設計のおかげで思ったより簡単に実装できそうだが、`Link`ヘッダと`Total-Count`ヘッダの取得方法がわからない。`fetchArticles`のレスポンスをコンソールに表示してもこれら2つがない。おそらくCORSポリシーのせいでjavascriptからアクセスできない。とりあえず`page`パラメータを用いてページングを行い、存在しない`page`にアクセスしてエラーが起きたらエラーハンドリングで対処。余裕があったらSSRを試してみる。(上の画像をよく見たら`Referrer-Policy`にそれっぽいこと書いてある)
+
+## 詳細検索の内容・仕様
+
+- タイトル部分一致(実装済み)
+- 本文部分一致
+- 空白区切りでOR検索
+- タグ(UIはdatalist)
+- タグはAND検索のみ
+- 含まないタグ
+- 作成日時のレンジ
+- 更新日時のレンジ
+
+詳細検索を使わずにメインボックスから検索した場合との整合性を取るためにメインテキストボックスと同様の機能のテキストボックスを詳細検索モーダルにも設置する。これら２つは連動させる。フォームの内容を基にクエリを生成する。メインテキストボックスが空欄であっても問題はないはず。
+
+# 3/22
+
+## MUI AutoComplete
+
+デザインシステムに合わせる必要があったので`useAutoComplete`を利用。`free solo`を使って任意のタグを設定できるようにしたかったが難しかったので断念。
+
+Qiitaのタグは総数が20万個以上あるのですべてを取得するのは現実的ではない。
+
+![タグの総数](/public/memo/0322_タグの総数.png)
+
+選択できるタグが限定されたり最新のタグを取得できないというデメリットはあるが、妥協策として全てのタグのうち記事数が高いtop1000くらいを定数ファイルに入れて利用する。
+
+以下の手順で取得。
+
+APIを叩くプログラムを作成。
+
+```fetchTags.mjs
+import axios from 'axios'
+
+export const fetchTags = async (token, page) => {
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const res = await axios.get(`https://qiita.com/api/v2/tags?sort=count&page=${page}&per_page=100`, config)
+  res.data.forEach((tag) => {
+    console.log(tag)
+    console.log(",")
+  })
+  // return res.data
+}
+console.log("export const tags = [")
+for (let i = 1; i <= 10; i++) {
+  await fetchTags(QIITA_API_KEY, i)
+}
+console.log("]")
+```
+
+プログラムを実行して結果を保存。
+
+```zsh
+touch tags.ts
+node fetchTags.mjs >> src/constants/tags.ts
+```
+
+# 3/23
+
+## タグの画像
+
+`GET /api/v2/items(/:item_id)`で取得した記事の情報にはタグの画像URLが含まれていないので記事詳細画面で`GET /api/v2/tags/:tag_id`を用いて画像を取得する必要がある。
+
+そもそもタグの画像が必要な理由って記事作成時/記事検索時にタグを見つけやすくするためとも考えられるので、記事詳細画面で表示する必要性は低い(だから記事を取得するAPIにも画像の情報がない)のかもしれない。まあ時間に余裕はあるしそんなに難しい処理ではないので実装しておく。
+
+## .vscodeフォルダ
+
+VSCodeのSettingsにはUser SettingsとWorkspace Settingsの2つがあり、VSCode全体の設定は前者、プロジェクト個別の場合は後者。知らなかった...
+
+とりあえずprettierの設定をWorkspace settingsに追記した。
+
+## prettierが効かない
+
+eslintとprettierでimport sortのルールが競合していたのが原因。確か競合しないようにするプラグインやエクステンションがあったような気もするが、とりあえずprettierの方のルールを削除したら解決した。
+
+### 参考
+
+https://qiita.com/teixan/items/dd612f13ed002528a6dd
+https://qiita.com/kokogento/items/9791cdc3aef309fbbed4
+
+## MUIの色のカスタマイズ
+
+https://mui.com/material-ui/customization/palette/#custom-colors
+
+## replace関数
+
+第二引数に関数を取ることができる。
+
+```javascript
+body = body.replace(
+  /<h([1-5])>(.+?)<\/h\1>/g,
+  (match, p1, p2) => `<h${Number(p1) + 1}>${p2}</h${Number(p1) + 1}>`
+)
+```
+
+## sanitize-htmlで除外するタグの設定
+
+- [ドキュメント](https://github.com/apostrophecms/sanitize-html)
+
+```javascript
+const clean = sanitizeHtml(dirty, {
+  allowedTags: ['b', 'i', 'em', 'strong', 'a'],
+  allowedAttributes: {
+    a: ['href'],
+  },
+  allowedIframeHostnames: ['www.youtube.com'],
+})
+```
+
+## シンタックスハイライト
+
+外部ライブラリの使用は断念。Qiitaのページからディベロッパーツールでコーディングブロックのcssファイル探して引用した(`highlight.css`)。
+
+## 今後の方針
+
+時間がなくなってきたので、以下の順に対応する。
+
+- [一部の画像が表示されない](https://github.com/inckayu/I-love-Qiita/issues/61)
+- [デザインシステムと現状の実装の確認](https://github.com/inckayu/I-love-Qiita/issues/55)
+- [CSSクラス名をBEM準拠にしてネストをなくす](https://github.com/inckayu/I-love-Qiita/issues/35)
+- [コンポーネントのStorybookの作成](https://github.com/inckayu/I-love-Qiita/issues/17)
+- [Jestの導入](https://github.com/inckayu/I-love-Qiita/issues/34)
+- [環境変数の取り扱い](https://github.com/inckayu/I-love-Qiita/issues/24)
+- [ホスティング](https://github.com/inckayu/I-love-Qiita/issues/42)
+- [関数のメモ化](https://github.com/inckayu/I-love-Qiita/issues/21)
+- [OGPの作成](https://github.com/inckayu/I-love-Qiita/issues/47)
+- [READMEの作成](https://github.com/inckayu/I-love-Qiita/issues/63)
+
+# 3/24
+
+## UI生成ツール
+
+vervelの提供する[V0](https://v0.dev/)というサービス。最初に知っておきたかった...
+
+## sanitizeHtmlのiframeが表示されない
+
+どうやら元々`rendered_body`にaタグが含まれていない。
+
+qiita
+
+![0324_iframe_qiita](public/memo/0324_iframe_qiita.png)
+
+rendered_body
+
+![0324_iframe_rendered_body](public/memo/0324_iframe_rendered_body.png)
+
+せっかくなのでdata-contentのURLからmeta情報を取得してカードの形式で表示させたいが時間的に断念。
+
+## ターミナルのショートカットキー
+
+https://qiita.com/akito/items/d09a2d5b36d4cf7bac6d
+
+## ターミナルのエイリアス
+
+今まで設定していなかったのでこれを気に作成
+
+```.zshrc
+alias soz='source ~/.zshrc'
+
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+alias ga='git add'
+alias gaa='git add .'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcom='git checkout master 2> /dev/null || git checkout main'
+alias gcod='git checkout dev 2> /dev/null || git checkout develop'
+alias gd='git diff'
+alias gl='git log'
+alias gps='git push'
+alias gpso='git push origin'
+alias gpl='git pull'
+alias gplo='git pull origin'
+alias gst='git status'
+alias gsw='git switch'
+alias gswm='git switch main'
+alias gswd='git switch dev 2> /dev/null || git switch develop'
+alias gswc='git switch -c'
+```
+
+## storybookのビルド時のエラー
+
+storybookが`@`インポート(eg: `'@/functions/getButtonVariant'`)に対応していないのでstorybookで管理するコンポーネント内のインポートは相対パスにする。もしかしたら@に対応させる設定があるかもしれないので要調査。
+
+# 3/25
+
+## metaタグ
+
+### description
+
+検索結果のランキングに直接影響はしないが、CTRが上昇するなど間接的なSEO効果があり。今回のアプリは一般に公開はするが別に沢山の人に使ってもらいたいわけではないのでSEOを意識する必要性は無い。だがせっかくなので最低限のことはしておく。
+
+### 環境変数
+
+APIキーなどのセキュアな環境変数はクライアントサイドではなくサーバーサイドのみで利用する必要がある。SSRのコンポーネントにおいて利用するか、そのような環境変数を要する処理を`pages/api`内に定義した関数内に記述し、CSRのコンポーネントでapiを叩くなどの方法がある。
+
+ちなみに環境変数の頭に`NEXT_PUBLIC`をつけるとクライアントサイドでも読み込むことができる。
+
+再検索実行時のpageのリセット
+tagとtags to excludeがqueryに反映されない

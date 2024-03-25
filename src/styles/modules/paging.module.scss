@@ -6,12 +6,12 @@
   width: 362px;
   height: 64px;
   margin: 48px auto;
-  line-height: 64px;
-  background-color: colors(white);
   border-radius: 32px;
+  background-color: colors(white);
+  line-height: 64px;
+}
 
-  &__page {
-    font-size: rem(18);
-    color: colors(purple);
-  }
+.paging__page {
+  color: colors(purple);
+  font-size: rem(18);
 }

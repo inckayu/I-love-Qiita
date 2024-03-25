@@ -1,35 +1,62 @@
-@use "../common" as *;
+@use '../common' as *;
 
 .home {
-  min-height: calc(100vh - 24px);
+  min-height: calc(100vh - 24px - 36px);
   padding-bottom: 24px;
   background-color: colors(purple, bg);
-  
-  &__title {
-    padding-top: 64px;
-    margin-bottom: 48px;
-    font-size: rem(64);
-    text-align: center;
-    color: colors(sumi);
-    
-  }
+}
 
-  &__form {
-    text-align: center;
-  }
+.home__title {
+  padding-top: 64px;
+  color: colors(sumi);
+  font-size: rem(64);
+  text-align: center;
+}
 
-  &__textbox {
-    margin-bottom: 16px;
-  }
+.home__subtext {
+  width: fit-content;
+  margin: 16px auto 0 auto;
+  color: colors(sumi, 420);
+  font-size: rem(24);
+}
 
-  &__options {
-    margin-bottom: 16px;
-  }
+.home__form {
+  text-align: center;
+}
 
-  &__search {
-    margin-bottom: 64px;
+.home__textbox {
+  margin-top: 13vh;
+  margin-bottom: 16px;
+}
+
+.home__iconbutton {
+  color: colors(sumi, 900);
+}
+
+.home__blink {
+  animation: blink 1s infinite;
+}
+
+.home__options {
+  margin-bottom: 16px;
+}
+
+.home__search {
+  margin-bottom: 64px;
+}
+
+.home__articles {
+  width: 100%;
+}
+
+@keyframes blink {
+  0% {
+    color: colors(sumi, 420);
   }
-  &__articles {
-    width: 100%;
+  50% {
+    color: colors(error);
+  }
+  100% {
+    color: colors(sumi, 420);
   }
 }

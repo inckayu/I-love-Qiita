@@ -5,7 +5,7 @@ import { Article } from '@/types/Article'
 
 import { errorTextState } from '@/state/errorTextState'
 import { isErrorState } from '@/state/isErrorState'
-import { isOpenApiKeyModalState } from '@/state/isOpenModalState'
+import { isOpenApiKeyModalState } from '@/state/isOpenApiKeyModalState'
 import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { isVerifingState } from '@/state/isVerifingState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'

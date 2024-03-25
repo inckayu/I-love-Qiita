@@ -1,7 +1,6 @@
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
-import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 
 import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
@@ -14,6 +13,7 @@ import { PublicationTimeline } from '@/types/PublicationTimeline'
 
 import ApiKeyForm from '@/components/ApiKeyForm'
 import ArticleCard from '@/components/ArticleCard'
+import CommonHead from '@/components/CommonHead'
 import CommonModal from '@/components/CommonModal'
 import DetailedSearchForm from '@/components/DetailedSearchForm'
 import MainTextBox from '@/components/MainTextBox'
@@ -53,12 +53,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>I love Qiita</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <CommonHead />
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__subtext}>

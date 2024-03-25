@@ -2,13 +2,13 @@ import BookmarkIcon from '@mui/icons-material/Bookmark'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import Link from 'next/link'
 
+import Tag from '../../components/Tag'
+import UserInfo from '../../components/UserInfo'
 import formatDate from '../../functions/formatDate'
 import { getUserName } from '../../functions/getUserName'
 import styles from '../../styles/modules/detailedarticle.module.scss'
 import { Article } from '../../types/Article'
 import { Button } from '../Button/Button'
-import Tag from '../../components/Tag'
-import UserInfo from '../../components/UserInfo'
 
 interface DetailedArticleHeaderProps {
   article: Article

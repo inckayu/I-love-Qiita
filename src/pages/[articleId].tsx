@@ -18,6 +18,7 @@ import LinkText from '@/stories/LinkText/LinkText'
 
 import { Article } from '@/types/Article'
 
+import CommonHead from '@/components/CommonHead'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
@@ -40,48 +41,51 @@ const DetailedArticle = () => {
   }, [router.query.articleId, qiitaApiToken])
 
   return (
-    <main className={styles.detailedarticle}>
-      {article === null ? (
-        <div className={styles.detailedarticle__circle}>
-          <CircularProgress
-            sx={{
-              color: '#6f23d0',
-            }}
-            size={100}
-          />
-        </div>
-      ) : (
-        <>
-          <div className={styles.detailedarticle__back}>
-            <LinkText text="back" path="/" />
+    <>
+      <CommonHead />
+      <main className={styles.detailedarticle}>
+        {article === null ? (
+          <div className={styles.detailedarticle__circle}>
+            <CircularProgress
+              sx={{
+                color: '#6f23d0',
+              }}
+              size={100}
+            />
           </div>
-          <div className={styles.detailedarticle__wrapper}>
-            <div>
-              <DetailedArticleHeader article={article} />
-              <div className={styles.detailedarticle__divider}>
-                <Divider widthUnit="%" width={90} thick={1} color="#B3B3B3" />
-              </div>
-              <div
-                className={styles.detailedarticle__body}
-                dangerouslySetInnerHTML={{
-                  __html: decorateLink(
-                    getDataframeInIframe(
-                      sanitizeHtml(
-                        downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
-                        sanitizeHtmlOptions
-                      )
-                    )
-                  ),
-                }}
-              />
+        ) : (
+          <>
+            <div className={styles.detailedarticle__back}>
+              <LinkText text="back" path="/" />
             </div>
-          </div>
-          <div className={styles.detailedarticle__back}>
-            <LinkText text="back" path="/" />
-          </div>
-        </>
-      )}
-    </main>
+            <div className={styles.detailedarticle__wrapper}>
+              <div>
+                <DetailedArticleHeader article={article} />
+                <div className={styles.detailedarticle__divider}>
+                  <Divider widthUnit="%" width={90} thick={1} color="#B3B3B3" />
+                </div>
+                <div
+                  className={styles.detailedarticle__body}
+                  dangerouslySetInnerHTML={{
+                    __html: decorateLink(
+                      getDataframeInIframe(
+                        sanitizeHtml(
+                          downgradeHeadings(pseudoCodingBlock(article?.rendered_body)),
+                          sanitizeHtmlOptions
+                        )
+                      )
+                    ),
+                  }}
+                />
+              </div>
+            </div>
+            <div className={styles.detailedarticle__back}>
+              <LinkText text="back" path="/" />
+            </div>
+          </>
+        )}
+      </main>
+    </>
   )
 }
 

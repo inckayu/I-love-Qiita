@@ -1,14 +1,13 @@
 import Groq from 'groq-sdk'
 import OpenAI from 'openai'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export const generateSummary = (article: string): Promise<string> => {
+const generateSummary = (article: string): Promise<string> => {
   const groq = new Groq({
-    apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
-    dangerouslyAllowBrowser: true,
+    apiKey: process.env.GROQ_API_KEY,
   })
   const openai = new OpenAI({
-    apiKey: process.env.NEXT_PUBLIC_GPT4_API_KEY,
-    dangerouslyAllowBrowser: true, // FIXME: 本番環境ではfalseにする
+    apiKey: process.env.GPT4_API_KEY,
   })
 
   const LLMs = {
@@ -46,4 +45,20 @@ export const generateSummary = (article: string): Promise<string> => {
         reject('Failed to generate summary due to an error.')
       })
   })
+}
+
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method === 'POST') {
+    const { article } = req.body
+
+    const GPT4_API_KEY = process.env.GPT4_API_KEY
+    // const GROQ_API_KEY = process.env.GROQ_API_KEY
+
+    const summary = await generateSummary(article)
+
+    res.status(200).json({ summary })
+  } else {
+    res.setHeader('Allow', ['POST'])
+    res.status(405).end(`Method ${req.method} Not Allowed`)
+  }
 }

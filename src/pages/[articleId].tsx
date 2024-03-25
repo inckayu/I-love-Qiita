@@ -1,7 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { GetServerSideProps } from 'next'
 import sanitizeHtml from 'sanitize-html'
 
 import { sanitizeHtml as sanitizeHtmlOptions } from '@/constants/sanitize'
@@ -19,29 +17,26 @@ import LinkText from '@/stories/LinkText/LinkText'
 
 import { Article } from '@/types/Article'
 
-import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
+import CommonHead from '@/components/CommonHead'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
-const DetailedArticle = () => {
-  const [article, setArticle] = useState<Article | null>(null)
-  const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
-  const router = useRouter()
+interface Props {
+  article: Article | null
+}
 
-  useEffect(() => {
-    const articleId = router.query.articleId
-    if (articleId && typeof articleId === 'string') {
-      fetchArticle(articleId, qiitaApiToken)
-        .then((article) => {
-          setArticle(article)
-        })
-        .catch((e) => {
-          console.error(e)
-        })
-    }
-  }, [router.query.articleId, qiitaApiToken])
+const DetailedArticle = ({ article }: Props) => {
+  // TODO: 404ページを作成する
+  if (!article) return <div>記事が見つかりませんでした。</div>
 
   return (
     <>
+      <CommonHead
+        genre="website"
+        title={article.title}
+        author={article.user.name || article.user.id}
+        icon={article.user.profile_image_url}
+        publishedAt={article.created_at}
+      />
       <main className={styles.detailedarticle}>
         {article === null ? (
           <div className={styles.detailedarticle__circle}>
@@ -87,6 +82,22 @@ const DetailedArticle = () => {
       <Footer />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context
+  const articleId = params?.articleId
+  const QIITA_TOKEN = process.env.QIITA_TOKEN
+  if (typeof articleId !== 'string') return { props: { article: null } }
+  if (!QIITA_TOKEN) return { props: { article: null } }
+
+  try {
+    const article = await fetchArticle(articleId, QIITA_TOKEN)
+    return { props: { article: article } }
+  } catch (error) {
+    console.error(error)
+    return { props: { article: null } }
+  }
 }
 
 export default DetailedArticle

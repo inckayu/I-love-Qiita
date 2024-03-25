@@ -1,14 +1,12 @@
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
-import Head from 'next/head'
+// import { GetServerSideProps } from 'next'
 import { useRecoilValue } from 'recoil'
 
 import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
 
-import ApiKeyForm from '@/stories/ApiKeyForm'
-import ArticleCard from '@/stories/ArticleCard'
 import { Button } from '@/stories/Button/Button'
 import CommonModal from '@/stories/CommonModal'
 import DetailedSearchForm from '@/stories/DetailedSearchForm'
@@ -19,6 +17,13 @@ import Paging from '@/stories/Paging'
 import { Article } from '@/types/Article'
 import { PublicationTimeline } from '@/types/PublicationTimeline'
 
+import ApiKeyForm from '@/components/ApiKeyForm'
+import ArticleCard from '@/components/ArticleCard'
+import CommonHead from '@/components/CommonHead'
+import CommonModal from '@/components/CommonModal'
+import DetailedSearchForm from '@/components/DetailedSearchForm'
+import MainTextBox from '@/components/MainTextBox'
+import Paging from '@/components/Paging'
 import { articleTitleState } from '@/state/articleQuery/articleTitleState'
 import { articlesState } from '@/state/articlesState'
 import { generatedSummariesState } from '@/state/generatedSummaries'
@@ -31,7 +36,7 @@ import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
 
-export default function Home() {
+const Home = () => {
   const articles = useRecoilValue<Article[]>(articlesState)
   const isSearching = useRecoilValue<boolean>(isSearchingState)
   const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
@@ -54,12 +59,7 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>I love Qiita</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <CommonHead genre="website" />
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__subtext}>
@@ -137,3 +137,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

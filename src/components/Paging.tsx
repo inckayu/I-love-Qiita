@@ -7,7 +7,7 @@ import { queryState } from '@/state/articleQuery'
 import { IsPagingDisabled, isPagingDisabledState } from '@/state/isPagingDisabled'
 import { pageNumberState } from '@/state/pageNumberState'
 
-import LinkText from './LinkText/LinkText'
+import LinkText from '../stories/LinkText/LinkText'
 import styles from '../styles/modules/paging.module.scss'
 
 const Paging = () => {

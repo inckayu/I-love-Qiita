@@ -19,9 +19,9 @@ import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
-import { Button } from './Button/Button'
 import TagsAutoComplete from './TagsAutoComplete'
-import TextBox from './TextBox/TextBox'
+import { Button } from '../stories/Button/Button'
+import TextBox from '../stories/TextBox/TextBox'
 import styles from '../styles/modules/detailedsearchform.module.scss'
 
 export default function DetailedSearchForm() {

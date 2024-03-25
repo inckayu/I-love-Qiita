@@ -1,0 +1,26 @@
+@use "../common" as *;
+
+.footer {
+  height: 36px;
+  background-color: colors(purple, bg);
+}
+
+.footer__wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 12%;
+  height: 36px;
+  margin: 0 auto;
+  font-size: rem(12);
+
+}
+
+.footer__copyright {
+  margin-top: 10px;
+  color: colors(sumi, 420);
+}
+
+.footer__iconbutton {
+  margin-top: 4px;
+  color: colors(sumi, 420);
+}

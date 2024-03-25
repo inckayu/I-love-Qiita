@@ -12,6 +12,7 @@ import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
 import DetailedArticleHeader from '@/stories/DetailedArticleHeader/DetailedArticleHeader'
 import Divider from '@/stories/Divider/Divider'
+import Footer from '@/stories/Footer/Footer'
 import LinkText from '@/stories/LinkText/LinkText'
 
 import { Article } from '@/types/Article'
@@ -78,6 +79,7 @@ const DetailedArticle = ({ article }: Props) => {
           </>
         )}
       </main>
+      <Footer />
     </>
   )
 }

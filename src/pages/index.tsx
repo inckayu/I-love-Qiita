@@ -12,6 +12,7 @@ import ArticleCard from '@/stories/ArticleCard'
 import { Button } from '@/stories/Button/Button'
 import CommonModal from '@/stories/CommonModal'
 import DetailedSearchForm from '@/stories/DetailedSearchForm'
+import Footer from '@/stories/Footer/Footer'
 import MainTextBox from '@/stories/MainTextBox'
 import Paging from '@/stories/Paging'
 
@@ -132,6 +133,7 @@ export default function Home() {
           <DetailedSearchForm />
         </CommonModal>
       </main>
+      <Footer />
     </>
   )
 }

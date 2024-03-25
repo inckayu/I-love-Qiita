@@ -1,4 +1,5 @@
 import CircularProgress from '@mui/material/CircularProgress'
+// import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -42,7 +43,7 @@ const DetailedArticle = () => {
 
   return (
     <>
-      <CommonHead />
+      <CommonHead genre="website" />
       <main className={styles.detailedarticle}>
         {article === null ? (
           <div className={styles.detailedarticle__circle}>
@@ -90,3 +91,13 @@ const DetailedArticle = () => {
 }
 
 export default DetailedArticle
+
+// export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+//   const id = context.query.articleId
+//   const token = process.env.NEXT_PUBLIC_QIITA_TOKEN
+//   console.log(id, token)
+//   if (typeof id !== 'string') return { props: {} }
+//   if (!token) return { props: {} }
+//   const content = await fetchArticle(id, token)
+//   return { props: content }
+// }

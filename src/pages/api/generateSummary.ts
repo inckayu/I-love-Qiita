@@ -2,12 +2,12 @@ import Groq from 'groq-sdk'
 import OpenAI from 'openai'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const generateSummary = (article: string): Promise<string> => {
+const generateSummary = (article: string, token: string): Promise<string> => {
   const groq = new Groq({
-    apiKey: process.env.GROQ_API_KEY,
+    apiKey: token,
   })
   const openai = new OpenAI({
-    apiKey: process.env.GPT4_API_KEY,
+    apiKey: token,
   })
 
   const LLMs = {
@@ -54,9 +54,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const GPT4_API_KEY = process.env.GPT4_API_KEY
     // const GROQ_API_KEY = process.env.GROQ_API_KEY
 
-    const summary = await generateSummary(article)
-
-    res.status(200).json({ summary })
+    if (!GPT4_API_KEY) {
+      res.status(500).json({ error: 'API key is not set.' })
+    } else {
+      const summary = await generateSummary(article, GPT4_API_KEY)
+      res.status(200).json({ summary })
+    }
   } else {
     res.setHeader('Allow', ['POST'])
     res.status(405).end(`Method ${req.method} Not Allowed`)

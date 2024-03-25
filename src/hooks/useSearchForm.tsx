@@ -23,6 +23,7 @@ import { isOpenApiKeyModalState } from '@/state/isOpenApiKeyModalState'
 import { isPagingDisabledState } from '@/state/isPagingDisabled'
 import { isSearchingState } from '@/state/isSearchingState'
 import { isSkeletonState } from '@/state/isSkeletonState'
+import { pageNumberState } from '@/state/pageNumberState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 
 const useSearchForm = () => {
@@ -41,6 +42,7 @@ const useSearchForm = () => {
   const [, setIsSkeleton] = useRecoilState<boolean>(isSkeletonState)
   const [, setPagingDisabled] = useRecoilState(isPagingDisabledState)
   const [, setQuery] = useRecoilState<string>(queryState)
+  const [, setPageNumber] = useRecoilState<number>(pageNumberState)
 
   const handleApiKeyModalClose = () => {
     setIsOpenApiKeyModal(false)
@@ -85,6 +87,7 @@ const useSearchForm = () => {
       excludedTags,
     ].join(' ')
     setQuery(query)
+    setPageNumber(1)
     fetchArticleAndSummary(query, 1)
   }
 

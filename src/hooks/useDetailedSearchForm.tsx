@@ -18,6 +18,7 @@ import {
 } from '@/state/articleQuery'
 import { isOpenDetailedSearchModalState } from '@/state/isOpenDetailedSearchModalState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
+import { pageNumberState } from '@/state/pageNumberState'
 
 import useSearchForm from './useSearchForm'
 
@@ -32,6 +33,7 @@ const useDetailedSearchForm = () => {
   const articleExcludedTags = useRecoilValue(articleExcludedTagsState)
   const [, setQuery] = useRecoilState(queryState)
   const [, setIsValidDateFormats] = useRecoilState<PublicationTimeline>(isValidDateFormatsState)
+  const [, setPageNumber] = useRecoilState<number>(pageNumberState)
 
   const { fetchArticleAndSummary } = useSearchForm()
 
@@ -162,6 +164,7 @@ const useDetailedSearchForm = () => {
     ].join(' ')
     setQuery(query)
     setIsOpenDetailedSearchModal(false)
+    setPageNumber(1)
     fetchArticleAndSummary(query, 1)
   }
   return {

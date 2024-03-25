@@ -32,7 +32,7 @@ const CommonHead = ({ genre, title, author, icon, publishedAt }: CommonHeadProps
       <meta property="og:site_name" content="I love Qiita" />
       <meta property="og:locale" content="ja_JP" />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content="東京大学白ばら会合唱団" />
+      <meta name="twitter:title" content="I love Qiita" />
 
       {genre === 'article' ? (
         <>

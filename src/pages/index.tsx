@@ -29,6 +29,7 @@ import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
+import Footer from '@/stories/Footer/Footer'
 
 export default function Home() {
   const articles = useRecoilValue<Article[]>(articlesState)
@@ -132,6 +133,7 @@ export default function Home() {
           <DetailedSearchForm />
         </CommonModal>
       </main>
+      <Footer />
     </>
   )
 }

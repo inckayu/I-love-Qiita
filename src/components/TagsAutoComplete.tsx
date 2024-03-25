@@ -5,10 +5,15 @@ import CloseIcon from '@mui/icons-material/Close'
 import { autocompleteClasses } from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
 import { tags } from '@/constants/tags'
 
 import { Tag } from '@/types/Tag'
+
+import { articleExcludedTagsState } from '@/state/articleQuery/articleExcludedTagsState'
+import { articleTagsState } from '@/state/articleQuery/articleTagsState'
 
 const Root = styled('div')(
   () => `
@@ -159,6 +164,19 @@ interface TagsAutoCompleteProps {
 }
 
 export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
+  const [articleTags, setArticleTags] = useRecoilState<Tag[]>(articleTagsState)
+  const [articleExcludedTags, setArticleExcludedTags] =
+    useRecoilState<Tag[]>(articleExcludedTagsState)
+  const currentLabel = (label: string) => {
+    switch (label) {
+      case 'Tags':
+        return articleTags
+      case 'Tags to Exclude':
+        return articleExcludedTags
+      default:
+        return
+    }
+  }
   const {
     getRootProps,
     getInputLabelProps,
@@ -172,10 +190,24 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
     setAnchorEl,
   } = useAutocomplete({
     id: 'customized-hook-demo',
+    defaultValue: currentLabel(label),
     multiple: true,
     options: tags,
     getOptionLabel: (option) => option.id,
   })
+
+  useEffect(() => {
+    switch (label) {
+      case 'Tags':
+        setArticleTags(value)
+        break
+      case 'Tags to Exclude':
+        setArticleExcludedTags(value)
+        break
+      default:
+        break
+    }
+  }, [value])
 
   return (
     <Root>
@@ -183,7 +215,7 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
         <Label {...getInputLabelProps()}>{label}</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
           {value.map((option: Tag, index: number) => {
-            const tagImage = tags[index].icon_url
+            const tagImage = option.icon_url
             return (
               <div key={option.id}>
                 {tagImage ? (

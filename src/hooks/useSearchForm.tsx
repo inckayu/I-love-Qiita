@@ -84,7 +84,6 @@ const useSearchForm = () => {
       tags,
       excludedTags,
     ].join(' ')
-
     setQuery(query)
     fetchArticleAndSummary(query, 1)
   }

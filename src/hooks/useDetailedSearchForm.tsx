@@ -160,7 +160,6 @@ const useDetailedSearchForm = () => {
       tags,
       excludedTags,
     ].join(' ')
-    console.log(query)
     setQuery(query)
     setIsOpenDetailedSearchModal(false)
     fetchArticleAndSummary(query, 1)

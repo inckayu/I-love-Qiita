@@ -12,6 +12,7 @@ import ArticleCard from '@/stories/ArticleCard'
 import { Button } from '@/stories/Button/Button'
 import CommonModal from '@/stories/CommonModal'
 import DetailedSearchForm from '@/stories/DetailedSearchForm'
+import Footer from '@/stories/Footer/Footer'
 import MainTextBox from '@/stories/MainTextBox'
 import Paging from '@/stories/Paging'
 
@@ -29,7 +30,6 @@ import { isValidApiKeyTokenState } from '@/state/isValidApiTokenState'
 import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
-import Footer from '@/stories/Footer/Footer'
 
 export default function Home() {
   const articles = useRecoilValue<Article[]>(articlesState)

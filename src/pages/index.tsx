@@ -8,11 +8,7 @@ import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
 
 import { Button } from '@/stories/Button/Button'
-import CommonModal from '@/stories/CommonModal'
-import DetailedSearchForm from '@/stories/DetailedSearchForm'
 import Footer from '@/stories/Footer/Footer'
-import MainTextBox from '@/stories/MainTextBox'
-import Paging from '@/stories/Paging'
 
 import { Article } from '@/types/Article'
 import { PublicationTimeline } from '@/types/PublicationTimeline'

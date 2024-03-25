@@ -31,7 +31,7 @@ const DetailedArticle = ({ article }: Props) => {
   return (
     <>
       <CommonHead
-        genre="website"
+        genre="article"
         title={article.title}
         author={article.user.name || article.user.id}
         icon={article.user.profile_image_url}

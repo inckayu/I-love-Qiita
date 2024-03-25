@@ -29,7 +29,13 @@ const DetailedArticle = ({ article }: Props) => {
 
   return (
     <>
-      <CommonHead genre="website" />
+      <CommonHead
+        genre="website"
+        title={article.title}
+        author={article.user.name || article.user.id}
+        icon={article.user.profile_image_url}
+        publishedAt={article.created_at}
+      />
       <main className={styles.detailedarticle}>
         {article === null ? (
           <div className={styles.detailedarticle__circle}>

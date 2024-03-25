@@ -51,7 +51,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { article } = req.body
 
-    const GPT4_TOKEN = process.env.GPT4_ç
+    const GPT4_TOKEN = process.env.GPT4_TOKEN
     // const GROQ_TOKEN = process.env.GROQ_TOKEN
 
     if (!GPT4_TOKEN) {

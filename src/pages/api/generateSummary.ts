@@ -51,13 +51,13 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const { article } = req.body
 
-    const GPT4_API_KEY = process.env.GPT4_API_KEY
-    // const GROQ_API_KEY = process.env.GROQ_API_KEY
+    const GPT4_TOKEN = process.env.GPT4_ç
+    // const GROQ_TOKEN = process.env.GROQ_TOKEN
 
-    if (!GPT4_API_KEY) {
+    if (!GPT4_TOKEN) {
       res.status(500).json({ error: 'API key is not set.' })
     } else {
-      const summary = await generateSummary(article, GPT4_API_KEY)
+      const summary = await generateSummary(article, GPT4_TOKEN)
       res.status(200).json({ summary })
     }
   } else {

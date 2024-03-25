@@ -63,6 +63,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/testing-library__jest-dom": "^6.0.0",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
     "commitmsg": "^1.0.2",
@@ -84,5 +85,11 @@
     "stylelint-scss": "^6.2.1",
     "ts-jest": "^29.1.2",
     "typescript": "^5"
+  },
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-push": "yarn test"
+    }
   }
 }

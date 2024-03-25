@@ -89,7 +89,7 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-push": "yarn test"
+      "pre-push": "jest"
     }
   }
 }

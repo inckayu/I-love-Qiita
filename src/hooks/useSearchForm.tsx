@@ -1,8 +1,8 @@
+import axios, { AxiosResponse } from 'axios'
 import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { fetchArticles } from '@/functions/fetchArticles'
-import { generateSummary } from '@/functions/generateSummary'
 import { slashConverter } from '@/functions/slashConverter'
 
 import { Article } from '@/types/Article'
@@ -98,8 +98,11 @@ const useSearchForm = () => {
   }
 
   const fetchArticleAndSummary = (query: string, page: number) => {
+    interface SummaryResponse {
+      summary: string
+    }
+
     setIsSearching(true)
-    console.log(page)
     fetchArticles(query, qiitaApiToken, page)
       .then(async (articles) => {
         if (articles.length > 0 && articles.length < 10) {
@@ -122,7 +125,20 @@ const useSearchForm = () => {
 
         // B
         const summaries = await Promise.all(
-          articles.map((article) => generateSummary(article.body))
+          articles.map(async (article) => {
+            try {
+              const response: AxiosResponse<SummaryResponse> = await axios.post(
+                '/api/generateSummary',
+                {
+                  article: article.body,
+                }
+              )
+              return response.data.summary
+            } catch (error) {
+              console.error('Failed to generate summary.', error)
+              return 'Failed to generate summary.'
+            }
+          })
         )
 
         // C

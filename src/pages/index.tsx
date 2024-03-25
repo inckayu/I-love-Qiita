@@ -1,6 +1,7 @@
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
+// import { GetServerSideProps } from 'next'
 import { useRecoilValue } from 'recoil'
 
 import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
@@ -30,7 +31,7 @@ import { isValidDateFormatsState } from '@/state/isValidDateFormatsState'
 import { qiitaApiTokenState } from '@/state/qiitaApiTokenState'
 import styles from '@/styles/modules/home.module.scss'
 
-export default function Home() {
+const Home = () => {
   const articles = useRecoilValue<Article[]>(articlesState)
   const isSearching = useRecoilValue<boolean>(isSearchingState)
   const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
@@ -53,7 +54,7 @@ export default function Home() {
 
   return (
     <>
-      <CommonHead />
+      <CommonHead genre="website" />
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__subtext}>
@@ -130,3 +131,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

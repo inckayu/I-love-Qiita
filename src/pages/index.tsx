@@ -1,8 +1,11 @@
 import KeyIcon from '@mui/icons-material/Key'
 import TuneIcon from '@mui/icons-material/Tune'
 import { IconButton } from '@mui/material'
-// import { GetServerSideProps } from 'next'
-import { useRecoilValue } from 'recoil'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+
+import { fetchArticles } from '@/functions/fetchArticles'
 
 import useDetailedSearchForm from '@/hooks/useDetailedSearchForm'
 import useSearchForm from '@/hooks/useSearchForm'
@@ -35,9 +38,10 @@ import styles from '@/styles/modules/home.module.scss'
 const Home = () => {
   const articles = useRecoilValue<Article[]>(articlesState)
   const isSearching = useRecoilValue<boolean>(isSearchingState)
-  const isValidApiKeyToken = useRecoilValue<boolean>(isValidApiKeyTokenState)
+  const [isValidApiKeyToken, setIsValidApiKeyToken] =
+    useRecoilState<boolean>(isValidApiKeyTokenState)
   const generatedSummaries = useRecoilValue<string[]>(generatedSummariesState)
-  const qiitaApiToken = useRecoilValue<string>(qiitaApiTokenState)
+  const [qiitaApiToken, setQiitaApiToken] = useRecoilState<string>(qiitaApiTokenState)
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const isOpenApiKeyModal = useRecoilValue<boolean>(isOpenApiKeyModalState)
   const isSkeleton = useRecoilValue<boolean>(isSkeletonState)
@@ -52,6 +56,20 @@ const Home = () => {
     isValidDateFormats.lastUpdate.end &&
     isValidDateFormats.publication.start &&
     isValidDateFormats.publication.end
+
+  useEffect(() => {
+    const qiitaToken = Cookies.get('qiitaToken')
+    if (qiitaToken && qiitaToken.length) {
+      fetchArticles('', qiitaToken, 1)
+        .then(() => {
+          setQiitaApiToken(qiitaToken)
+          setIsValidApiKeyToken(true)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }, [setIsValidApiKeyToken, setQiitaApiToken])
 
   return (
     <>

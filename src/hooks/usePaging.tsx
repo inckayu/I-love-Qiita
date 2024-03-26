@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { queryState } from '@/state/articleQuery'
@@ -12,7 +13,7 @@ const usePaging = () => {
   const [, setIsPagingDisabled] = useRecoilState<IsPagingDisabled>(isPagingDisabledState)
   const query = useRecoilValue<string>(queryState)
 
-  const handlePrevButtonClick = () => {
+  const handlePrevButtonClick = useCallback(() => {
     setPageNumber((prev) => prev - 1)
     fetchArticleAndSummary(query, pageNumber - 1)
     setIsPagingDisabled((cur) => ({ ...cur, next: false }))
@@ -21,15 +22,16 @@ const usePaging = () => {
     } else {
       setIsPagingDisabled((cur) => ({ ...cur, prev: false }))
     }
-  }
+  }, [setPageNumber, fetchArticleAndSummary, query, pageNumber, setIsPagingDisabled])
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = useCallback(() => {
     setPageNumber((prev) => prev + 1)
     fetchArticleAndSummary(query, pageNumber + 1)
     if (pageNumber === 1) {
       setIsPagingDisabled((cur) => ({ ...cur, prev: false }))
     }
-  }
+  }, [setPageNumber, fetchArticleAndSummary, query, pageNumber, setIsPagingDisabled])
+
   return {
     handlePrevButtonClick,
     handleNextButtonClick,

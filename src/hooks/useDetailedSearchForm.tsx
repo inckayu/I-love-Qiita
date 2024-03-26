@@ -1,3 +1,4 @@
+import React, { useCallback } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { convertToHalfWidth } from '@/functions/convertToHalfWidth'
@@ -37,100 +38,124 @@ const useDetailedSearchForm = () => {
 
   const { fetchArticleAndSummary } = useSearchForm()
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleTitle(e.target.value)
-  }
+  const handleTitleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setArticleTitle(e.target.value)
+    },
+    [setArticleTitle]
+  )
 
-  const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleBody(e.target.value)
-  }
+  const handleBodyChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setArticleBody(e.target.value)
+    },
+    [setArticleBody]
+  )
 
-  const handleAuthorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setArticleAuthor(e.target.value)
-  }
+  const handleAuthorChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setArticleAuthor(e.target.value)
+    },
+    [setArticleAuthor]
+  )
 
-  const handlePublicationStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsValidDateFormats((cur) => {
-      return {
-        ...cur,
-        publication: {
-          start: isValidFormatDate(e.target.value),
-          end: cur.publication.end,
-        },
-      }
-    })
-    setArticlePublication((cur) => {
-      return {
-        ...cur,
-        start: e.target.value,
-      }
-    })
-  }
+  const handlePublicationStartChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsValidDateFormats((cur) => {
+        return {
+          ...cur,
+          publication: {
+            start: isValidFormatDate(e.target.value),
+            end: cur.publication.end,
+          },
+        }
+      })
+      setArticlePublication((cur) => {
+        return {
+          ...cur,
+          start: e.target.value,
+        }
+      })
+    },
+    [setArticlePublication, setIsValidDateFormats]
+  )
 
-  const handlePublicationEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsValidDateFormats((cur) => {
-      return {
-        ...cur,
-        publication: {
-          start: cur.publication.start,
-          end: isValidFormatDate(e.target.value),
-        },
-      }
-    })
-    setArticlePublication((cur) => {
-      return {
-        ...cur,
-        end: e.target.value,
-      }
-    })
-  }
+  const handlePublicationEndChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsValidDateFormats((cur) => {
+        return {
+          ...cur,
+          publication: {
+            start: cur.publication.start,
+            end: isValidFormatDate(e.target.value),
+          },
+        }
+      })
+      setArticlePublication((cur) => {
+        return {
+          ...cur,
+          end: e.target.value,
+        }
+      })
+    },
+    [setArticlePublication, setIsValidDateFormats]
+  )
 
-  const handleLastUpdateStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsValidDateFormats((cur) => {
-      return {
-        ...cur,
-        lastUpdate: {
-          start: isValidFormatDate(e.target.value),
-          end: cur.lastUpdate.end,
-        },
-      }
-    })
-    setArticleLastUpdate((cur) => {
-      return {
-        ...cur,
-        start: e.target.value,
-      }
-    })
-  }
+  const handleLastUpdateStartChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsValidDateFormats((cur) => {
+        return {
+          ...cur,
+          lastUpdate: {
+            start: isValidFormatDate(e.target.value),
+            end: cur.lastUpdate.end,
+          },
+        }
+      })
+      setArticleLastUpdate((cur) => {
+        return {
+          ...cur,
+          start: e.target.value,
+        }
+      })
+    },
+    [setArticleLastUpdate, setIsValidDateFormats]
+  )
 
-  const handleLastUpdateEndChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsValidDateFormats((cur) => {
-      return {
-        ...cur,
-        lastUpdate: {
-          start: cur.lastUpdate.start,
-          end: isValidFormatDate(e.target.value),
-        },
-      }
-    })
-    setArticleLastUpdate((cur) => {
-      return {
-        ...cur,
-        end: e.target.value,
-      }
-    })
-  }
+  const handleLastUpdateEndChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIsValidDateFormats((cur) => {
+        return {
+          ...cur,
+          lastUpdate: {
+            start: cur.lastUpdate.start,
+            end: isValidFormatDate(e.target.value),
+          },
+        }
+      })
+      setArticleLastUpdate((cur) => {
+        return {
+          ...cur,
+          end: e.target.value,
+        }
+      })
+    },
+    [setArticleLastUpdate, setIsValidDateFormats]
+  )
 
-  const handleDetailedSearchModalClose = () => {
+  const handleDetailedSearchModalClose = useCallback(() => {
     setIsOpenDetailedSearchModal(false)
-  }
-  const handleDetailedSearchButton = () => {
+  }, [setIsOpenDetailedSearchModal])
+
+  const handleDetailedSearchButton = useCallback(() => {
     setIsOpenDetailedSearchModal(true)
-  }
-  const handleCancelButtonClick = () => {
+  }, [setIsOpenDetailedSearchModal])
+
+  const handleCancelButtonClick = useCallback(() => {
     setIsOpenDetailedSearchModal(false)
-  }
-  const handleOKButtonClick = () => {
+  }, [setIsOpenDetailedSearchModal])
+
+  const handleOKButtonClick = useCallback(() => {
     // FIXME: 正規表現でチェックする
     // FIXME: クエリの組み立てを関数に切り出す
 
@@ -166,7 +191,22 @@ const useDetailedSearchForm = () => {
     setIsOpenDetailedSearchModal(false)
     setPageNumber(1)
     fetchArticleAndSummary(query, 1)
-  }
+  }, [
+    articleTitle,
+    articleBody,
+    articleAuthor,
+    articlePublication.start,
+    articlePublication.end,
+    articleLastUpdate.start,
+    articleLastUpdate.end,
+    articleTags,
+    articleExcludedTags,
+    setQuery,
+    setIsOpenDetailedSearchModal,
+    setPageNumber,
+    fetchArticleAndSummary,
+  ])
+
   return {
     handleTitleChange,
     handleBodyChange,

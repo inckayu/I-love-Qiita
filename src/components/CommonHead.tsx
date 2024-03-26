@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import React from 'react'
 
 interface CommonHeadProps {
   genre: string
@@ -8,7 +9,8 @@ interface CommonHeadProps {
   publishedAt?: string
 }
 
-const CommonHead = ({ genre, title, author, icon, publishedAt }: CommonHeadProps) => {
+/* eslint react/display-name: 0 */
+const CommonHead = React.memo(({ genre, title, author, icon, publishedAt }: CommonHeadProps) => {
   return (
     <Head>
       <title>I love Qiita</title>
@@ -53,6 +55,6 @@ const CommonHead = ({ genre, title, author, icon, publishedAt }: CommonHeadProps
       )}
     </Head>
   )
-}
+})
 
 export default CommonHead

@@ -10,7 +10,8 @@ interface LinkTextProps {
   onClick?: () => void
 }
 
-const LinkText = ({ text, path, disabled = false, onClick }: LinkTextProps) => {
+/* eslint react/display-name: 0 */
+const LinkText = React.memo(({ text, path, disabled = false, onClick }: LinkTextProps) => {
   return disabled ? (
     <div className={styles.linktext__disabled}>{text}</div>
   ) : (
@@ -18,6 +19,6 @@ const LinkText = ({ text, path, disabled = false, onClick }: LinkTextProps) => {
       <div className={styles.linktext}>{text}</div>
     </Link>
   )
-}
+})
 
 export default LinkText

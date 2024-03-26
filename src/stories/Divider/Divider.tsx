@@ -7,7 +7,8 @@ interface DividerProps {
   color: string
 }
 
-const Divider = ({ widthUnit, width, thick, color }: DividerProps) => {
+/* eslint react/display-name: 0 */
+const Divider = React.memo(({ widthUnit, width, thick, color }: DividerProps) => {
   return (
     <div
       style={{
@@ -18,6 +19,6 @@ const Divider = ({ widthUnit, width, thick, color }: DividerProps) => {
       }}
     />
   )
-}
+})
 
 export default Divider

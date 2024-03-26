@@ -12,7 +12,8 @@ interface MainTextBoxProps {
   disabled?: boolean
 }
 
-const MainTextBox = ({ placeholder, disabled = false }: MainTextBoxProps) => {
+/* eslint react/display-name: 0 */
+const MainTextBox = React.memo(({ placeholder, disabled = false }: MainTextBoxProps) => {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const { handleInputTitle } = useSearchForm()
 
@@ -29,6 +30,6 @@ const MainTextBox = ({ placeholder, disabled = false }: MainTextBoxProps) => {
       disabled={disabled}
     />
   )
-}
+})
 
 export default MainTextBox

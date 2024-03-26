@@ -13,36 +13,39 @@ interface TextBoxProps {
   isError?: boolean
 }
 
-const TextBox = ({
-  value,
-  label,
-  width = 240,
-  placeholder,
-  required = false,
-  errorText,
-  onChange,
-  isError = false,
-}: TextBoxProps) => {
-  return (
-    <div className={styles.textbox}>
-      <div>
-        <label className={styles.textbox__label}>
-          {label}
-          {required ? <span className={styles.textbox__required}>&nbsp;*</span> : null}
-        </label>
-      </div>
+/* eslint react/display-name: 0 */
+const TextBox = React.memo(
+  ({
+    value,
+    label,
+    width = 240,
+    placeholder,
+    required = false,
+    errorText,
+    onChange,
+    isError = false,
+  }: TextBoxProps) => {
+    return (
+      <div className={styles.textbox}>
+        <div>
+          <label className={styles.textbox__label}>
+            {label}
+            {required ? <span className={styles.textbox__required}>&nbsp;*</span> : null}
+          </label>
+        </div>
 
-      <input
-        type="text"
-        value={value}
-        placeholder={placeholder}
-        onChange={onChange}
-        className={`${styles.textbox__body} ${isError ? styles.textbox__error : ''}`}
-        style={{ width }}
-      />
-      {isError ? <div className={styles.textbox__errortext}>{errorText}</div> : null}
-    </div>
-  )
-}
+        <input
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          className={`${styles.textbox__body} ${isError ? styles.textbox__error : ''}`}
+          style={{ width }}
+        />
+        {isError ? <div className={styles.textbox__errortext}>{errorText}</div> : null}
+      </div>
+    )
+  }
+)
 
 export default TextBox

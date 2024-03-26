@@ -6,6 +6,7 @@ import { autocompleteClasses } from '@mui/material/Autocomplete'
 import { styled } from '@mui/material/styles'
 import Image from 'next/image'
 import { useEffect } from 'react'
+import React from 'react'
 import { useRecoilState } from 'recoil'
 
 import { tags } from '@/constants/tags'
@@ -66,7 +67,8 @@ interface TagProps extends ReturnType<AutocompleteGetTagProps> {
   label: string
 }
 
-function Tag(props: TagProps) {
+/* eslint react/display-name: 0 */
+const Tag = React.memo((props: TagProps) => {
   const { label, onDelete, ...other } = props
   return (
     <div {...other}>
@@ -74,7 +76,7 @@ function Tag(props: TagProps) {
       <CloseIcon onClick={onDelete} />
     </div>
   )
-}
+})
 
 const StyledTag = styled(Tag)<TagProps>(
   ({ theme }) => `
@@ -163,7 +165,8 @@ interface TagsAutoCompleteProps {
   label: string
 }
 
-export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
+/* eslint react/display-name: 0 */
+export default React.memo(function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
   const [articleTags, setArticleTags] = useRecoilState<TagType[]>(articleTagsState)
   const [articleExcludedTags, setArticleExcludedTags] =
     useRecoilState<TagType[]>(articleExcludedTagsState)
@@ -257,4 +260,4 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
       ) : null}
     </Root>
   )
-}
+})

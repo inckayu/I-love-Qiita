@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import { useRecoilState } from 'recoil'
 
 import { Article } from '@/types/Article'
@@ -61,6 +62,7 @@ const useApiKeyForm = () => {
       setIsOpenApiKeyModal(false)
       setIsValidApiKeyToken(true)
       setIsVerifing(false)
+      Cookies.set('qiitaToken', qiitaApiToken, { expires: 30 })
     }
   }
   return {

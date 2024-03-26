@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil'
 
 import { tags } from '@/constants/tags'
 
-import { Tag } from '@/types/Tag'
+import { Tag as TagType } from '@/types/Tag'
 
 import { articleExcludedTagsState } from '@/state/articleQuery/articleExcludedTagsState'
 import { articleTagsState } from '@/state/articleQuery/articleTagsState'
@@ -164,9 +164,9 @@ interface TagsAutoCompleteProps {
 }
 
 export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
-  const [articleTags, setArticleTags] = useRecoilState<Tag[]>(articleTagsState)
+  const [articleTags, setArticleTags] = useRecoilState<TagType[]>(articleTagsState)
   const [articleExcludedTags, setArticleExcludedTags] =
-    useRecoilState<Tag[]>(articleExcludedTagsState)
+    useRecoilState<TagType[]>(articleExcludedTagsState)
   const currentLabel = (label: string) => {
     switch (label) {
       case 'Tags':
@@ -214,7 +214,7 @@ export default function TagsAutoComplete({ label }: TagsAutoCompleteProps) {
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}>{label}</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          {value.map((option: Tag, index: number) => {
+          {value.map((option: TagType, index: number) => {
             const tagImage = option.icon_url
             return (
               <div key={option.id}>

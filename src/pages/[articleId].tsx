@@ -7,6 +7,7 @@ import { sanitizeHtml as sanitizeHtmlOptions } from '@/constants/sanitize'
 import { decorateLink } from '@/functions/decorateLink'
 import { downgradeHeadings } from '@/functions/downgradeHeadings'
 import { fetchArticle } from '@/functions/fetchArticle'
+import formatDate from '@/functions/formatDate'
 import { getDataframeInIframe } from '@/functions/getDataframeInIframe'
 import { pseudoCodingBlock } from '@/functions/pseudoCodingBlock'
 
@@ -18,6 +19,7 @@ import LinkText from '@/stories/LinkText/LinkText'
 import { Article } from '@/types/Article'
 
 import CommonHead from '@/components/CommonHead'
+import Custom404 from '@/components/Custom404'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
 interface Props {
@@ -26,16 +28,16 @@ interface Props {
 
 const DetailedArticle = ({ article }: Props) => {
   // TODO: 404ページを作成する
-  if (!article) return <div>記事が見つかりませんでした。</div>
+  if (!article) return <Custom404 />
 
   return (
     <>
       <CommonHead
-        genre="website"
+        genre="article"
         title={article.title}
         author={article.user.name || article.user.id}
         icon={article.user.profile_image_url}
-        publishedAt={article.created_at}
+        publishedAt={formatDate(article.created_at)}
       />
       <main className={styles.detailedarticle}>
         {article === null ? (

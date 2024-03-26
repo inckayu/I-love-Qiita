@@ -18,7 +18,7 @@ const CommonHead = ({ genre, title, author, icon, publishedAt }: CommonHeadProps
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="icon" href="/favicon.ico" sizes="48x48" />
       <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
-      <link rel="manifest" href="/site.webmanifest" />
+      {/* <link rel="manifest" href="/site.webmanifest" /> */}
 
       {/* URLはデプロイ後に変える */}
       <meta property="og:title" content="I love Qiita" />
@@ -38,11 +38,11 @@ const CommonHead = ({ genre, title, author, icon, publishedAt }: CommonHeadProps
         <>
           <meta
             property="og:image"
-            content={`https://i-love-qiita.vercel.app/api/ogpArticle?title=${title}&author=${author}&icon=${icon}&publishedAt=${publishedAt}`}
+            content={`https://i-love-qiita.vercel.app/api/ogpArticle?title=${title}&author=${author}&icon=${typeof icon === 'string' ? encodeURIComponent(icon) : ''}&publishedAt=${publishedAt}`}
           />
           <meta
             name="twitter:image"
-            content={`https://i-love-qiita.vercel.app/api/ogpArticle?title=${title}&author=${author}&icon=${icon}&publishedAt=${publishedAt}`}
+            content={`https://i-love-qiita.vercel.app/api/ogpArticle?title=${title}&author=${author}&icon=${typeof icon === 'string' ? encodeURIComponent(icon) : ''}&publishedAt=${publishedAt}`}
           />
         </>
       ) : (

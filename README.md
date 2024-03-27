@@ -1,10 +1,6 @@
 # I love Qiita
 
-<img alt="Static Badge" src="https://img.shields.io/badge/FE_framework-Nextjs-blue">
-<img alt="Static Badge" src="https://img.shields.io/badge/language-Typescript-blue">
-<img alt="Static Badge" src="https://img.shields.io/badge/language-sass-blue">
-<img alt="Static Badge" src="https://img.shields.io/badge/CSS_framework-Material_UI-blue">
-<img alt="Static Badge" src="https://img.shields.io/badge/license-MIT-blue">
+<img alt="Static Badge" src="https://img.shields.io/badge/FE_framework-Nextjs-blue"> <img alt="Static Badge" src="https://img.shields.io/badge/language-Typescript-blue"> <img alt="Static Badge" src="https://img.shields.io/badge/language-sass-blue"> <img alt="Static Badge" src="https://img.shields.io/badge/CSS_framework-Material_UI-blue"> <img alt="Static Badge" src="https://img.shields.io/badge/license-MIT-blue">
 
 _I love Qiita, where many seekers for knowledge meet up._
 
@@ -40,7 +36,7 @@ _I love Qiita, where many seekers for knowledge meet up._
       ├── memo
       ├── readme
       ├── favicon.ico
-      ├── favicon.svg
+      └── favicon.svg
 ├── src
       ├── components
       ├── constants
@@ -51,7 +47,7 @@ _I love Qiita, where many seekers for knowledge meet up._
             ├── _app.tsx
             ├── _document.tsx
             ├── [articleId].tsx
-            ├── index.tsx
+            └── index.tsx
       ├── state
       ├── stories
             ├── Button
@@ -59,34 +55,32 @@ _I love Qiita, where many seekers for knowledge meet up._
             ├── Divider
             ├── Footer
             ├── LinkText
-            ├── TextBox
+            └── TextBox
       ├── styles
             ├── common
             ├── modules
             ├── globals.scss
-            ├── highlight.css
+            └── highlight.css
       ├── types
-      ├── .env
-      ├── .env.development
-      ├── .env.local
-      ├── .env.example
-      ├── .eslintignore
-      ├── .eslintre.json
-      ├── .gitignore
-      ├── .prettierrc.json
-      ├── .stylelintrc.json
-      ├── commitlint.config.js
-      ├── jest.config.js
-      ├── memo.md
-      ├── next.config.mjs
-      ├── package-lock.json
-      ├── package.json
-      ├── README.md
-      ├── robots.txt
-      ├── tsconfig.json
-      ├── yarn.lock
-├── xxx
-└── README.md
+├── .env
+├── .env.development
+├── .env.local
+├── .env.example
+├── .eslintignore
+├── .eslintre.json
+├── .gitignore
+├── .prettierrc.json
+├── .stylelintrc.json
+├── commitlint.config.js
+├── jest.config.js
+├── memo.md
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── README.md
+├── robots.txt
+├── tsconfig.json
+└── yarn.lock
 </pre>
 
 ## 環境変数

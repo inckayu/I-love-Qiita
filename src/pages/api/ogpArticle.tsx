@@ -1,4 +1,3 @@
-import formatDate from '@/functions/formatDate'
 import { ImageResponse } from '@vercel/og'
 import { NextRequest } from 'next/server'
 
@@ -11,8 +10,6 @@ export default function handler(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     const hasTitle = searchParams.has('title')
     const hasAuthor = searchParams.has('author')
-    const hasDate = searchParams.has('date')
-    const hasIcon = searchParams.has('icon')
     const title = hasTitle ? searchParams.get('title')?.slice(0, 100) : 'undefined'
     const author = hasAuthor ? searchParams.get('author')?.slice(0, 100) : 'undefined'
     const publishedAt = searchParams.get('publishedAt') || 'undefined'
@@ -96,8 +93,7 @@ export default function handler(req: NextRequest) {
         height: 630,
       }
     )
-  } catch (e: any) {
-    console.log(`${e.message}`)
+  } catch {
     return new Response(`Failed to generate the image`, {
       status: 500,
     })

@@ -9,7 +9,8 @@ interface UserInfoProps {
   user: BasicUserInfo
 }
 
-const UserInfo = ({ user }: UserInfoProps) => {
+/* eslint react/display-name: 0 */
+const UserInfo = React.memo(({ user }: UserInfoProps) => {
   return (
     <div className={styles.userinfo}>
       <div className={styles.userinfo__left}>
@@ -29,6 +30,6 @@ const UserInfo = ({ user }: UserInfoProps) => {
       </div>
     </div>
   )
-}
+})
 
 export default UserInfo

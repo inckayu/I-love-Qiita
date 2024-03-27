@@ -1,0 +1,32 @@
+@use '../common' as *;
+
+.custom404 {
+  height: calc(100vh - 36px - 64px);
+  padding-top: 64px;
+  background-color: colors(purple, bg);
+}
+
+.custom404__wrapper {
+  width: 90%;
+  height: 90%;
+  margin: 0 auto;
+  border-radius: 40px;
+  background-color: colors(white);
+  text-align: center
+}
+
+.custom404__title {
+  padding-top: 64px;
+  font-weight: bold;
+  font-size: rem(36);
+}
+
+.custom404__message {
+  padding-top: 16px;
+  font-size: rem(20);
+  @include fonts()
+}
+
+.custom404__button {
+  padding-top: 100px;
+}

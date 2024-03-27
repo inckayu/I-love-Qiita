@@ -10,7 +10,8 @@ interface TagProps {
   tag: string
 }
 
-const Tag = ({ tag }: TagProps) => {
+/* eslint react/display-name: 0 */
+const Tag = React.memo(({ tag }: TagProps) => {
   const [tagImage, setTagImage] = useState<string | null>(null)
   const qiitaApiToken = useRecoilValue(qiitaApiTokenState)
 
@@ -22,7 +23,7 @@ const Tag = ({ tag }: TagProps) => {
       .catch((e) => {
         console.error(e)
       })
-  }, [])
+  }, [qiitaApiToken, tag])
 
   return (
     <div className={styles.tag}>
@@ -34,6 +35,6 @@ const Tag = ({ tag }: TagProps) => {
       <div>{tag}</div>
     </div>
   )
-}
+})
 
 export default Tag

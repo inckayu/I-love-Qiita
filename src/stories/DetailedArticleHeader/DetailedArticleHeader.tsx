@@ -1,6 +1,7 @@
 import BookmarkIcon from '@mui/icons-material/Bookmark'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import Link from 'next/link'
+import React from 'react'
 
 import Tag from '../../components/Tag'
 import UserInfo from '../../components/UserInfo'
@@ -13,7 +14,9 @@ import { Button } from '../Button/Button'
 interface DetailedArticleHeaderProps {
   article: Article
 }
-const DetailedArticleHeader = ({ article }: DetailedArticleHeaderProps) => {
+
+/* eslint react/display-name: 0 */
+const DetailedArticleHeader = React.memo(({ article }: DetailedArticleHeaderProps) => {
   return (
     <div>
       <div className={styles.detailedarticle__top}>
@@ -62,5 +65,5 @@ const DetailedArticleHeader = ({ article }: DetailedArticleHeaderProps) => {
       </div>
     </div>
   )
-}
+})
 export default DetailedArticleHeader

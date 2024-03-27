@@ -19,6 +19,7 @@ import LinkText from '@/stories/LinkText/LinkText'
 import { Article } from '@/types/Article'
 
 import CommonHead from '@/components/CommonHead'
+import Custom404 from '@/components/Custom404'
 import styles from '@/styles/modules/detailedarticle.module.scss'
 
 interface Props {
@@ -27,7 +28,7 @@ interface Props {
 
 const DetailedArticle = ({ article }: Props) => {
   // TODO: 404ページを作成する
-  if (!article) return <div>記事が見つかりませんでした。</div>
+  if (!article) return <Custom404 />
 
   return (
     <>

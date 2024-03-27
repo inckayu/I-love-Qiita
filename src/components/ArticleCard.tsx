@@ -18,7 +18,8 @@ interface ArticleCardProps {
   isSkeleton: boolean
 }
 
-const ArticleCard = ({ article, summary, isSkeleton }: ArticleCardProps) => {
+/* eslint react/display-name: 0 */
+const ArticleCard = React.memo(({ article, summary, isSkeleton }: ArticleCardProps) => {
   const articleTitle = useRecoilValue<string>(articleTitleState)
   const words = articleTitle.split(/[\u{20}\u{3000}]/u)
 
@@ -50,5 +51,5 @@ const ArticleCard = ({ article, summary, isSkeleton }: ArticleCardProps) => {
       <div className={styles.articlecard__right}>{summary}</div>
     </Link>
   )
-}
+})
 export default ArticleCard

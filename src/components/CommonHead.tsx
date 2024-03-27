@@ -14,7 +14,7 @@ const CommonHead = React.memo(({ genre, title, author, icon, publishedAt }: Comm
   return (
     <Head>
       <title>I love Qiita</title>
-      <meta content="I love Qiita, where many seekers of knowledge meet up." name="description" />
+      <meta content="I love Qiita, where many seekers for knowledge meet up." name="description" />
       <meta charSet="utf-8" />
 
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -26,7 +26,7 @@ const CommonHead = React.memo(({ genre, title, author, icon, publishedAt }: Comm
       <meta property="og:title" content="I love Qiita" />
       <meta
         property="og:description"
-        content="I love Qiita, where many seekers of knowledge meet up."
+        content="I love Qiita, where many seekers for knowledge meet up."
       />
       <meta property="og:type" content={genre} />
       <meta property="og:url" content="https://i-love-qiita.vercel.app" />

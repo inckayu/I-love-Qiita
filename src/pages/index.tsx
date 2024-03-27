@@ -77,7 +77,7 @@ const Home = () => {
       <main className={styles.home}>
         <h1 className={styles.home__title}>I love Qiita</h1>
         <div className={styles.home__subtext}>
-          I love Qiita, where many seekers of knowledge meet up.
+          I love Qiita, where many seekers for knowledge meet up.
         </div>
         <div className={styles.home__form}>
           <form onSubmit={handleSearchFormSubmit}>

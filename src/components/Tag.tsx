@@ -23,7 +23,7 @@ const Tag = React.memo(({ tag }: TagProps) => {
       .catch((e) => {
         console.error(e)
       })
-  }, [])
+  }, [qiitaApiToken, tag])
 
   return (
     <div className={styles.tag}>

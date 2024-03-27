@@ -210,7 +210,7 @@ export default React.memo(function TagsAutoComplete({ label }: TagsAutoCompleteP
       default:
         break
     }
-  }, [value])
+  }, [value, label, setArticleTags, setArticleExcludedTags])
 
   return (
     <Root>
@@ -235,7 +235,13 @@ export default React.memo(function TagsAutoComplete({ label }: TagsAutoCompleteP
             )
           })}
           <input {...getInputProps()} />
-          <div style={{ marginTop: '4px', marginRight: '4px' }}>
+          <div
+            style={{
+              marginTop: '4px',
+              marginLeft: '332px',
+              position: 'absolute',
+            }}
+          >
             <ArrowDropDownIcon fontSize="medium" />
           </div>
         </InputWrapper>

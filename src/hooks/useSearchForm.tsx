@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { fetchArticles } from '@/functions/fetchArticles'
@@ -44,128 +44,149 @@ const useSearchForm = () => {
   const [, setQuery] = useRecoilState<string>(queryState)
   const [, setPageNumber] = useRecoilState<number>(pageNumberState)
 
-  const handleApiKeyModalClose = () => {
+  const fetchArticleAndSummary = useCallback(
+    (query: string, page: number) => {
+      interface SummaryResponse {
+        summary: string
+      }
+
+      setIsSearching(true)
+      fetchArticles(query, qiitaApiToken, page)
+        .then(async (articles) => {
+          if (articles.length > 0 && articles.length < 10) {
+            setPagingDisabled((cur) => ({ ...cur, next: true }))
+          } else {
+            setPagingDisabled((cur) => ({ ...cur, next: false }))
+          }
+          if (articles.length === 0) {
+            setIsSearching(false)
+            setIsSkeleton(false)
+            return
+          }
+
+          setArticles(articles)
+
+          setTimeout(() => {
+            setIsSkeleton(true)
+          }, 4000)
+
+          const summaries = await Promise.all(
+            articles.map(async (article) => {
+              try {
+                const response: AxiosResponse<SummaryResponse> = await axios.post(
+                  '/api/generateSummary',
+                  {
+                    article: article.body,
+                  }
+                )
+                return response.data.summary
+              } catch (error) {
+                console.error('Failed to generate summary.', error)
+                return 'Failed to generate summary.'
+              }
+            })
+          )
+
+          setTimeout(() => {
+            setGeneratedSummaries(summaries)
+            setIsSearching(false)
+            setIsSkeleton(false)
+          }, 2000)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    },
+    [
+      qiitaApiToken,
+      setIsSearching,
+      setIsSkeleton,
+      setArticles,
+      setPagingDisabled,
+      setGeneratedSummaries,
+    ]
+  )
+
+  const handleApiKeyModalClose = useCallback(() => {
     setIsOpenApiKeyModal(false)
-  }
+  }, [setIsOpenApiKeyModal])
 
-  const handleApiKeyButton = () => {
+  const handleApiKeyButton = useCallback(() => {
     setIsOpenApiKeyModal(true)
-  }
+  }, [setIsOpenApiKeyModal])
 
-  const handleTitleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    e.preventDefault() // フォームが送信されてリロードされないよう
+  const handleTitleClick = useCallback<React.MouseEventHandler<HTMLButtonElement>>(
+    (e) => {
+      e.preventDefault() // フォームが送信されてリロードされないよう
 
-    // FIXME: 正規表現でチェックする
-    // FIXME: クエリの組み立てを関数に切り出す
+      // FIXME: 正規表現でチェックする
+      // FIXME: クエリの組み立てを関数に切り出す
 
-    const title = articleTitle.length ? `title:${articleTitle.replace(/[\s\u3000]+/g, ',')}` : ''
-    const body = articleBody.length ? `body:${articleBody.replace(/[\s\u3000]+/g, ',')}` : ''
-    const author = articleAuthor.length ? `user:${articleAuthor.replace(/[\s\u3000]+/g, ',')}` : ''
-    const publicationStart = articlePublication.start.length
-      ? `created:>=${slashConverter(articlePublication.start)}`
-      : ''
-    const publicationEnd = articlePublication.end.length
-      ? `created:<=${slashConverter(articlePublication.end)}`
-      : ''
-    const lastUpdateStart = articleLastUpdate.start.length
-      ? `updated:>=${slashConverter(articleLastUpdate.start)}`
-      : ''
-    const lastUpdateEnd = articleLastUpdate.end.length
-      ? `updated:<=${slashConverter(articleLastUpdate.end)}`
-      : ''
-    const tags = articleTags.map((tag) => `tag:${tag.id}`).join(' ') // NOTE: joinの引数は半角空白
-    const excludedTags = articleExcludedTags.map((tag) => `-tag:${tag.id}`).join(' ')
-    const query = [
-      title,
-      body,
-      author,
-      publicationStart,
-      publicationEnd,
-      lastUpdateStart,
-      lastUpdateEnd,
-      tags,
-      excludedTags,
-    ].join(' ')
-    setQuery(query)
-    setPageNumber(1)
-    fetchArticleAndSummary(query, 1)
-  }
+      const title = articleTitle.length ? `title:${articleTitle.replace(/[\s\u3000]+/g, ',')}` : ''
+      const body = articleBody.length ? `body:${articleBody.replace(/[\s\u3000]+/g, ',')}` : ''
+      const author = articleAuthor.length
+        ? `user:${articleAuthor.replace(/[\s\u3000]+/g, ',')}`
+        : ''
+      const publicationStart = articlePublication.start.length
+        ? `created:>=${slashConverter(articlePublication.start)}`
+        : ''
+      const publicationEnd = articlePublication.end.length
+        ? `created:<=${slashConverter(articlePublication.end)}`
+        : ''
+      const lastUpdateStart = articleLastUpdate.start.length
+        ? `updated:>=${slashConverter(articleLastUpdate.start)}`
+        : ''
+      const lastUpdateEnd = articleLastUpdate.end.length
+        ? `updated:<=${slashConverter(articleLastUpdate.end)}`
+        : ''
+      const tags = articleTags.map((tag) => `tag:${tag.id}`).join(' ') // NOTE: joinの引数は半角空白
+      const excludedTags = articleExcludedTags.map((tag) => `-tag:${tag.id}`).join(' ')
+      const query = [
+        title,
+        body,
+        author,
+        publicationStart,
+        publicationEnd,
+        lastUpdateStart,
+        lastUpdateEnd,
+        tags,
+        excludedTags,
+      ].join(' ')
+      setQuery(query)
+      setPageNumber(1)
+      fetchArticleAndSummary(query, 1)
+    },
+    [
+      articleTitle,
+      articleBody,
+      articleAuthor,
+      articlePublication.start,
+      articlePublication.end,
+      articleLastUpdate.start,
+      articleLastUpdate.end,
+      articleTags,
+      articleExcludedTags,
+      setQuery,
+      setPageNumber,
+      fetchArticleAndSummary,
+    ]
+  )
 
-  const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputTitle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setArticleTitle(e.target.value)
-  }
+  }, [])
 
-  const handleSearchFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchFormSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-  }
-
-  const fetchArticleAndSummary = (query: string, page: number) => {
-    interface SummaryResponse {
-      summary: string
-    }
-
-    setIsSearching(true)
-    fetchArticles(query, qiitaApiToken, page)
-      .then(async (articles) => {
-        if (articles.length > 0 && articles.length < 10) {
-          setPagingDisabled((cur) => ({ ...cur, next: true }))
-        } else {
-          setPagingDisabled((cur) => ({ ...cur, next: false }))
-        }
-        if (articles.length === 0) {
-          setIsSearching(false)
-          setIsSkeleton(false)
-          return
-        }
-
-        setArticles(articles)
-
-        // A
-        setTimeout(() => {
-          setIsSkeleton(true)
-        }, 4000) // ローディングサークルでユーザを待たせるのはUX的に4秒が限度と仮定
-
-        // B
-        const summaries = await Promise.all(
-          articles.map(async (article) => {
-            try {
-              const response: AxiosResponse<SummaryResponse> = await axios.post(
-                '/api/generateSummary',
-                {
-                  article: article.body,
-                }
-              )
-              return response.data.summary
-            } catch (error) {
-              console.error('Failed to generate summary.', error)
-              return 'Failed to generate summary.'
-            }
-          })
-        )
-
-        // C
-        setTimeout(() => {
-          setGeneratedSummaries(summaries)
-          setIsSearching(false)
-          setIsSkeleton(false)
-        }, 2000)
-
-        // FIXME: Cの処理を必ず最後に実行してisSkeletonをfalseにするために、処理時間(s)が 4 = A < B + C = B + 2となるようにしている。
-        // 検索と要約生成の時間に必ず+2秒されてしまうのが欠点
-        // スマートな書き方ではないので要修正
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-  }
+  }, [])
 
   return {
+    fetchArticleAndSummary,
     handleApiKeyModalClose,
     handleApiKeyButton,
     handleTitleClick,
     handleInputTitle,
     handleSearchFormSubmit,
-    fetchArticleAndSummary,
   }
 }
 

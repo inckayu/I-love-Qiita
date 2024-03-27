@@ -9,7 +9,8 @@ interface CommonModalProps {
   onClose: React.ReactEventHandler
 }
 
-const CommonModal = ({ isOpenModal, children, onClose }: CommonModalProps) => {
+/* eslint react/display-name: 0 */
+const CommonModal = React.memo(({ isOpenModal, children, onClose }: CommonModalProps) => {
   return (
     <Modal
       open={isOpenModal}
@@ -20,6 +21,6 @@ const CommonModal = ({ isOpenModal, children, onClose }: CommonModalProps) => {
       <div className={styles.commonmodal}>{children}</div>
     </Modal>
   )
-}
+})
 
 export default CommonModal

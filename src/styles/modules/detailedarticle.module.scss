@@ -95,5 +95,6 @@
 }
 
 .detailedarticle__body div div code {
+  color: colors(sumi, 300);
   @include fonts(400, source);
 }

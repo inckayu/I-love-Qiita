@@ -243,7 +243,7 @@ export default React.memo(function TagsAutoComplete({ label }: TagsAutoCompleteP
       {groupedOptions.length > 0 ? (
         <Listbox {...getListboxProps()}>
           {(groupedOptions as typeof tags).map((option, index) => {
-            const tagImage = tags[index].icon_url
+            const tagImage = option.icon_url
             return (
               <li key={option.id} {...getOptionProps({ option, index })}>
                 {tagImage ? (
